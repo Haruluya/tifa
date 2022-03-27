@@ -16,8 +16,8 @@
 
 <font color="green"> **Front end**</font>
 
-| Modules | Version | Directory               |
-| -------| ------- | ----------------------- |
+| <img width=50/>Modules <img width=50/> | <img width=50/>Version  <img width=50/>| <img width=50/>Directory<img width=50/>|
+| -------| ------- | --------|
 | ✅Chrome | 98 |  |
 | ✅JavaScript | ES2015 |  |
 | ✅Vue    | 3.0.0   | haruluya-ui       |
@@ -30,7 +30,7 @@
 
 <font color="green"> **Back end**</font>
 
-| Modules          | Version       | Directory         |
+| <img width=50/>Modules <img width=50/>   |<img width=50/> Version<img width=50/> | <img width=50/>Directory<img width=50/>|
 | ---------------- | ------------- | ----------------- |
 | ✅JDK             | 8             |                   |
 | ✅Spring-Boot     | 2.3.4.RELEASE | haruluya-admin    |
@@ -94,6 +94,7 @@ The details can be seen in the pom.xml document.
 git pull https://github.com/Haruluya/MallShoppingProj.git master
 ```
 **Install** dependencies.
+
 ![img](https://i.postimg.cc/K8xmkhL9/img.png)
 
 **Run** the Project.
