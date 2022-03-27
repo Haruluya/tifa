@@ -35,3 +35,4 @@ target
 *.iml
 package-lock.json
 yarn.lock
+package.json
