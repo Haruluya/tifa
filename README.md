@@ -1,4 +1,4 @@
-# Online Shopping software
+# Online Shopping Website
 
 >SoftWare EngineeringWork.
 >
@@ -20,11 +20,11 @@
 | -------| ------- | --------|
 | ✅Chrome | 98 |  |
 | ✅JavaScript | ES2015 |  |
-| ✅Vue    | 3.0.0   | haruluya-ui       |
-| ✅Vuex   |         | haruluya-ui/store |
+| ✅Vue    | 3.0.0   | tifa-ui       |
+| ✅Vuex   |         | tifa-ui/store |
 | ✅less   |         | .Vue/templates   |
-| ✅axios  |         | haruluya-ui/api   |
-| ✅mock   |         | haruluya-ui/mock  |
+| ✅axios  |         | tifa-ui/api   |
+| ✅mock   |         | tifa-ui/mock  |
 | ✅eslint |         |                         |
 | ❔Nginx  | 1.2.x   |                         |
 
@@ -33,7 +33,7 @@
 | <img width=50/>Modules <img width=50/>   |<img width=50/> Version<img width=50/> | <img width=50/>Directory<img width=50/>|
 | ---------------- | ------------- | ----------------- |
 | ✅JDK             | 8             |                   |
-| ✅Spring-Boot     | 2.3.4.RELEASE | haruluya-admin    |
+| ✅Spring-Boot     | 2.3.4.RELEASE | tifa-admin    |
 | ✅Spring-MVC      |               |                   |
 | ✅Spring          |               |                   |
 | ✅Mybatis         | 2.2.2         | resources/mybatis |
@@ -44,7 +44,7 @@
 
 ## Deployment method
 
-### **Haruluya-ui**
+### **tifa-ui**
 
 This file is a separate front-end project with Vue.
 
@@ -82,7 +82,7 @@ npm run lint
 
 
 
-### Haruluya-admin
+### tifa-admin
 
 This file is a separate back-end project with Spring-Boot.
 
