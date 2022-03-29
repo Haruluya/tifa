@@ -10,11 +10,11 @@
 
 
 
-<font color="blue"> **Just a simple e-commerce project for practice.**</font>
+**Just a simple e-commerce project for practice.**
 
 ## Development Environment
 
-<font color="green"> **Front end**</font>
+**Front end**
 
 | <img width=50/>Modules <img width=50/> | <img width=50/>Version  <img width=50/>| <img width=50/>Directory<img width=50/>|
 | -------| ------- | --------|
@@ -28,7 +28,7 @@
 | ✅eslint |         |                         |
 | ❔Nginx  | 1.2.x   |                         |
 
-<font color="green"> **Back end**</font>
+**Back end**
 
 | <img width=50/>Modules <img width=50/>   |<img width=50/> Version<img width=50/> | <img width=50/>Directory<img width=50/>|
 | ---------------- | ------------- | ----------------- |

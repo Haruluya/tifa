@@ -1,15 +1,22 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Header></Header>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+// 导入组件。
+import Header from "./components/Header/Header.Vue"
+import Footer from "./components/Footer/Footer.Vue"
 
 export default {
   name: 'App',
+  // 组件注册。
   components: {
-    HelloWorld
+    Header,
+    Footer
   }
 }
 </script>

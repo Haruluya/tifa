@@ -73,11 +73,24 @@
             <version>3.5.1</version>
         </dependency>
 
+<!--        &lt;!&ndash;多数据源&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>-->
+<!--            <version>3.5.0</version>-->
+<!--        </dependency>-->
+
+        <!--springboot test-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
         <!-- yaml拼写提醒。-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
-            <version>2.1.1.RELEASE</version>
+            <version>2.6.5</version>
             <optional>true</optional>
         </dependency>
 
@@ -85,7 +98,8 @@
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
-            <version>2.9.7</version>
+            <version>2.9.9</version>
+            <type>pom</type>
         </dependency>
 
         <!--Thymeleaf -->
@@ -93,6 +107,24 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+
+        <!--junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 二级缓存-->
+        <dependency>
+            <groupId>org.mybatis.caches</groupId>
+            <artifactId>mybatis-ehcache</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+
+
+
+
 
     </dependencies>
 

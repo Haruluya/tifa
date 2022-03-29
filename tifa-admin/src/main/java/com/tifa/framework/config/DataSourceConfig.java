@@ -1,14 +1,12 @@
 package com.tifa.framework.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 /**
  * @author haruluya
- * @date 2022/3/28
- * 核心配置类。
+ * druid等数据源配置。
  */
 @Configuration
-public class TifaCenterConfig {
+public class DataSourceConfig {
 
 }
