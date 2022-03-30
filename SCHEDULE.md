@@ -50,7 +50,7 @@ SpringBootTest扫描配置类时未扫描到，需要主动指定：
 
 ##### 3-30
 
-配置pagehelper，CURD功能基本实现。
+配置pagehelper，CURD功能基本实现。测试CURD功能，并移植到前端，测试前后端交互。
 
 **问题：**
 

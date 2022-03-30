@@ -6,12 +6,13 @@ spring:
     contentnegotiation:
       favor-parameter: true  #开启请求参数内容协商模式
 
-
-
-
   #加载druid配置文件。
   profiles:
     include: druid
+
+
+server:
+  port: 8081
 
 # 配置mybatis规则
 mybatis:
@@ -25,5 +26,6 @@ mybatis:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 
 
