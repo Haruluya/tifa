@@ -1,4 +1,5 @@
 package com.tifa.framework.web.mapper;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.tifa.framework.web.pojo.User;
@@ -20,6 +21,9 @@ public interface UserMapper extends BaseMapper<User> {
     User selectById(Serializable id);
 
     int insertSelective(User user);
+
+    List<User> selectAll();
+
 }
 
 

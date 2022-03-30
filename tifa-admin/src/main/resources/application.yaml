@@ -1,3 +1,18 @@
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true   #页面表单Rest。
+    contentnegotiation:
+      favor-parameter: true  #开启请求参数内容协商模式
+
+
+
+
+  #加载druid配置文件。
+  profiles:
+    include: druid
+
 # 配置mybatis规则
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml  #全局配置文件位置
@@ -5,16 +20,10 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-spring:
+#配置mybatis-plus
+#输出sql语句。
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-  mvc:
-#    static-path-pattern: /static/**   #静态资源访问前缀。
-    hiddenmethod:
-      filter:
-        enabled: true   #页面表单Rest。
-    contentnegotiation:
-      favor-parameter: true  #开启请求参数内容协商模式
 
-#加载druid配置文件。
-  profiles:
-    include: druid

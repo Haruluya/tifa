@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/bootstrap-3.4.1-dist/css/bootstrap.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="page-header">
+                    <h1>
+                        <small>用户列表 —— 显示所有用户</small>
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 column">
+                <a class="btn btn-primary" href="">新增</a>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>用户id</th>
+                        <th>用户name</th>
+                        <th>用户password</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="user:${pageInfo.getList()}">
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.name}"></td>
+                            <td th:text="${user.password}"></td>
+                            <td>
+                                <a href="">更改</a> |
+                                <a href="">删除</a>
+                            </td>
+                            <td th:text="${pageInfo.getPageSize()}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="/bootstrap-3.4.1-dist/jquery-3.6.0.js"></script>
+    <script src="/bootstrap-3.4.1-dist/js/bootstrap.min.js" ></script>
+</html>

@@ -4,6 +4,8 @@ import com.tifa.framework.web.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
 * @author haruluya
 * @description 针对表【user】的数据库操作Service
@@ -12,4 +14,5 @@ import org.springframework.stereotype.Repository;
 
 public interface UserService extends IService<User> {
 
+    List<User> selectAll();
 }

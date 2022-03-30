@@ -30,4 +30,9 @@
             <if test="password != null">#{password,jdbcType=VARCHAR},</if>
         </trim>
     </insert>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from user
+    </select>
+
 </mapper>
