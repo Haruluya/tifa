@@ -22,7 +22,7 @@
 </template>
 <script>
 
-import requests from '../../../api/axios.js'
+
 
 export default {
     name:'Login',

@@ -9,14 +9,12 @@
 
 // 导入组件。
 import Header from "./components/Header"
-import Footer from "./components/Footer"
 
 export default {
   name: 'App',
   // 组件注册。
   components: {
     Header,
-    Footer,
   }
 }
 </script>

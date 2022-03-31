@@ -50,4 +50,17 @@ public class CRUDTestController {
         res.setHeader("Access-Control-Allow-Headers", "Content-Type");
         return "index";
     }
+
+    @RequestMapping("/api/userData")
+    @ResponseBody
+    public PageInfo<User> userData(HttpServletRequest req, HttpServletResponse res){
+        res.setHeader("Access-Control-Allow-Origin","*");
+        res.setHeader("Access-Control-Allow-Credentials","true");
+        res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        PageHelper.startPage(1,3);
+        List<User> userList = userService.selectAll();
+        PageInfo<User> page = new PageInfo<User>(userList,2);
+        return page;
+    }
 }

@@ -83,3 +83,14 @@ maven如果打包方式为jar包需要配置maven让其包含yaml配置文件：
 **解决：**
 
 需使用starter配合springboot。
+
+##### **3-31**
+
+配置axios，完善CRUD功能。配置nprogress、lodash、mock、swiper基本功能。
+
+
+
+```
+
+```
+

@@ -2,12 +2,11 @@
 
   <div class="hero">
     <div class="container">
-      <h1>Welcome To Tifa</h1>
-      <p>Just a interface for test.</p>
+      
     </div>
   </div>
-
-  <section class="container content">
+  
+    <section class="container content">
     <h2>Testing</h2>
     <p>测试网站</p>
 
@@ -27,18 +26,58 @@
     <p>测试网站</p>
   </section>
 
+
+
+
+
 </template>
 <script>
+import Swiper from 'swiper';    
+import "swiper/swiper-bundle.min.css";
+
+
+
 
 export default {
     name: "home",
-
+    mounted() {
+      new Swiper ('.swiper', {
+          // direction: 'vertical', // 垂直切换选项
+          loop: true, // 循21q环模式选项
+          
+          // 如果需要分页器
+          pagination: {
+            el: '.swiper-pagination',
+          },
+          
+          // 如果需要前进后退按钮
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          
+          // 如果需要滚动条
+          scrollbar: {
+            el: '.swiper-scrollbar',
+          },
+      })
+    },
 }
+
+
+
 
 
 </script>
 <style scoped lang="css">
 
+ .swiper {
+   position: absolute;
+        top: 300px;
+        width: 500px;
+        height: 300px;
+        margin: 20px auto;
+    }
 .hero {
   background-image: url('../../../assets/images/tifaImage01.jpeg');
   background-repeat: no-repeat;
