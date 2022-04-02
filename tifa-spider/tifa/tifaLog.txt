@@ -1,0 +1,240 @@
+2022-04-02 17:43:57 [scrapy.utils.log] INFO: Scrapy 2.6.1 started (bot: tifa)
+2022-04-02 17:43:57 [scrapy.utils.log] INFO: Versions: lxml 4.8.0.0, libxml2 2.9.12, cssselect 1.1.0, parsel 1.6.0, w3lib 1.22.0, Twisted 22.2.0, Python 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)], pyOpenSSL 22.0.0 (OpenSSL 1.1.1n  15 Mar 2022), cryptography 36.0.2, Platform Windows-10-10.0.19044-SP0
+2022-04-02 17:43:57 [scrapy.crawler] INFO: Overridden settings:
+{'BOT_NAME': 'tifa',
+ 'LOG_FILE': 'tifaLog.txt',
+ 'NEWSPIDER_MODULE': 'tifa.spiders',
+ 'SPIDER_MODULES': ['tifa.spiders']}
+2022-04-02 17:43:57 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.selectreactor.SelectReactor
+2022-04-02 17:43:57 [scrapy.extensions.telnet] INFO: Telnet Password: 75048851921f0e21
+2022-04-02 17:43:57 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.logstats.LogStats']
+2022-04-02 17:43:59 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2022-04-02 17:43:59 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2022-04-02 17:43:59 [scrapy.middleware] INFO: Enabled item pipelines:
+[]
+2022-04-02 17:43:59 [scrapy.core.engine] INFO: Spider opened
+2022-04-02 17:43:59 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2022-04-02 17:43:59 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2022-04-02 17:44:05 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://www.jd.com/> from <GET http://www.jd.com/>
+2022-04-02 17:44:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.jd.com/> (referer: None)
+2022-04-02 17:44:05 [scrapy.core.engine] INFO: Closing spider (finished)
+2022-04-02 17:44:05 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 420,
+ 'downloader/request_count': 2,
+ 'downloader/request_method_count/GET': 2,
+ 'downloader/response_bytes': 57666,
+ 'downloader/response_count': 2,
+ 'downloader/response_status_count/200': 1,
+ 'downloader/response_status_count/302': 1,
+ 'elapsed_time_seconds': 6.049013,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2022, 4, 2, 9, 44, 5, 887847),
+ 'httpcompression/response_bytes': 175394,
+ 'httpcompression/response_count': 1,
+ 'log_count/DEBUG': 3,
+ 'log_count/INFO': 10,
+ 'response_received_count': 1,
+ 'scheduler/dequeued': 2,
+ 'scheduler/dequeued/memory': 2,
+ 'scheduler/enqueued': 2,
+ 'scheduler/enqueued/memory': 2,
+ 'start_time': datetime.datetime(2022, 4, 2, 9, 43, 59, 838834)}
+2022-04-02 17:44:05 [scrapy.core.engine] INFO: Spider closed (finished)
+2022-04-02 17:47:19 [scrapy.utils.log] INFO: Scrapy 2.6.1 started (bot: tifa)
+2022-04-02 17:47:19 [scrapy.utils.log] INFO: Versions: lxml 4.8.0.0, libxml2 2.9.12, cssselect 1.1.0, parsel 1.6.0, w3lib 1.22.0, Twisted 22.2.0, Python 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)], pyOpenSSL 22.0.0 (OpenSSL 1.1.1n  15 Mar 2022), cryptography 36.0.2, Platform Windows-10-10.0.19044-SP0
+2022-04-02 17:47:19 [scrapy.crawler] INFO: Overridden settings:
+{'BOT_NAME': 'tifa',
+ 'LOG_FILE': 'tifaLog.txt',
+ 'NEWSPIDER_MODULE': 'tifa.spiders',
+ 'SPIDER_MODULES': ['tifa.spiders']}
+2022-04-02 17:47:19 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.selectreactor.SelectReactor
+2022-04-02 17:47:19 [scrapy.extensions.telnet] INFO: Telnet Password: a551d1a98986456e
+2022-04-02 17:47:19 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.logstats.LogStats']
+2022-04-02 17:47:21 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2022-04-02 17:47:21 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2022-04-02 17:47:21 [scrapy.middleware] INFO: Enabled item pipelines:
+[]
+2022-04-02 17:47:21 [scrapy.core.engine] INFO: Spider opened
+2022-04-02 17:47:21 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2022-04-02 17:47:21 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2022-04-02 17:47:26 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://book.jd.com/booksort.html> from <GET http://book.jd.com/booksort.html>
+2022-04-02 17:47:26 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://book.jd.com/booksort.html> (referer: None)
+2022-04-02 17:47:26 [scrapy.core.engine] INFO: Closing spider (finished)
+2022-04-02 17:47:26 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 448,
+ 'downloader/request_count': 2,
+ 'downloader/request_method_count/GET': 2,
+ 'downloader/response_bytes': 7227,
+ 'downloader/response_count': 2,
+ 'downloader/response_status_count/200': 1,
+ 'downloader/response_status_count/302': 1,
+ 'elapsed_time_seconds': 5.26104,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2022, 4, 2, 9, 47, 26, 671190),
+ 'httpcompression/response_bytes': 22296,
+ 'httpcompression/response_count': 1,
+ 'log_count/DEBUG': 3,
+ 'log_count/INFO': 10,
+ 'response_received_count': 1,
+ 'scheduler/dequeued': 2,
+ 'scheduler/dequeued/memory': 2,
+ 'scheduler/enqueued': 2,
+ 'scheduler/enqueued/memory': 2,
+ 'start_time': datetime.datetime(2022, 4, 2, 9, 47, 21, 410150)}
+2022-04-02 17:47:26 [scrapy.core.engine] INFO: Spider closed (finished)
+2022-04-02 17:51:07 [scrapy.utils.log] INFO: Scrapy 2.6.1 started (bot: tifa)
+2022-04-02 17:51:07 [scrapy.utils.log] INFO: Versions: lxml 4.8.0.0, libxml2 2.9.12, cssselect 1.1.0, parsel 1.6.0, w3lib 1.22.0, Twisted 22.2.0, Python 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)], pyOpenSSL 22.0.0 (OpenSSL 1.1.1n  15 Mar 2022), cryptography 36.0.2, Platform Windows-10-10.0.19044-SP0
+2022-04-02 17:51:07 [scrapy.crawler] INFO: Overridden settings:
+{'BOT_NAME': 'tifa',
+ 'LOG_FILE': 'tifaLog.txt',
+ 'NEWSPIDER_MODULE': 'tifa.spiders',
+ 'SPIDER_MODULES': ['tifa.spiders']}
+2022-04-02 17:51:07 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.selectreactor.SelectReactor
+2022-04-02 17:51:07 [scrapy.extensions.telnet] INFO: Telnet Password: fdb746c0fa29fa54
+2022-04-02 17:51:07 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.logstats.LogStats']
+2022-04-02 17:51:09 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2022-04-02 17:51:09 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2022-04-02 17:51:09 [scrapy.middleware] INFO: Enabled item pipelines:
+[]
+2022-04-02 17:51:09 [scrapy.core.engine] INFO: Spider opened
+2022-04-02 17:51:09 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2022-04-02 17:51:09 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2022-04-02 17:51:15 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://book.jd.com/booksort.html> (referer: None)
+2022-04-02 17:51:15 [scrapy.core.engine] INFO: Closing spider (finished)
+2022-04-02 17:51:15 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 224,
+ 'downloader/request_count': 1,
+ 'downloader/request_method_count/GET': 1,
+ 'downloader/response_bytes': 6769,
+ 'downloader/response_count': 1,
+ 'downloader/response_status_count/200': 1,
+ 'elapsed_time_seconds': 5.276707,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2022, 4, 2, 9, 51, 15, 200272),
+ 'httpcompression/response_bytes': 22296,
+ 'httpcompression/response_count': 1,
+ 'log_count/DEBUG': 2,
+ 'log_count/INFO': 10,
+ 'response_received_count': 1,
+ 'scheduler/dequeued': 1,
+ 'scheduler/dequeued/memory': 1,
+ 'scheduler/enqueued': 1,
+ 'scheduler/enqueued/memory': 1,
+ 'start_time': datetime.datetime(2022, 4, 2, 9, 51, 9, 923565)}
+2022-04-02 17:51:15 [scrapy.core.engine] INFO: Spider closed (finished)
+2022-04-02 17:52:45 [scrapy.utils.log] INFO: Scrapy 2.6.1 started (bot: tifa)
+2022-04-02 17:52:45 [scrapy.utils.log] INFO: Versions: lxml 4.8.0.0, libxml2 2.9.12, cssselect 1.1.0, parsel 1.6.0, w3lib 1.22.0, Twisted 22.2.0, Python 3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)], pyOpenSSL 22.0.0 (OpenSSL 1.1.1n  15 Mar 2022), cryptography 36.0.2, Platform Windows-10-10.0.19044-SP0
+2022-04-02 17:52:45 [scrapy.crawler] INFO: Overridden settings:
+{'BOT_NAME': 'tifa',
+ 'LOG_FILE': 'tifaLog.txt',
+ 'NEWSPIDER_MODULE': 'tifa.spiders',
+ 'SPIDER_MODULES': ['tifa.spiders']}
+2022-04-02 17:52:45 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.selectreactor.SelectReactor
+2022-04-02 17:52:45 [scrapy.extensions.telnet] INFO: Telnet Password: 10ec7762ee10a219
+2022-04-02 17:52:45 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.logstats.LogStats']
+2022-04-02 17:52:47 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2022-04-02 17:52:47 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2022-04-02 17:52:47 [scrapy.middleware] INFO: Enabled item pipelines:
+[]
+2022-04-02 17:52:47 [scrapy.core.engine] INFO: Spider opened
+2022-04-02 17:52:47 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2022-04-02 17:52:47 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2022-04-02 17:52:52 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://book.jd.com/booksort.html> (referer: None)
+2022-04-02 17:52:52 [scrapy.core.engine] INFO: Closing spider (finished)
+2022-04-02 17:52:52 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 224,
+ 'downloader/request_count': 1,
+ 'downloader/request_method_count/GET': 1,
+ 'downloader/response_bytes': 6788,
+ 'downloader/response_count': 1,
+ 'downloader/response_status_count/200': 1,
+ 'elapsed_time_seconds': 4.846163,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2022, 4, 2, 9, 52, 52, 394148),
+ 'httpcompression/response_bytes': 22296,
+ 'httpcompression/response_count': 1,
+ 'log_count/DEBUG': 2,
+ 'log_count/INFO': 10,
+ 'response_received_count': 1,
+ 'scheduler/dequeued': 1,
+ 'scheduler/dequeued/memory': 1,
+ 'scheduler/enqueued': 1,
+ 'scheduler/enqueued/memory': 1,
+ 'start_time': datetime.datetime(2022, 4, 2, 9, 52, 47, 547985)}
+2022-04-02 17:52:52 [scrapy.core.engine] INFO: Spider closed (finished)
