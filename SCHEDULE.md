@@ -88,9 +88,13 @@ maven如果打包方式为jar包需要配置maven让其包含yaml配置文件：
 
 配置axios，完善CRUD功能。配置nprogress、lodash、mock、swiper基本功能。
 
+##### **4-1**
+
+测试项目部署。
+
+##### 4-2
+
+整合redis并完成相关配置。
 
 
-```
-
-```
 

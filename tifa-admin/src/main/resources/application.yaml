@@ -8,7 +8,7 @@ spring:
 
   #加载druid配置文件。
   profiles:
-    include: druid
+    include: druid,thymeleaf,redis
 
 
 server:
