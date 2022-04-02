@@ -42,6 +42,16 @@
 | ❔Mysql(for test) | 8.x           |                   |
 | ❔WxJava(maybe)   |               |                   |
 
+**Tool**
+
+
+
+| <img width=50/>Modules <img width=50/> | <img width=50/> Version<img width=50/> | <img width=50/>Directory<img width=50/> |
+| -------------------------------------- | -------------------------------------- | --------------------------------------- |
+| ✅Scrapy                                | 2.6.0                                  | tifa-spider                             |
+
+
+
 ## Deployment method
 
 ### **tifa-ui**
@@ -98,6 +108,8 @@ git pull https://github.com/Haruluya/MallShoppingProj.git master
 ![img](https://i.postimg.cc/K8xmkhL9/img.png)
 
 **Run** the Project.
+
+### tifa-spider
 
 ## Meaning of project
 

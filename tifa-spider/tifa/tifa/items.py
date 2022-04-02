@@ -9,4 +9,8 @@ import scrapy
 class TifaItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    item_alt = scrapy.Field()
+    item_price = scrapy.Field()
+    item_desc = scrapy.Field()
+    # item_
+

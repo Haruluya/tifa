@@ -1,19 +1,15 @@
 import scrapy
 
 
-class TcSpider(scrapy.Spider):
-    name = 'tc'
-    allowed_domains = ['https://bj.58.com/sou/?key=%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91']
-    start_urls = ['https://bj.58.com/sou/?key=%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91']
+class JingdongSpider(scrapy.Spider):
+    name = 'jd'
+    allowed_domains = ['you.163.com']
+    start_urls = ['https://you.163.com/xhr/item/saleRankItems.json']
+    DEFAULT_REQUEST_HEADERS = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36',
+    }
 
     def parse(self, response):
-        # 字符串
-        # content = response.text
-        # 二进制数据
-        # content = response.body
-        # print('===========================')
-        # print(content)
+        pass
+#
 
-        span = response.xpath('//div[@id="filter"]/div[@class="tabs"]/a/span')[0]
-        print('=======================')
-        print(span.extract())
