@@ -37,6 +37,7 @@ const routes = [
 const routerHistory = createWebHistory()
 const router = createRouter({
   base:'/http/',
+  mode:'history',
   history: routerHistory,
   routes
 })

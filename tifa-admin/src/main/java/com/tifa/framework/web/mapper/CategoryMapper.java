@@ -1,9 +1,12 @@
 package com.tifa.framework.web.mapper;
+import com.tifa.framework.web.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
 import com.tifa.framework.web.pojo.Category;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
 * @author haruluya
@@ -13,7 +16,7 @@ import org.springframework.stereotype.Repository;
 */
 @Repository
 public interface CategoryMapper extends BaseMapper<Category> {
-
+    List<Category> selectAll();
 }
 
 

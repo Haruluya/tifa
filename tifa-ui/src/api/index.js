@@ -4,8 +4,8 @@ import requests from "./axios";
 
 
 
-export const getUserPageData = ()=>
+export const getTableDataByName = (tableName)=>
     requests({
         method:'GET',
-        url:'/userData'
+        url:`/${tableName.toLowerCase()}Data`,
     })
