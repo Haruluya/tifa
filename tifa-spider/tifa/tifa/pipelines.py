@@ -9,5 +9,15 @@ from itemadapter import ItemAdapter
 
 
 class TifaPipeline:
+    fp = None
+    def open_spider(self, spider):
+        print("开始爬虫......")
+        self.fp = open('spiders/json01.txt', 'w', encoding='utf-8')
+
     def process_item(self, item, spider):
+        self.fp.write(str(item))
         return item
+
+    def close_spider(self, spider):
+        print("爬虫结束！")
+        self.fp.close()

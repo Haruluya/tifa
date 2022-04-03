@@ -9,8 +9,9 @@ import redis.clients.jedis.Jedis;
 public class redisTest {
     @Test
     public void connectTest(){
-        Jedis jedis = new Jedis("121.40.84.85",6379);
+        Jedis jedis = new Jedis("120.53.121.245",6379);
         String value = jedis.ping();
         System.out.println(value);
+        System.out.println(jedis.keys("*"));
     }
 }

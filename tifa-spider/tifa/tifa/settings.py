@@ -25,7 +25,7 @@ USER_AGENT_LIST=[
 ]
 USER_AGENT = random.choice(USER_AGENT_LIST)
 # 日志信息。
-LOG_FILE = 'tifaLog.txt'
+# LOG_FILE = 'tifaLog.txt'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'tifa (+http://www.yourdomain.com)'
@@ -37,6 +37,11 @@ ROBOTSTXT_OBEY = False
 DEFAULT_REQUEST_HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36 Edg/99.0.1150.55'
 }
+
+ITEM_PIPELINES = {
+   'tifa.pipelines.TifaPipeline': 300,
+}
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
