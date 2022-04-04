@@ -19,6 +19,7 @@ selenium-debug.log
 *.sln
 *.local
 
+
 # Package Files #
 *.jar
 *.war
@@ -32,6 +33,7 @@ selenium-debug.log
 .project
 .settings
 target
+_pycache_
 *.iml
 package-lock.json
 yarn.lock
