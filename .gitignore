@@ -33,7 +33,9 @@ selenium-debug.log
 .project
 .settings
 target
-_pycache_
+*/__pycache_
+*/*/__pycache_
+*/*/*/__pycache_
 *.iml
 package-lock.json
 yarn.lock
