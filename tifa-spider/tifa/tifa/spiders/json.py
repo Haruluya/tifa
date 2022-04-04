@@ -22,8 +22,5 @@ class JsonSpider(scrapy.Spider):
             item['className3'] = jsonpath(media,'$.mediaList[0].categorys')[0]
             item['itemPic'] = jsonpath(media,'$.mediaList[0].coverPic')[0]
             item['itemDisc'] = jsonpath(media,'$.mediaList[0].descs')[0]
-            fp = open('./data/json01.txt','a')
-            fp.write(str(item) + '\n\n')
-            fp.close()
             yield
 
