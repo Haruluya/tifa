@@ -28,7 +28,7 @@ selenium-debug.log
 *.zip
 *.tar.gz
 *.rar
-*.pyc
+**/*.pyc
 
 .classpath
 .project
