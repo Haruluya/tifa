@@ -28,14 +28,12 @@ selenium-debug.log
 *.zip
 *.tar.gz
 *.rar
+*.pyc
 
 .classpath
 .project
 .settings
 target
-*/__pycache_
-*/*/__pycache_
-*/*/*/__pycache_
 *.iml
 package-lock.json
 yarn.lock
