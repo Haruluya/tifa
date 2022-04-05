@@ -5,7 +5,10 @@
 
 import scrapy
 
-
+# 
+# @date 2022/4/2
+# 商品数据类型。对应数据库中商品各属性。
+# 
 class TifaItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()

@@ -1,7 +1,11 @@
 import scrapy
 from tifa.items import TifaItem
-
-class JingdongSpider(scrapy.Spider):
+# 
+# @date 2022/4/4
+# dangdang网主要分类的商品数据爬取。
+# 这些页数dangdang网数据传输方式还是简单的html元素中包含，爬取较为方便。
+# 
+class DangDangSpider(scrapy.Spider):
     name = 'dangdang'
     allowed_domains = ['dangdang.com','e.dangdang.com']
     start_urls = ['http://dangdang.com']
@@ -14,13 +18,13 @@ class JingdongSpider(scrapy.Spider):
         for first_title in first_title_list[4:15]:
             first_category = first_title.xpath('./text()').extract_first()
             second_html_link = first_title.xpath('./@href').extract_first()
-#           访问第二个连接。
+            # 分类数据保存。
             temp_data = {}
             temp_data['first_category'] = first_category
             print(first_title)
             print(second_html_link + "??")
 
-
+            # 从1到指定页数的商品数据爬取。
             for i in range(0,50):
                 if i == 0:
                     pass
@@ -33,13 +37,14 @@ class JingdongSpider(scrapy.Spider):
                     meta={"secondData":temp_data}
                 )
 
+    # 进入第二分类的页面爬取。
     def parse_second_url(self,response):
         temp = response.meta['secondData']
         second_title_list = response.xpath('//div[@id="search_nature_rg"]/ul[@ class="bigimg cloth_shoplist"]/li')
         print(second_title_list)
 
 
-
+        # 此页面商品遍历保存。
         for second_title in second_title_list:
             item = TifaItem()
             item['name'] = second_title.xpath("./p[@class='price']/span/text()").extract_first()

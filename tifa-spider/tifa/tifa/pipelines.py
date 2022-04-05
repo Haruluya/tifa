@@ -8,7 +8,9 @@
 
 from itemadapter import ItemAdapter
 import json
-
+# 
+# @date 2022/4/3
+# 管道配置一：存入json文件。
 class TifaPipeline:
     fp = None
     def open_spider(self, spider):

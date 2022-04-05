@@ -17,7 +17,7 @@ class DangdangIndexpageSpider(scrapy.Spider):
 
 
     def parse(self, response):
-        # json请求参数。
+        # json请求参数保存。
         self.categoryMap = {"小说": "XS2", "文艺": "WY", "历史文化": "SK", "经济/管理": "JG", "心理/励志": "CGLZ", "生活": "SH",
                             "童书": "TS", "科技/教育": "KJ", "原版书": "JKS"}
         second_title_list = response.xpath('//div[@class="new_aside"]/dl/dt/a')
@@ -35,8 +35,10 @@ class DangdangIndexpageSpider(scrapy.Spider):
                 meta={"secondData":temp_data}
             )
 
+    # 第二分类页面爬取。
     def parse_third_url(self,response):
         temp_data = response.meta["secondData"]
+        # json请求连接动态拼接。
         json_data_url = 'http://e.dangdang.com/media/api.go?action=mediaCategoryLeaf&promotionType=1&deviceSerialNo=html5&macAddr=html5&channelType=html5&permanentId=20220402205658932304926291687615935&returnType=json&channelId=70000&clientVersionNo=6.8.0' \
                         '&platformSource=DDDS-P&fromPlatform=106&deviceType' \
                         '=pconline&token=&start=21&end=41&category='+temp_data['json_url']+'&dimension=dd_sale&order=0'
@@ -46,7 +48,7 @@ class DangdangIndexpageSpider(scrapy.Spider):
             meta={"thirdData": temp_data}
         )
 
-
+    # 第三分类页面爬取。
     def parse_json(self,response):
         catagoryData = response.meta["thirdData"]
         itemList = jsonpath(response.json(),'$.data.saleList.*')
