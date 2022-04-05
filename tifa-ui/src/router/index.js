@@ -5,7 +5,7 @@ const routes = [
     path: '/',
     component: () => import('../pages/Center/Home'),
     meta:{
-      showFooter:true
+      showHeader:true
     },
   },
   {
@@ -13,15 +13,15 @@ const routes = [
     name: 'home',
     component: () => import('../pages/Center/Home'),
     meta:{
-      showFooter:true
+      showHeader:true
     },
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: () => import('../pages/Center/Login'),
     meta:{
-      showFooter:false
+      showHeader:false
     },
   },
   {
@@ -29,8 +29,16 @@ const routes = [
     name: 'CRUD',
     component: () => import('../pages/Center/CRUD'),
     meta:{
-      showFooter:false
+      showHeader:false
     },
+  },
+  {
+    path: '/register',
+    name:'register',
+    component: () => import('../pages/Center/Register'),
+    meta:{
+      showHeader:false
+    }
   }
 ]
 

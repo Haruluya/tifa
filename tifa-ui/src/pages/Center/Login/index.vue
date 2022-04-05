@@ -15,7 +15,7 @@
 
         <button class="btn">Login</button>
 
-        <p class="text">Don't have an account? <a href="#">Register</a> </p>
+        <p class="text">Don't have an account? <a href="register">Register</a> </p>
       </form>
     </div>
 </div>

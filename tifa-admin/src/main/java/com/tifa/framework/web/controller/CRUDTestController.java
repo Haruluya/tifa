@@ -26,6 +26,7 @@ import java.util.List;
  * 测试CRUD的控制类。
  */
 @Controller
+@RequestMapping("/tifai/CRUD")
 public class CRUDTestController {
 
     @Autowired
@@ -48,47 +49,36 @@ public class CRUDTestController {
     @Autowired
     private UserMapper userMapper;
 
-    @RequestMapping("/CRUD")
-    public String showUsers(@RequestParam(value = "pageNum",defaultValue="1")Integer pageNum, Model model){
-
-        PageHelper.startPage(1,3);
-        List<User> userList = userService.selectAll();
-        PageInfo<User> page = new PageInfo<User>(userList,2);
-        model.addAttribute("pageInfo",page);
-        return "CRUDindex";
-    }
+//    @RequestMapping("/CRUD")
+//    public String showUsers(@RequestParam(value = "pageNum",defaultValue="1")Integer pageNum, Model model){
+//
+//        PageHelper.startPage(1,3);
+//        List<User> userList = userService.selectAll();
+//        PageInfo<User> page = new PageInfo<User>(userList,2);
+//        model.addAttribute("pageInfo",page);
+//        return "CRUDindex";
+//    }
 
 
 //    @RequestMapping("/api")
 //    @ResponseBody
 //    public String proxyTest(HttpServletRequest req, HttpServletResponse res){
-//        res.setHeader("Access-Control-Allow-Origin","*");
-//        res.setHeader("Access-Control-Allow-Credentials","true");
-//        res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-//        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 //        return "index";
 //    }
 
-    @RequestMapping("/api/userData")
+    @RequestMapping("/userData")
     @ResponseBody
-    public PageInfo<User> userData(HttpServletRequest req, HttpServletResponse res){
-        res.setHeader("Access-Control-Allow-Origin","*");
-        res.setHeader("Access-Control-Allow-Credentials","true");
-        res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    public PageInfo<User> userData(Model model){
+
         PageHelper.startPage(1,5);
         List<User> userList = userService.selectAll();
         PageInfo<User> page = new PageInfo<User>(userList,2);
         return page;
     }
 
-    @RequestMapping("/api/categoryData")
+    @RequestMapping("/categoryData")
     @ResponseBody
-    public PageInfo<Category> categoryData(HttpServletRequest req, HttpServletResponse res){
-        res.setHeader("Access-Control-Allow-Origin","*");
-        res.setHeader("Access-Control-Allow-Credentials","true");
-        res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    public PageInfo<Category> categoryData(Model model){
         PageHelper.startPage(1,10);
         List<Category> categoryList = categoryMapper.selectAll();
         PageInfo<Category> page = new PageInfo<Category>(categoryList,2);

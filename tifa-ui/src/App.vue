@@ -1,5 +1,5 @@
 <template>
-  <Header  v-show="$route.meta.showFooter"></Header>
+  <Header  v-show="$route.meta.showHeader"></Header>
   <div>
     <router-view></router-view> 
   </div>

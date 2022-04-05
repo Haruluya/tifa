@@ -8,6 +8,10 @@ import router from './router';
 import store from './store/index.js';
 
 
+import Header from '_components/Header'
+import Footer from '_components/Footer'
+Vue.component('header',Header);
+Vue.component('footer',Footer);
 
 const app = createApp(App);
 
