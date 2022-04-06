@@ -6,26 +6,28 @@ import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerIntercept
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-public class MybatisConfig {
 
+/**
+ * @author haruluya
+ * @date 2022/4/6
+ * mybatis-plus插件配置。
+ */
+@Configuration
+public class MybatisPlusConfig {
     /**
-     * MybatisPlusInterceptor
-     * @return
+     * 分页插件配置。
+     * @return MybatisPlus拦截器。
      */
     @Bean
     public MybatisPlusInterceptor paginationInterceptor() {
         MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
-        // 设置请求的页面大于最大页后操作， true调回到首页，false 继续请求  默认false
-        // paginationInterceptor.setOverflow(false);
-        // 设置最大单页限制数量，默认 500 条，-1 不受限制
-        // paginationInterceptor.setLimit(500);
-        // 开启 count 的 join 优化,只针对部分 left join
-
-        //这是分页拦截器
+        //分页拦截器。
         PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor();
+        //请求页数大于最大页数时回到首页。
         paginationInnerInterceptor.setOverflow(true);
-        paginationInnerInterceptor.setMaxLimit(500L);
+        //每页最多条数。
+        paginationInnerInterceptor.setMaxLimit(200L);
+        //添加分页插件。
         mybatisPlusInterceptor.addInnerInterceptor(paginationInnerInterceptor);
 
         return mybatisPlusInterceptor;

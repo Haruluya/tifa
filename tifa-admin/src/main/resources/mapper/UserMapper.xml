@@ -31,8 +31,6 @@
         </trim>
     </insert>
 
-    <select id="selectAll" resultMap="BaseResultMap">
-        select * from user
-    </select>
+
 
 </mapper>

@@ -28,10 +28,10 @@
     </el-aside>
 
     <el-container>
-      <el-header style="text-align: right; font-size: 12px">
+      <el-header style="text-align: right; font-size: 20px; margin: 10px 0">
         <div class="toolbar">
           <el-dropdown>
-            <el-icon style="margin-right: 8px; margin-top: 1px"
+            <el-icon style="margin-right: 8px; margin-top: 6px"
               ><setting/></el-icon>
             <template #dropdown>
               <el-dropdown-menu>
@@ -41,52 +41,81 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <span>Setting</span>
+          <span >Modify table</span>
         </div>
       </el-header>
 
       <el-main>
         <el-scrollbar>
-          <el-table :data="tableData">
+          <el-table :data="tableItems">
             <el-table-column prop="id" label="id" width="140" />
             <el-table-column prop="name" label="name" width="120" />
             <el-table-column prop="password" label="password" />
-
           </el-table>
+          
         </el-scrollbar>
       </el-main>
+
+      <el-footer>
+          <div height = "100%" style="font-size: 10px; display: flex; justify-content: center; position:absolute" >
+            <span>当前为第[{{currentPage}}]页，共[{{tablePageNums}}]页。</span>
+          </div>
+          <el-button-group size="small" >
+            <el-button type="success" icon="ArrowLeft" >Previous</el-button>
+                <el-button style="margin: 0px 4px;"  v-for="count in tablePageNums" @click="changePage($event)">
+                  {{count}}
+                </el-button>
+            <el-button type="success">Next
+              <el-icon class="el-icon--right"><ArrowRight /></el-icon>
+            </el-button>
+          </el-button-group>
+      </el-footer>
+
+
     </el-container>
   </el-container>
 </template>
 <script>
 import { result } from 'lodash-es';
-
 import {getTableDataByName} from '_api/index.js'
 import { ref } from 'vue'
+import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
 
-const item = {
-  date: '2016-05-02',
-  name: 'Tom',
-  address: 'No. 189, Grove St, Los Angeles',
-}
-
-// const tableData = ref(Array.from({ length: 20 }).fill(item))
 
 export default {
     name: 'CRUD',
     data(){
        return {
-           tableData : []
+           currentPage: 1,
+           tablePageNums:1,
        }  
     },
+    computed:{
+	    // ...mapGetters({tableItems:'tableItems',tablePageNums:'tablePageNums'})
+      tableItems(){
+        // if ( this.$store.state.tableData.records == []){
+        //   return [];
+        // }
+        // console.log(this.$store.state.tableData);
+        // return this.$store.state.tableData.records;
+        console.log(this.$store.state.tableData);
+        return [];
+      }
+
+    },
     methods: {
-        getTableData(tableName){
-            getTableDataByName(tableName).then((result) => {
-                this.tableData = result.list
-                console.log(result);
-            }).catch((err) => {
-                console.log(err);
-            });;
+      async getTableData(tableName){
+            try {
+              await this.$store.dispatch('getTableData',tableName)
+            } catch (error) {
+              alert("请求失败成功！");
+            }
+        },
+        changePage(event){
+          // event.target.
+          // console.log(event.target);
+          // 发送请求。
+
         }
     },
     mounted(){
@@ -94,6 +123,7 @@ export default {
     }
 }
 </script>
-<style lang="">
-    
+<style lang="css">
+
+
 </style>

@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.tifa.framework.web.pojo.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -15,14 +16,8 @@ import java.io.Serializable;
 * @createDate 2022-03-29 17:15:21
 * @Entity com.tifa.framework.web.pojo.User
 */
-@Repository
+
 public interface UserMapper extends BaseMapper<User> {
-    @Override
-    User selectById(Serializable id);
-
-    int insertSelective(User user);
-
-    List<User> selectAll();
 
 }
 

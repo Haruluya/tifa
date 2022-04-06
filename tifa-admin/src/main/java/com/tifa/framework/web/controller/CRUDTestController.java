@@ -1,89 +1,97 @@
 package com.tifa.framework.web.controller;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import com.tifa.framework.web.mapper.*;
-import com.tifa.framework.web.pojo.Category;
-import com.tifa.framework.web.pojo.User;
+
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tifa.framework.web.pojo.*;
+import com.tifa.framework.web.service.ProductService;
+import com.tifa.framework.web.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
 import java.util.List;
 
 /**
  * @author haruluya
  * 测试CRUD的控制类。
  */
-@Controller
+@RestController
 @RequestMapping("/tifai/CRUD")
 public class CRUDTestController {
 
     @Autowired
-//    @Qualifier("userServiceImpl")
-    private UserMapper userService;
+    private UserServiceImpl userService;
     @Autowired
-    private CategoryMapper categoryMapper;
+    private CategoryServiceImpl categoryService;
     @Autowired
-    private OrderMapper orderMapper;
+    private OrderServiceImpl orderService;
     @Autowired
-    private ProductimageMapper productimageMapper;
+    private ProductimageServiceImpl productimageService;
     @Autowired
-    private ProductMapper productMapper;
+    private ProductServiceImpl productService;
     @Autowired
-    private PropertyMapper propertyMapper;
+    private PropertyServiceImpl propertyService;
     @Autowired
-    private PropertyvalueMapper propertyvalueMapper;
+    private PropertyvalueServiceImpl propertyvalueService;
     @Autowired
-    private ReviewMapper reviewMapper;
+    private ReviewServiceImpl reviewService;
     @Autowired
-    private UserMapper userMapper;
+    private OrderitemServiceImpl orderitemService;
 
-//    @RequestMapping("/CRUD")
-//    public String showUsers(@RequestParam(value = "pageNum",defaultValue="1")Integer pageNum, Model model){
-//
-//        PageHelper.startPage(1,3);
-//        List<User> userList = userService.selectAll();
-//        PageInfo<User> page = new PageInfo<User>(userList,2);
-//        model.addAttribute("pageInfo",page);
-//        return "CRUDindex";
-//    }
-
-
-//    @RequestMapping("/api")
-//    @ResponseBody
-//    public String proxyTest(HttpServletRequest req, HttpServletResponse res){
-//        return "index";
-//    }
-
-    @RequestMapping("/userData")
-    @ResponseBody
-    public PageInfo<User> userData(Model model){
-
-        PageHelper.startPage(1,5);
-        List<User> userList = userService.selectAll();
-        PageInfo<User> page = new PageInfo<User>(userList,2);
-        return page;
+    @GetMapping("/userData")
+    public Page<User> userData(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum, Model model){
+        Page<User> userPage = new Page<>(pageNum,10);
+        return userService.page(userPage,null);
     }
 
-    @RequestMapping("/categoryData")
-    @ResponseBody
-    public PageInfo<Category> categoryData(Model model){
-        PageHelper.startPage(1,10);
-        List<Category> categoryList = categoryMapper.selectAll();
-        PageInfo<Category> page = new PageInfo<Category>(categoryList,2);
-        return page;
+    @GetMapping("/categoryData")
+    public Page<Category> categoryData(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum, Model model){
+        Page<Category> categoryPage = new Page<>(pageNum,10);
+        return categoryService.page(categoryPage,null);
+    }
+
+    @GetMapping("/propertyData")
+    public Page<Property> propertyData(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum, Model model){
+        Page<Property> propertyPage = new Page<>(pageNum,10);
+        return propertyService.page(propertyPage,null);
+    }
+
+    @GetMapping("/productData")
+    public Page<Product> productData(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum, Model model){
+        Page<Product> productPage = new Page<>(pageNum,10);
+        return productService.page(productPage,null);
     }
 
 
+    @GetMapping("/propertyvalueData")
+    public Page<Propertyvalue> propertyvalueData(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum, Model model){
+        Page<Propertyvalue> propertyvaluePage = new Page<>(pageNum,10);
+        return propertyvalueService.page(propertyvaluePage,null);
+    }
+
+    @GetMapping("/productimageData")
+    public Page<Productimage> productimageData(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum, Model model){
+        Page<Productimage> productimagePage = new Page<>(pageNum,10);
+        return productimageService.page(productimagePage,null);
+    }
+
+    @GetMapping("/reviewData")
+    public Page<Review> reviewData(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum, Model model){
+        Page<Review> reviewPage = new Page<>(pageNum,10);
+        return reviewService.page(reviewPage,null);
+    }
+
+    @GetMapping("/order_Data")
+    public Page<Order> order_Data(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum, Model model){
+        Page<Order> order_Page = new Page<>(pageNum,10);
+        return orderService.page(order_Page,null);
+    }
+
+    @GetMapping("/orderitemData")
+    public Page<Orderitem> orderitemData(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum, Model model){
+        Page<Orderitem> orderitemPage = new Page<>(pageNum,10);
+        return orderitemService.page(orderitemPage,null);
+    }
 }

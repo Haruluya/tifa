@@ -19,3 +19,12 @@ export const postRegisterConfim = (data)=>
         url:`/register/confirm`,
         data
     })
+
+// 根据表名和页数查询当页数据。
+export const getTableDataByNameAndPage = (pageNum,tableName)=>
+    requests({
+        method:'GET',
+        url:`/CRUD/${tableName.toLowerCase()}Data`,
+        params:{'pageNum':pageNum}
+    })
+

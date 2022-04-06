@@ -1,7 +1,6 @@
 package com.tifa.framework.web.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.pagehelper.PageHelper;
 import com.tifa.framework.web.pojo.User;
 import com.tifa.framework.web.service.UserService;
 import com.tifa.framework.web.mapper.UserMapper;
@@ -20,12 +19,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     implements UserService{
-    @Autowired
-    UserMapper userMapper;
-    @Override
-    public List<User> selectAll() {
-        return userMapper.selectAll();
-    }
+
 }
 
 

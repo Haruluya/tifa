@@ -108,3 +108,6 @@ maven如果打包方式为jar包需要配置maven让其包含yaml配置文件：
 
 编写register和login模块。
 
+**4.6**
+
+写bug。

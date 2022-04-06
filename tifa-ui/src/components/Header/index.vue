@@ -19,8 +19,9 @@ export default {
         return {
 
         }
-    }
-    
+    },
+
+   
 }
 
 window.onload = function(){
