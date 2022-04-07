@@ -21,10 +21,17 @@ export const postRegisterConfim = (data)=>
     })
 
 // 根据表名和页数查询当页数据。
-export const getTableDataByNameAndPage = (pageNum,tableName)=>
+export const getTableDataByNameAndPage = (tableName,pageIndex)=>
     requests({
         method:'GET',
         url:`/CRUD/${tableName.toLowerCase()}Data`,
-        params:{'pageNum':pageNum}
+        params:{'pageIndex':pageIndex}
     })
 
+
+//  查询数据库中所有表名。
+export const getAllTableNames = ()=>
+    requests({
+        method:'GET',
+        url:`/CRUD/tableNames`,
+    })

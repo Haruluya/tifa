@@ -12,15 +12,7 @@
             </template>
             <el-menu-item-group>
               <template #title>table</template>
-              <el-menu-item index="1-1" @click="getTableData('User')">User</el-menu-item>
-              <el-menu-item index="1-2" @click="getTableData('category')">category</el-menu-item>
-              <el-menu-item index="1-3" @click="getTableData('property')">property</el-menu-item>
-              <el-menu-item index="1-4" @click="getTableData('product')">product</el-menu-item>
-              <el-menu-item index="1-5" @click="getTableData('propertyvalue')">propertyvalue</el-menu-item>
-              <el-menu-item index="1-6" @click="getTableData('productimage')">productimage</el-menu-item> 
-              <el-menu-item index="1-7" @click="getTableData('review')">review</el-menu-item>
-              <el-menu-item index="1-8" @click="getTableData('order_')">order_</el-menu-item>
-              <el-menu-item index="1-9" @click="getTableData('orderitem')">orderitem</el-menu-item> 
+              <el-menu-item  v-for="name in tableNames" @click="getTableData(name)" >{{name}}</el-menu-item>
             </el-menu-item-group>
           </el-sub-menu>
         </el-menu>
@@ -62,7 +54,7 @@
           </div>
           <el-button-group size="small" >
             <el-button type="success" icon="ArrowLeft" >Previous</el-button>
-                <el-button style="margin: 0px 4px;"  v-for="count in tablePageNums" @click="changePage($event)">
+                <el-button style="margin: 0px 4px;"  v-for="count in tablePageNums" @click="changePage(count,$event)">
                   {{count}}
                 </el-button>
             <el-button type="success">Next
@@ -87,39 +79,46 @@ export default {
     data(){
        return {
            currentPage: 1,
-           tablePageNums:1,
+           tableName:'user',
        }  
     },
     computed:{
-	    // ...mapGetters({tableItems:'tableItems',tablePageNums:'tablePageNums'})
-      tableItems(){
-        // if ( this.$store.state.tableData.records == []){
-        //   return [];
-        // }
-        // console.log(this.$store.state.tableData);
-        // return this.$store.state.tableData.records;
-        console.log(this.$store.state.tableData);
-        return [];
-      }
-
+      ...mapState({
+        tableNames: state=>state.CRUD.tableNames,
+      }),
+	    ...mapGetters(['tableItems','tablePageNums'])
     },
     methods: {
-      async getTableData(tableName){
+      async getTableNames(){
             try {
-              await this.$store.dispatch('getTableData',tableName)
+              await this.$store.dispatch('getTableNames');
             } catch (error) {
-              alert("请求失败成功！");
+              alert("请求失败！");
             }
         },
-        changePage(event){
-          // event.target.
-          // console.log(event.target);
+      async getTableData(tableName){
+            try {
+              this.tableName = tableName;
+              await this.$store.dispatch('getTableData',tableName)
+            } catch (error) {
+              alert("请求失败！");
+            }
+        },
+      async changePage(count,event){
           // 发送请求。
+          let pageData = {'pageIndex':count,'tableName':this.tableName};
+          try {
+            await this.$store.dispatch('changePage',pageData);
+          } catch (error) {
+            alert("请求失败！");
+          }
+        },
 
-        }
     },
     mounted(){
+        this.getTableNames();
         this.getTableData('User');
+        
     }
 }
 </script>

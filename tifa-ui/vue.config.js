@@ -8,7 +8,7 @@ function resolve(dir){
 module.exports = {
     productionSourceMap:false,
     // 关闭ESLINT校验工具
-    lintOnSave: false,
+    // lintOnSave: false,
 
 
     //代理。 

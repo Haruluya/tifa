@@ -23,6 +23,7 @@ const actions = {
             console.log(user);
         } else {
             return Promise.reject(new Error("faile"));
+            
         }
     },
 }

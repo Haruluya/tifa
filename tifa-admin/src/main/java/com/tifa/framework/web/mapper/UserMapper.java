@@ -17,8 +17,10 @@ import java.io.Serializable;
 * @Entity com.tifa.framework.web.pojo.User
 */
 
+@Repository
 public interface UserMapper extends BaseMapper<User> {
-
+    @Select("select table_name from information_schema.TABLES where TABLE_SCHEMA='tmall'")
+    public String[] getAllTableNames();
 }
 
 
