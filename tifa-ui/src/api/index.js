@@ -35,3 +35,33 @@ export const getAllTableNames = ()=>
         method:'GET',
         url:`/CRUD/tableNames`,
     })
+
+
+// 查询三级分类表数据。
+export const getClassNavData = ()=>
+    requests({
+        method:'GET',
+        url:`/classNav/classData`,
+    })
+
+// 获取登录信息。
+export const postLoginConfirm = (data)=>
+    requests({
+        method:'POST',
+        url:`/login/confirm`,
+        data
+    })
+
+// 退出登录请求。
+export const postLogout = ()=>
+    requests({
+        method:'POST',
+        url:`/login/logout`,
+    })
+
+// 获取用户信息。
+export const getUserData = ()=>
+    requests({
+        method:'POST',
+        url:`/user/userData`,
+    })

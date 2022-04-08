@@ -18,12 +18,11 @@ let requests = axios.create();
 //请求拦截器配置。
 requests.interceptors.request.use((config) => {
     // if(store.state.detail.uuid_token){
-    //     //请求头添加一个字段(userTempId):7
     //     config.headers.userTempId = store.state.detail.uuid_token;
     // }
-    // //需要携带token带给服务器
-    // if(store.state.user.token){
-    //     config.headers.token = store.state.user.token;
+    // // 表示用户已经登录。
+    // if(store.state.login.token){
+    //     config.headers.token = store.state.login.token;
     // }
     // 开始进度条。
     nprogress.start();
@@ -43,5 +42,8 @@ requests.interceptors.response.use(
       alert("服务器响应数据失败");
     }
 );
+
+
+
 
 export default requests;

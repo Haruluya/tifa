@@ -2,21 +2,22 @@
 <div class="bodyContainer">
     <div class="container">
       <h1>Please Login</h1>
-      <form id="login" action="CRUD" method="get">
-        <div class="form-control">
-          <input type="text" required placeholder="Email" autocomplete="new-password">
-          <label></label>
-        </div>
+      
+        <form>
+          <div class="form-control" >
+            <input type="text" required placeholder="Email" autocomplete="new-password" v-model="email">
+            <label></label>
+          </div>
 
-        <div class="form-control">
-          <input type="password" required placeholder="Password" autocomplete="new-password">
-          <label></label>
-        </div>
+          <div class="form-control" >
+            <input v-model="password" type="password" required placeholder="Password" autocomplete="new-password">
+            <label></label>
+          </div>
 
-        <button class="btn">Login</button>
+          <button class="btn" @click.prevent="confirmLogin()">Login</button>
+        </form>
 
         <p class="text">Don't have an account? <a href="register">Register</a> </p>
-      </form>
     </div>
 </div>
 </template>
@@ -25,6 +26,28 @@
 
 export default {
     name:'Login',
+    data() {
+        return {
+          password: '',
+          email: '',
+        }
+    },
+    methods: {
+      async confirmLogin(){
+        try {
+          //登录成功
+          const { email, password } = this;
+          email&&password&&(await this.$store.dispatch("confirmLogin", { email, password }));
+          let toPath = this.$route.query.redirect||"/home";
+          this.$router.push(toPath);
+        } catch (error) {
+          console.log(error);
+          alert('登录失败！');
+        }
+      },
+
+
+    },
 
     beforeCreate() {
         document.body.style.overflow = 'hidden';

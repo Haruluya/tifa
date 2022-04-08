@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class TifaApplication {
     public static void main(String[] args)
     {
+        System.setProperty("es.set.netty.runtime.available.processors","false");
         SpringApplication.run(TifaApplication.class, args);
         System.out.println("Tifa is running");
     }

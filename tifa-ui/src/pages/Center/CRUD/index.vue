@@ -12,7 +12,7 @@
             </template>
             <el-menu-item-group>
               <template #title>table</template>
-              <el-menu-item  v-for="name in tableNames" @click="getTableData(name)" >{{name}}</el-menu-item>
+              <el-menu-item :index="{index}" v-for="(name,index) in tableNames" @click="getTableData(name)" >{{name}}</el-menu-item>
             </el-menu-item-group>
           </el-sub-menu>
         </el-menu>

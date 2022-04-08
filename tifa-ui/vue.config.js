@@ -8,21 +8,17 @@ function resolve(dir){
 module.exports = {
     productionSourceMap:false,
     // 关闭ESLINT校验工具
-    // lintOnSave: false,
+    lintOnSave: false,
 
 
     //代理。 
-    // devServer:{
-	//     proxy:{
-    //     '/api':{
-    //         target: 'http://localhost:8081',
-    //         changeOrigin: true,
-    //         pathRewrite: {
-    //             '/api': '/' 
-    //         }  
-	//       }
-    //   }
-	//   },
+    devServer:{
+	    proxy:{
+        '/tifai':{
+            target: 'http://localhost:8081',
+	      }
+      }
+	  },
 
     // 别名配置。
     chainWebpack:(config)=>{
@@ -32,6 +28,8 @@ module.exports = {
         .set('_assets',resolve('./src/assets'))
         .set('_pages',resolve('./src/pages'))
         .set('_api',resolve('./src/api'))
+        .set('_store',resolve('./src/store'))
+        .set('_utils',resolve('./src/utils'))
     },
 };
   

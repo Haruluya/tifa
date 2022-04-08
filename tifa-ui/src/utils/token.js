@@ -1,0 +1,30 @@
+import { v4 as uuid } from 'uuid';
+//存储token
+export const setToken = (token) => {
+    localStorage.setItem("TOKEN", token);
+  };
+//获取token
+export const getToken = () => {
+    return localStorage.getItem("TOKEN");
+};
+
+//清除本地存储的token
+export const removeToken=()=>{
+    localStorage.removeItem("TOKEN");
+}
+  
+
+//要生成一个随机字符串，且每次执行不能发生变化，游客身份持久存储
+export const getUUID = ()=>{
+   //先从本地存储获取uuid（看一下本地存储里面是否有）
+   let uuid_token = localStorage.getItem('UUIDTOKEN');
+   //如果没有
+   if(!uuid_token){
+       //我生成游客临时身份
+      uuid_token = uuid();
+      //本地存储存储一次
+      localStorage.setItem('UUIDTOKEN',uuid_token);
+   }
+   //切记有返回值,没有返回值undefined
+   return uuid_token;
+}

@@ -131,3 +131,23 @@ actions无法传参。
 **解决**
 
 事实上actions最多只能传递两个参数。
+
+##### 4.8
+
+编写token业务，编写ClassNav组件，配置导航守卫。
+
+**问题**
+
+mockjs一直报404。
+
+**解决**
+
+mockjs无法识别axios的baseurl，必须映射时添加。
+
+**问题**
+
+路由跳转时报api.new is not a function。
+
+**解决**
+
+逆天！到最后问题是因为vue devtools版本低！这种bug谁受得了？？？

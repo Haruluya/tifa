@@ -8,6 +8,8 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.ToString;
 
+
+
 /**
  * 
  * @TableName user
@@ -31,6 +33,7 @@ public class User implements Serializable {
      * 
      */
     private String password;
+
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

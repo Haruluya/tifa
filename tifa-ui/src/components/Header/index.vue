@@ -3,16 +3,26 @@
       <div class="container">
         <h1 class="logo"><a href="/index.html">TIFA</a></h1>
         <ul>
-          <li><a href="login" class="current">CRUD</a></li>
-          <li><a href="#">NULL</a></li>
-          <li><a href="#">NULL</a></li>
-          <li><a href="#">NULL</a></li>
+          <li><a href="CRUD" >CRUD</a></li>
+          <li><a href="classNav">ClassNav</a></li>
+          <li><a href="login">Login</a></li>
+          <li><a href="register">Register</a></li>
+          <li><a href="#">
+            <span v-if="!userName">
+              <router-link to="/login">未登录</router-link>
+            </span>
+            <span v-else>
+              <span>{{userName}}</span>
+            </span>
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
 </template>
 
 <script>
+import {mapState,mapMutations,mapAction,mapGetters} from 'vuex';
 export default {
     name: "Header",
     data(){
@@ -20,6 +30,14 @@ export default {
 
         }
     },
+    computed:{
+      ...mapState({
+          userName:state=>state.global.userData.name
+        })
+    },
+    mounted(){
+    }
+
 
    
 }
