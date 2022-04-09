@@ -1,85 +1,32 @@
 <template>
-  <div class="register-container">
-    <!-- 注册内容 -->
-    <div class="register">
-      <h3>
-        注册新用户
-        <span class="go"
-          >我有账号，去 <a href="login" target="_blank">登陆</a>
-        </span>
-      </h3>
-      <div class="content">
-        <label>手机号:</label>
-        <input
-          placeholder="请输入你的手机号"
-          v-model="phone"
-          name="phone"
-        />
-        <span class="error-msg">{{ }}</span>
-      </div>
-      <div class="content">
-        <label>验证码:</label>
-        <input
-          placeholder="请输入你的验证码"
-          v-model="code"
-          name="code"
-        />
-        <button style="width:100px;height:38px" @click="getCode">
-          获取验证码
-        </button>
-        <span class="error-msg">{{ }}</span>
-      </div>
-      <div class="content">
-        <label>登录密码:</label>
-        <input
-          placeholder="请输入你的密码"
-          v-model="password"
-          name="password"
-        />
-        <span class="error-msg">{{  }}</span>
-      </div>
-      <div class="content">
-        <label>确认密码:</label>
-        <input
-          placeholder="请输入确认密码"
-          v-model="confimPassword"
-          name="confimPassword"
-        />
-        <span class="error-msg">{{ }}</span>
-      </div>
-      <div class="controls">
-        <input
-          type="checkbox"
-          v-model="agree"
-          name="agree"
-        />
-        <span>同意协议并注册《尚品汇用户协议》</span>
-        <span class="error-msg">{{  }}</span>
-      </div>
-      <div class="btn">
-        <button @click="commitRegister">完成注册</button>
-      </div>
-    </div>
+<div class="bodyContainer">
+    <div class="container">
+      <h1>Register</h1>
+      
+        <form>
+          <div class="form-control" >
+            <input type="text" required placeholder="Name" autocomplete="new-password" v-model="name">
+            <label></label>
+          </div>
 
-    <!-- 底部 -->
-    <div class="copyright">
-      <ul>
-        <li>关于我们</li>
-        <li>联系我们</li>
-        <li>联系客服</li>
-        <li>商家入驻</li>
-        <li>营销中心</li>
-        <li>手机尚品汇</li>
-        <li>销售联盟</li>
-        <li>尚品汇社区</li>
-      </ul>
-      <div class="address">地址：北京市昌平区宏福科技园综合楼6层</div>
-      <div class="beian">京ICP备19006430号</div>
+          <div class="form-control" >
+            <input v-model="password" type="password" required placeholder="Password" autocomplete="new-password">
+            <label></label>
+          </div>
+
+          <div class="form-control" >
+            <input v-model="confirmPassword" type="password" required placeholder="Password Confirm" autocomplete="new-password">
+            <label></label>
+          </div>
+
+          <button class="btn" @click.prevent="commitRegister()">Login</button>
+        </form>
+
+        <p class="text">Inpute you name and password to register!</p>
     </div>
-  </div>
+</div>
 </template>
 <script>
-import postRegisterConfim from '_api/index.js'
 
 // 注册界面
 export default {
@@ -89,13 +36,13 @@ export default {
     data() {
         return {
             // 收集表单数据--手机号
-            phone: "",
+            name: "",
             //验证码
             code: "",
             //密码
             password: "",
             //确认密码
-            confimPassword: "",
+            confirmPassword: "",
             //是否同意
             agree: true,
         };
@@ -107,10 +54,10 @@ export default {
         },
         //用户注册
         async commitRegister() {
-            const { phone, code, password} = this;
+            const { name, code, password} = this;
             try {
                 await this.$store.dispatch("commitRegister", {
-                    phone,
+                    name,
                     code,
                     password,
                 });
@@ -124,118 +71,114 @@ export default {
     },
 }
 </script>
-<style lang="less" scoped>
-.register-container {
-  .register {
-    width: 1200px;
-    height: 445px;
-    border: 1px solid rgb(223, 223, 223);
-    margin: 0 auto;
+<style lang="css" scoped>
 
-    h3 {
-      background: #ececec;
-      margin: 0;
-      padding: 6px 15px;
-      color: #333;
-      border-bottom: 1px solid #dfdfdf;
-      font-size: 20.04px;
-      line-height: 30.06px;
-
-      span {
-        font-size: 14px;
-        float: right;
-
-        a {
-          color: #e1251b;
-        }
-      }
-    }
-
-    div:nth-of-type(1) {
-      margin-top: 40px;
-    }
-
-    .content {
-      padding-left: 390px;
-      margin-bottom: 18px;
-      position: relative;
-
-      label {
-        font-size: 14px;
-        width: 96px;
-        text-align: right;
-        display: inline-block;
-      }
-
-      input {
-        width: 270px;
-        height: 38px;
-        padding-left: 8px;
-        box-sizing: border-box;
-        margin-left: 5px;
-        outline: none;
-        border: 1px solid #999;
-      }
-
-      img {
-        vertical-align: sub;
-      }
-
-      .error-msg {
-        position: absolute;
-        top: 100%;
-        left: 495px;
-        color: red;
-      }
-    }
-
-    .controls {
-      text-align: center;
-      position: relative;
-
-      input {
-        vertical-align: middle;
-      }
-
-      .error-msg {
-        position: absolute;
-        top: 100%;
-        left: 495px;
-        color: red;
-      }
-    }
-
-    .btn {
-      text-align: center;
-      line-height: 36px;
-      margin: 17px 0 0 55px;
-
-      button {
-        outline: none;
-        width: 270px;
-        height: 36px;
-        background: #e1251b;
-        color: #fff !important;
-        display: inline-block;
-        font-size: 16px;
-      }
-    }
-  }
-
-  .copyright {
-    width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-    line-height: 24px;
-
-    ul {
-      li {
-        display: inline-block;
-        border-right: 1px solid #e4e4e4;
-        padding: 0 20px;
-        margin: 15px 0;
-      }
-    }
-  }
+.bodyContainer {
+  background-color: rgba(14, 205, 222, 0.052);
+  color: #fff;
+  font-family: 'Muli', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
 }
+
+.container {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 20px 40px;
+  border-radius: 5px;
+}
+
+.container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.container a {
+  text-decoration: none;
+  color: rgba(237, 37, 74, 0.518);
+}
+
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  background: rgba(43, 100, 234, 0.948);
+  padding: 15px;
+  font-family: inherit;
+  font-size: 16px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.text {
+  margin-top: 30px;
+}
+
+.form-control {
+  position: relative;
+  margin: 20px 0 40px;
+  width: 300px;
+}
+
+.form-control input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px #fff solid;
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  font-size: 18px;
+  color: #fff;
+}
+
+.form-control input:focus,
+.form-control input:valid {
+  outline: 0;
+  border-bottom-color: lightblue;
+}
+
+.form-control label {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  pointer-events: none;
+}
+
+.form-control label span {
+  display: inline-block;
+  font-size: 18px;
+  min-width: 5px;
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-control input:focus + label span,
+.form-control input:valid + label span {
+  color: lightblue;
+  transform: translateY(-30px);
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition-delay: 90000s;
+  transition: color 90000s ease-out, background-color 90000s ease-out;
+  -webkit-transition-delay: 90000s;
+  -webkit-transition: color 90000s ease-out, background-color 90000s ease-out;
+  -webkit-text-fill-color: black;
+}
+
 </style>

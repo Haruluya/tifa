@@ -26,10 +26,11 @@ router.beforeEach(async (to, from, next) => {
       }else{
          //登陆了且没有用户信息。
          try {
-            await store.dispatch('getUserData');
+            await store.dispatch('getNowUserData',token);
             next();
          } catch (error) {
            //token失效从新登录。
+           console.log(error);
            await store.dispatch('userLogout');
            next('/login')
          }

@@ -1,4 +1,4 @@
-package com.tifa.framework.web.controller;
+package com.tifa.framework.dpcontroller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;

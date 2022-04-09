@@ -4,14 +4,7 @@
             <div class="container">
                 <h2 class="all">全部商品分类</h2>
                 <nav class="nav">
-                    <a href="###">服装城</a>
-                    <a href="###">美妆馆</a>
-                    <a href="###">尚品汇超市</a>
-                    <a href="###">全球购</a>
-                    <a href="###">闪购</a>
-                    <a href="###">团购</a>
-                    <a href="###">有趣</a>
-                    <a href="###">秒杀</a>
+                  <el-button type="danger" @click="backToHome()">返回主页</el-button>
                 </nav>
                 <div class="sort">
                     <div class="all-sort-list2" @click="redirectToSearch($event)">
@@ -49,8 +42,8 @@
             <!-- 登录了 -->
             <p v-else>
                     <span>你已经登录</span>
-                    <a>{{userName}}</a>
-                    <a @click="userLogOut()">退出登录</a>
+                    <a>{  {{userName}} }</a>
+                    <el-link type="danger" @click="userLogOur()">退出登录</el-link>
             </p>
         </div>
 </template>
@@ -63,16 +56,25 @@ export default {
     data(){
         return {
             mouseCurrentIndex: 1,
+            visible: false,
         }
     },
     computed:{
         ...mapState({
             classNavData: state=>state.classNav.classNavData,
-            userName: state=>state.global.userData.name
         }),
+        ...mapGetters(['userName'])
       
     },
     methods:{
+        //100ms内只会触发一次。 
+        changeMouseCurrentIndex: throttle(function(index){
+            this.mouseCurrentIndex = index;
+        },100),
+        
+        backToHome(){
+          this.$router.push('/home');
+        },
         async userLogOut(){
             try {
               //如果退出成功
@@ -84,10 +86,6 @@ export default {
             }
         } 
       },
-            //100ms内只会触发一次。 
-      changeMouseCurrentIndex: throttle(function(index){
-          this.mouseCurrentIndex = index;
-      },100),
       // 点击分类，跳转search并传递参数。
       redirectToSearch(event) {
           let targetNode = event.target;
@@ -132,6 +130,11 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+  a{
+    text-decoration: none;
+  }
+
+
     .type-nav {
   border-bottom: 2px solid yellowgreen;
 

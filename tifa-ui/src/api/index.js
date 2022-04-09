@@ -9,14 +9,14 @@ import requests from "./axios";
 export const getTableDataByName = (tableName)=>
     requests({
         method:'GET',
-        url:`/CRUD/${tableName.toLowerCase()}Data`,
+        url:`/${tableName}/pageData`,
     })
 
 // 根据用户信息确认是否可注册。
 export const postRegisterConfim = (data)=>
     requests({
         method:'POST',
-        url:`/register/confirm`,
+        url:`/user/registerConfirm`,
         data
     })
 
@@ -24,7 +24,7 @@ export const postRegisterConfim = (data)=>
 export const getTableDataByNameAndPage = (tableName,pageIndex)=>
     requests({
         method:'GET',
-        url:`/CRUD/${tableName.toLowerCase()}Data`,
+        url:`/${tableName}/pageData`,
         params:{'pageIndex':pageIndex}
     })
 
@@ -33,7 +33,7 @@ export const getTableDataByNameAndPage = (tableName,pageIndex)=>
 export const getAllTableNames = ()=>
     requests({
         method:'GET',
-        url:`/CRUD/tableNames`,
+        url:`/user/tableNames`,
     })
 
 
@@ -48,7 +48,7 @@ export const getClassNavData = ()=>
 export const postLoginConfirm = (data)=>
     requests({
         method:'POST',
-        url:`/login/confirm`,
+        url:`/user/loginConfirm`,
         data
     })
 
@@ -56,12 +56,13 @@ export const postLoginConfirm = (data)=>
 export const postLogout = ()=>
     requests({
         method:'POST',
-        url:`/login/logout`,
+        url:`/user/logout`,
     })
 
 // 获取用户信息。
-export const getUserData = ()=>
+export const getUserData = (token)=>
     requests({
         method:'POST',
         url:`/user/userData`,
+        data:token
     })

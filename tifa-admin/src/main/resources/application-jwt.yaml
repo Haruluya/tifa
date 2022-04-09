@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: springboot-jwt
+
+config:
+  jwt:
+    # 加密密钥
+    secret: tifa_admin_6666
+    # token有效时长
+    expire: 3600
+    # header 名称
+    header: token

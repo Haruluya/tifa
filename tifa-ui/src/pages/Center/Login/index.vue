@@ -5,7 +5,7 @@
       
         <form>
           <div class="form-control" >
-            <input type="text" required placeholder="Email" autocomplete="new-password" v-model="email">
+            <input type="text" required placeholder="Name" autocomplete="new-password" v-model="name">
             <label></label>
           </div>
 
@@ -29,15 +29,15 @@ export default {
     data() {
         return {
           password: '',
-          email: '',
+          name: '',
         }
     },
     methods: {
       async confirmLogin(){
         try {
           //登录成功
-          const { email, password } = this;
-          email&&password&&(await this.$store.dispatch("confirmLogin", { email, password }));
+          const { name, password } = this;
+          name&&password&&(await this.$store.dispatch("confirmLogin", { name, password }));
           let toPath = this.$route.query.redirect||"/home";
           this.$router.push(toPath);
         } catch (error) {

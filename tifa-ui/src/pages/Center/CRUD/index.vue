@@ -12,7 +12,7 @@
             </template>
             <el-menu-item-group>
               <template #title>table</template>
-              <el-menu-item :index="{index}" v-for="(name,index) in tableNames" @click="getTableData(name)" >{{name}}</el-menu-item>
+              <el-menu-item  v-for="(name,index) in tableNames" @click="getTableData(name)" :index="`1-${index}`">{{name}} </el-menu-item>
             </el-menu-item-group>
           </el-sub-menu>
         </el-menu>
@@ -27,9 +27,9 @@
               ><setting/></el-icon>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item>View</el-dropdown-item>
+                <!-- <el-dropdown-item>View</el-dropdown-item>
                 <el-dropdown-item>Add</el-dropdown-item>
-                <el-dropdown-item>Delete</el-dropdown-item>
+                <el-dropdown-item>Delete</el-dropdown-item> -->
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -39,10 +39,11 @@
 
       <el-main>
         <el-scrollbar>
-          <el-table :data="tableItems">
-            <el-table-column prop="id" label="id" width="140" />
-            <el-table-column prop="name" label="name" width="120" />
-            <el-table-column prop="password" label="password" />
+          <el-table :data="tableItems"  >
+            <el-table-column prop="id" label="data1" width="140" />
+            <el-table-column prop="name" label="data2" width="120" />
+            <el-table-column prop="password" label="data3" />
+
           </el-table>
           
         </el-scrollbar>
@@ -60,6 +61,7 @@
             <el-button type="success">Next
               <el-icon class="el-icon--right"><ArrowRight /></el-icon>
             </el-button>
+            
           </el-button-group>
       </el-footer>
 
@@ -89,6 +91,7 @@ export default {
 	    ...mapGetters(['tableItems','tablePageNums'])
     },
     methods: {
+
       async getTableNames(){
             try {
               await this.$store.dispatch('getTableNames');
@@ -114,10 +117,11 @@ export default {
           }
         },
 
+
     },
     mounted(){
         this.getTableNames();
-        this.getTableData('User');
+        this.getTableData('user');
         
     }
 }

@@ -1,5 +1,6 @@
 package com.tifa.framework.web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tifa.framework.web.pojo.User;
 import com.tifa.framework.web.service.UserService;
@@ -19,6 +20,43 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     implements UserService{
+
+    /**
+     * 获取数据库所有表名。
+     * @return 表名。
+     */
+    @Override
+    public String[] getAllTableNames(){
+        return baseMapper.getAllTableNames();
+    }
+
+    /**
+     * 判断email是否在数据库中已经存在。
+     * @return boolean。
+     */
+    @Override
+    public Boolean emailExisted(String name) {
+        long count = this.count(new QueryWrapper<User>().eq("name",name));
+        return count != 0;
+    }
+
+    @Override
+    public Boolean userExisted(User loginData) {
+        long count = this.count(new QueryWrapper<User>().eq("name",loginData.getName()).eq("password",loginData.getPassword()));
+        return count != 0;
+    }
+
+    @Override
+    public Integer getIdByName(String name) {
+        return this.getOne(new QueryWrapper<User>().eq("name",name)).getId();
+    }
+
+    @Override
+    public String getNameById(Integer id) {
+        return this.getOne(new QueryWrapper<User>().eq("id",id)).getName();
+    }
+
+
 }
 
 

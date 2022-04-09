@@ -6,6 +6,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 
+/**
+ * 返回数据时规范形式为ajax式。
+ * @author haruluya
+ * @date 2022/4/9
+ */
 @NoArgsConstructor
 public class AjaxReturnValue extends HashMap<String, Object> {
     private static final long serialVersionUID = 1L;
@@ -15,6 +20,7 @@ public class AjaxReturnValue extends HashMap<String, Object> {
     public static final String MSG_KEY = "message";
 
     public static final String DATA_KEY = "data";
+
 
     public AjaxReturnValue(int statusCode, String message)
     {

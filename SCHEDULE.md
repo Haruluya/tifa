@@ -151,3 +151,72 @@ mockjs无法识别axios的baseurl，必须映射时添加。
 **解决**
 
 逆天！到最后问题是因为vue devtools版本低！这种bug谁受得了？？？
+
+##### 4.9
+
+配置jwt，模块数据由前端mock响应在后端配置，基本完成注册和登录功能。
+
+```
+  <!-- <div class="register-container">
+    <!-- 注册内容 -->
+    <div class="register">
+      <h3>
+        注册新用户
+        <span class="go"
+          >我有账号，去 <a href="login" target="_blank">登陆</a>
+        </span>
+      </h3>
+      <div class="content">
+        <label>手机号:</label>
+        <input
+          placeholder="请输入你的手机号"
+          v-model="phone"
+          name="phone"
+        />
+        <span class="error-msg">{{ }}</span>
+      </div>
+      <div class="content">
+        <label>验证码:</label>
+        <input
+          placeholder="请输入你的验证码"
+          v-model="code"
+          name="code"
+        />
+        <button style="width:100px;height:38px" @click="getCode">
+          获取验证码
+        </button>
+        <span class="error-msg">{{ }}</span>
+      </div>
+      <div class="content">
+        <label>登录密码:</label>
+        <input
+          placeholder="请输入你的密码"
+          v-model="password"
+          name="password"
+        />
+        <span class="error-msg">{{  }}</span>
+      </div>
+      <div class="content">
+        <label>确认密码:</label>
+        <input
+          placeholder="请输入确认密码"
+          v-model="confimPassword"
+          name="confimPassword"
+        />
+        <span class="error-msg">{{ }}</span>
+      </div>
+      <div class="controls">
+        <input
+          type="checkbox"
+          v-model="agree"
+          name="agree"
+        />
+        <span>同意协议并注册《尚品汇用户协议》</span>
+        <span class="error-msg">{{  }}</span>
+      </div>
+      <div class="btn">
+        <button @click="commitRegister">完成注册</button>
+      </div>
+    </div> -->
+```
+

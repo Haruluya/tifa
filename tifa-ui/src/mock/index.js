@@ -14,7 +14,3 @@ import userData from '@/mock/userData.json'
 
 
 Mock.mock("http://localhost:8081/tifai/classNav/classData",'get',classData);
-Mock.mock("http://localhost:8081/tifai/login/confirm",'post',token);
-Mock.mock("http://localhost:8081/tifai/register/confirm",'post',registerData);
-Mock.mock("http://localhost:8081/tifai/login/logout",'post',logoutData);
-Mock.mock("http://localhost:8081/tifai/user/userData",'post',userData);

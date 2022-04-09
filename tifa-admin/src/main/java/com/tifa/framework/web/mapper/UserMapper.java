@@ -21,6 +21,8 @@ import java.io.Serializable;
 public interface UserMapper extends BaseMapper<User> {
     @Select("select table_name from information_schema.TABLES where TABLE_SCHEMA='tmall'")
     public String[] getAllTableNames();
+
+
 }
 
 

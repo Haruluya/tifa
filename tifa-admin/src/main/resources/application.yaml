@@ -8,7 +8,7 @@ spring:
 
   #加载druid配置文件。
   profiles:
-    include: druid,thymeleaf,redis,actuator
+    include: druid,thymeleaf,redis,actuator,jwt
 
 
 server:

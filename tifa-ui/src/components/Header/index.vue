@@ -32,8 +32,9 @@ export default {
     },
     computed:{
       ...mapState({
-          userName:state=>state.global.userData.name
-        })
+
+        }),
+      ...mapGetters(['userName'])
     },
     mounted(){
     }
