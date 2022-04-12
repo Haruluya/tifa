@@ -15,9 +15,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
+/**
+ *
+ * @author haruluya
+ * @date 2022/4/3
+ */
+@CrossOrigin
 @RestController
 @RequestMapping("/tifai/user")
 public class UserController {

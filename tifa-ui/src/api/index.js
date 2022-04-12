@@ -66,3 +66,11 @@ export const getUserData = (token)=>
         url:`/user/userData`,
         data:token
     })
+
+// 获取搜索信息。
+export const postSearchDataRequest= (data)=>
+    requests({
+        method:'POST',
+        url:`/property/searchProperty`,
+        data
+    })

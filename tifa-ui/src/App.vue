@@ -3,18 +3,21 @@
   <div>
     <router-view></router-view> 
   </div>
+  <Footer v-show="$route.meta.showFooter"></Footer>
 </template>
 
 <script>
 
 // 导入组件。
 import Header from "./components/Header"
+import Footer from "./components/Footer"
 
 export default {
   name: 'App',
   // 组件注册。
   components: {
     Header,
+    Footer
   }
 }
 </script>
@@ -26,6 +29,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
 }
 </style>

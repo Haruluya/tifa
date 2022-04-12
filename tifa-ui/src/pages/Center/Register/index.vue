@@ -1,7 +1,7 @@
 <template>
 <div class="bodyContainer">
     <div class="container">
-      <h1>Register</h1>
+      <h1>TIFA Register</h1>
       
         <form>
           <div class="form-control" >
@@ -19,7 +19,7 @@
             <label></label>
           </div>
 
-          <button class="btn" @click.prevent="commitRegister()">Login</button>
+          <button class="btn" @click.prevent="commitRegister()">Register</button>
         </form>
 
         <p class="text">Inpute you name and password to register!</p>

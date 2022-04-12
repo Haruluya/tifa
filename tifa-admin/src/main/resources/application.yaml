@@ -29,3 +29,8 @@ mybatis-plus:
 
 
 
+logging:
+  level:
+    com.atlsh.springcloud.service.PaymentService: debug
+  file:
+    path: ./logs/

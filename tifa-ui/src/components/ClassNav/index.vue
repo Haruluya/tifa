@@ -84,41 +84,42 @@ export default {
             } catch (error) {
               alert('退出失败！');
             }
-        } 
+        },
+         // 点击分类，跳转search并传递参数。
+        redirectToSearch(event) {
+            let targetNode = event.target;
+
+            // 获取自定义属性。
+            let { tifa_categoryname,tifa_categoryleveloneid,tifa_categoryleveltwoid,tifa_categorylevelthreeid} = targetNode.dataset;
+            // 如果为a标签。
+            if (tifa_categoryname) {
+
+                let loction = { name: "search" };
+                let query = { categoryName: tifa_categoryname };
+
+                // 点击一级目录。传递一级分类id。
+                if (tifa_categoryleveloneid) {
+                    query.tifa_categoryleveloneid = tifa_categoryleveloneid;
+
+                // 点击二级目录。传递一、二级分类id。
+                } else if (tifa_categoryleveltwoid) {
+                    query.tifa_categoryleveltwoid = tifa_categoryleveltwoid
+
+                // 点击三级目录。传递一、二、三级分类id。
+                } else {
+                    query.tifa_categorylevelthreeid = tifa_categorylevelthreeid;
+                }
+                //如果路由跳转的时候，带有params参数，则传递。
+                if (this.$route.params) {
+                    loction.params = this.$route.params;
+                }
+                loction.query = query;
+                // 路由跳转
+                this.$router.push(loction);
+            }
+        },
       },
-      // 点击分类，跳转search并传递参数。
-      redirectToSearch(event) {
-          let targetNode = event.target;
-
-          // 获取自定义属性。
-          let { tifa_categoryname,tifa_categoryleveloneid,tifa_categoryleveltwoid,tifa_categorylevelthreeid} = targetNode.dataset;
-          // 如果为a标签。
-          if (tifa_categoryname) {
-
-              let loction = { name: "search" };
-              let query = { categoryName: tifa_categoryname };
-
-              // 点击一级目录。传递一级分类id。
-              if (tifa_categoryleveloneid) {
-                  query.tifa_categoryleveloneid = tifa_categoryleveloneid;
-
-              // 点击二级目录。传递一、二级分类id。
-              } else if (tifa_categoryleveltwoid) {
-                  query.tifa_categoryleveltwoid = tifa_categoryleveltwoid
-
-              // 点击三级目录。传递一、二、三级分类id。
-              } else {
-                  query.tifa_categorylevelthreeid = tifa_categorylevelthreeid;
-              }
-              //如果路由跳转的时候，带有params参数，则传递。
-              if (this.$route.params) {
-                  loction.params = this.$route.params;
-              }
-              loction.query = query;
-              // 路由跳转
-              this.$router.push(loction);
-          }
-      },
+     
     mounted() {
         try {
             console.log("sss");

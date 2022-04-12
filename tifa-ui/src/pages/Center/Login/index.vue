@@ -1,8 +1,7 @@
 <template>
 <div class="bodyContainer">
     <div class="container">
-      <h1>Please Login</h1>
-      
+      <h1>TIFA Login</h1>
         <form>
           <div class="form-control" >
             <input type="text" required placeholder="Name" autocomplete="new-password" v-model="name">
@@ -59,7 +58,10 @@ export default {
 <style scoped lang="css">
 
 .bodyContainer {
-  background-color:rgb(235, 247, 213);
+  background-image: url('../../../assets/images/tifaImage01.jpeg');
+  background-repeat: no-repeat;
+  background-position-x: -300px;
+  background-position-y: -200px;
   color: #fff;
   font-family: 'Muli', sans-serif;
   display: flex;
@@ -71,10 +73,22 @@ export default {
   margin: 0;
 }
 
+.bodyContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
 .container {
-  background-color: rgba(0, 0, 0, 0.4);
+  
+  background-color: rgba(104, 86, 86, 0.852);
   padding: 20px 40px;
   border-radius: 5px;
+  z-index: 2;
 }
 
 .container h1 {

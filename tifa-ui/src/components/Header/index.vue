@@ -7,6 +7,7 @@
           <li><a href="classNav">ClassNav</a></li>
           <li><a href="login">Login</a></li>
           <li><a href="register">Register</a></li>
+          <li><a href="search">Search</a></li>
           <li><a href="#">
             <span v-if="!userName">
               <router-link to="/login">未登录</router-link>

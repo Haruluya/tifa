@@ -3,6 +3,7 @@ import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as icons from '@element-plus/icons-vue' 
+import mitt from "mitt"
 
 // 引入mockjs。
 import '@/mock/index.js'
@@ -17,10 +18,12 @@ import ClassNav from '_components/ClassNav';
 
 const app = createApp(App);
 
-
+app.config.globalProperties.$bus = new mitt();
 
 app.use(router).use(store).use(ElementPlus);
 app.component('Header',Header).component('Footer',Footer).component('ClassNav',ClassNav);
+// 配置全局事件总线。
+
 
 Object.keys(icons).forEach(key => {
     app.component(key, icons[key])
