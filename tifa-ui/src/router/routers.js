@@ -6,7 +6,13 @@ const routerHistory = createWebHistory()
 const router = createRouter({
   base:'/http/',
   history: routerHistory,
-  routes
+
+  //路由跳转后滚动到最上方。
+  scrollBehavior(to, from, savedPosition) {
+    return { y: 0 };
+  },
+  
+  routes,
 })
 
 // 全局前置守卫。

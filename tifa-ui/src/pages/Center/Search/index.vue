@@ -111,15 +111,14 @@
               </li>
             </ul>
           </div>
-          <!-- <Pagination  :pageNo="31"  :pageSize="3" :total="99" :continues="5" @getPageNo="getPageNo"/> -->
+          <PageHelper  :currentPageIndex="31"  :onePageItemAmount="3" :totalItemAmount="99" :pageSize="5" @skipToClickPage="skipToClickPage"/> 
           <!-- 分页器:测试分页器阶段，这里数据将来需要替换的-->
           <!-- <Pagination
             :pageNo="searchParams.pageNo"
             :pageSize="searchParams.pageSize"
             :total="total"
             :continues="5"
-            @getPageNo="getPageNo"
-          /> -->
+            @getPageNo="getPageNo"-->
         </div>
       </div>
     </div>
@@ -160,15 +159,32 @@ export default {
       },
     };
   },
+
+
   //首次跳转时需要分析route路径的参数，
   beforeMount() {
     Object.assign(this.searchParams, this.$route.query, this.$route.params);
   },
 
+
   //组件挂载时获取数据。
     mounted() {
     //在发请求之前咱们需要将searchParams里面参数进行修改带给服务器
     this.getShowData();
+  },
+
+
+  watch: {
+      // 统一监听路由的参数变化，是为了应对组件刷新不重新挂载的模式。
+      $route(newValue, oldValue) {
+        // 重新发请求。
+        Object.assign(this.searchParams, this.$route.query, this.$route.params);
+        this.getShowData();
+        // 分类名并非一定会改变，需要每次请求后清空。
+        this.searchParams.category1Id = undefined;
+        this.searchParams.category2Id = undefined;
+        this.searchParams.category3Id = undefined;
+      },
   },
 
   methods: {
@@ -244,8 +260,13 @@ export default {
       }
       this.searchParams.order = newOrder;
       this.getShowData();
-    }
+    },
 
+    //请求跳转到指定页数。
+    skipToClickPage(page){
+      this.searchParams.pageNo = page;
+      this.getShowData();
+    }
   },
   computed: {
     ...mapGetters(["goodsList"]),
@@ -270,19 +291,9 @@ export default {
     }),
   },
 
+
   
-  watch: {
-      // 统一监听路由的参数变化，是为了应对组件刷新不重新挂载的模式。
-      $route(newValue, oldValue) {
-        // 重新发请求。
-        Object.assign(this.searchParams, this.$route.query, this.$route.params);
-        this.getShowData();
-        // 分类名并非一定会改变，需要每次请求后清空。
-        this.searchParams.category1Id = undefined;
-        this.searchParams.category2Id = undefined;
-        this.searchParams.category3Id = undefined;
-      },
-  },
+
 
 }
 </script>
