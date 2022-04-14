@@ -74,3 +74,16 @@ export const postSearchDataRequest= (data)=>
         url:`/property/searchProperty`,
         data
     })
+
+// 通过商品id获取商品详细信息。
+export const getGoodDetailById= (id)=>
+    requests({
+        method:'get',
+        url:`/product/detailData`,
+    })
+// 添加、更新购物车。
+export const postUpdateShopCart= (goodId,goodAmount)=>
+    requests({
+        method:'post',
+        url:`/product/updateShopCart`,
+    })

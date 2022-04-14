@@ -57,7 +57,26 @@ export const routes = [
       name:'search',
       component: () => import('_pages/Center/Search'),
       meta:{
-        showHeader:false
+        showHeader:false,
+        showFooter:true,
+      }
+    },
+    {
+      path: '/gooddetail/:goodId',
+      name:'gooddetail',
+      component: () => import('_pages/Center/GoodDetail'),
+      meta:{
+        showHeader:false,
+        showFooter:true,
+      }
+    },
+    {
+      path: '/shopcart',
+      name:'shopcart',
+      component: () => import('_pages/Center/ShopCart'),
+      meta:{
+        showHeader:false,
+        showFooter:true,
       }
     }
   ]

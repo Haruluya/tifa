@@ -75,9 +75,9 @@
                 <div class="list-wrap">
                   <div class="p-img">
                     <!-- 在路由跳转的时候切记别忘记带id（params）参数 -->
-                    <!-- <router-link :to="`/detail/${good.id}`">
+                    <router-link :to="`/gooddetail/${good.id}`">
                       <img src="good.defaultImg" />
-                    </router-link> -->
+                    </router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -138,23 +138,15 @@ export default {
 
       // 搜索请求参数
       searchParams: {
-        //产品相应的id
         category1Id: "",
         category2Id: "",
         category3Id: "",
-        //产品的名字
         categoryName: "",
-        //搜索的关键字
         keyword: "",
-        //排序:初始状态应该是综合且降序
         order: "1:desc",
-        //第几页
         pageNo: 1,
-        //每一页展示条数
         pageSize: 3,
-        //平台属性的操作
         props: [],
-        //品牌
         trademark: "",
       },
     };

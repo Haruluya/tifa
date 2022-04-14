@@ -172,3 +172,7 @@ mockjs无法识别axios的baseurl，必须映射时添加。
 
 不应该将v-for和v-if使用与同一个元素，不然v-if中接受不到v-for中的参数，选择外包一层span。
 
+##### 4.14
+
+编写前端goodDetail模块。
+
