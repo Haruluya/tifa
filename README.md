@@ -6,7 +6,7 @@
 
 ## Introduction 
 
-![Haruluya](https://img.shields.io/badge/X-Haruluya-brightgreen)![Vue](https://img.shields.io/badge/Vue-3.0.0-blue)![Spring](https://img.shields.io/badge/Spring-5-blue)![SpringBoot](https://img.shields.io/badge/Spring--Boot-2-blue)
+![Haruluya](https://img.shields.io/badge/X-Haruluya-brightgreen)	![Vue](https://img.shields.io/badge/Vue-3.0.0-blue)		![Spring](https://img.shields.io/badge/Spring-5-blue)	![SpringBoot](https://img.shields.io/badge/Spring--Boot-2-blue)		![Scrapy](https://img.shields.io/badge/Scrapy-2-blue)	![Spark](https://img.shields.io/badge/Spark-2.11-blue)
 
 
 
@@ -42,7 +42,7 @@
 | ❔Mysql(for test) | 8.x           |                   |
 | ❔WxJava(maybe)   |               |                   |
 
-**Tool**
+**Spider**
 
 
 
@@ -51,14 +51,19 @@
 | ✅Scrapy                                | 2.6.0                                  | tifa-spider                             |
 
 
+**Recommendation system**
+
+
+| <img width=50/>Modules <img width=50/> | <img width=50/> Version<img width=50/> | <img width=50/>Directory<img width=50/> |
+| -------------------------------------- | -------------------------------------- | --------------------------------------- |
+| ✅Spark                                | 2.11.0                                  | tifa-rec                            |
+
 
 ## Deployment method
 
 ### **tifa-ui**
 
-This file is a separate front-end project with Vue.
-
-
+This file is a separate front-end project with Vue.	
 
 **Pull** the project:
 
