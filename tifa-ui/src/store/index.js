@@ -7,6 +7,7 @@ import login from '@/store/modules/login';
 import search from '@/store/modules/search'
 import gooddetail from '@/store/modules/gooddetail';
 import shopCart from '@/store/modules/shopCart';
+import order from '@/store/modules/order';
 // 导入小模块的仓库。
 
 export default new Vuex.Store({
@@ -18,5 +19,6 @@ export default new Vuex.Store({
 		search,
 		gooddetail,
 		shopCart,
+		order
 	}
 })

@@ -176,3 +176,7 @@ mockjs无法识别axios的baseurl，必须映射时添加。
 
 编写前端goodDetail模块。
 
+##### 4.15
+
+编写shopcart模块。
+

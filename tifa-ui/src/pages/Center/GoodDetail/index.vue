@@ -116,9 +116,6 @@
                 >
               </div>
               <div class="add">
-                <!-- 以前咱们的路由跳转：从A路由跳转到B路由，这里在加入购物车，进行路由跳转之前，发请求
-                    把你购买的产品的信息通过请求的形式通知服务器，服务器进行相应的存储
-                  -->
                 <a @click="addShopcar">加入购物车</a>
               </div>
             </div>
@@ -377,6 +374,7 @@ export default {
     return {
       //购买产品的个数
       goodAmount: 1,
+
     };
   },
 
@@ -416,9 +414,7 @@ export default {
     },
 
 
-    async addShopcar(){
 
-    },
 
     //加入购物车
     async addShopcar() {

@@ -8,7 +8,7 @@ spring:
 
   #加载druid配置文件。
   profiles:
-    include: druid,thymeleaf,redis,actuator,jwt
+    include: druid,thymeleaf,nosql,actuator,jwt
 
 
 server:
@@ -28,9 +28,6 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
-
+#log4j配置。
 logging:
-  level:
-    com.atlsh.springcloud.service.PaymentService: debug
-  file:
-    path: ./logs/
+  config: classpath:log4j.properties

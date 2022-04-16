@@ -17,10 +17,11 @@ let requests = axios.create();
 
 //请求拦截器配置。
 requests.interceptors.request.use((config) => {
+    // //如果为游客。
     // if(store.state.detail.uuid_token){
-    //     config.headers.userTempId = store.state.detail.uuid_token;
+    //     config.headers.touristsId = store.state.detail.uuid;
     // }
-    // // 表示用户已经登录。
+    // // 用户已经登录。
     // if(store.state.login.token){
     //     config.headers.token = store.state.login.token;
     // }

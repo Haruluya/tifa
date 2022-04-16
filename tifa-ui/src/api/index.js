@@ -87,3 +87,18 @@ export const postUpdateShopCart= (goodId,goodAmount)=>
         method:'post',
         url:`/product/updateShopCart`,
     })
+
+//  获取购物车数据。
+export const getShopCartData= ()=>
+    requests({
+        method:'get',
+        url:`/product/getShopCartData`,
+    })
+    
+//  删除购物车某商品。
+export const postDeleteCartByGoodId= (goodId)=>
+    requests({
+        method:'post',
+        url:`/product/deleteCart`,
+        data:{goodId}
+    })

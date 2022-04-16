@@ -103,95 +103,78 @@ export default {
   methods: {
     //获取个人购物车数据
     getShowData() {
-      this.$store.dispatch("getCartList");
+      this.$store.dispatch("getCartListData");
     },
-    //修改某一个产品的个数[节流]
+
+    //以节流的形式修改商品数量。
     handler: throttle(async function(type, disNum, cart) {
-      //type:为了区分这三个元素
-      //disNum形参:+ 变化量（1）  -变化量（-1）   input最终的个数（并不是变化量）
-      //cart:哪一个产品【身上有id】
-      //向服务器发请求，修改数量
-      switch (type) {
-        //加号
-        case "add":
-          disNum = 1;
-          break;
-        case "minus":
-          //判断产品的个数大于1，才可以传递给服务器-1
-          //如果出现产品的个数小于等于1，传递给服务器个数0（原封不动）
-          disNum = cart.skuNum > 1 ? -1 : 0;
-          break;
-        case "change":
-          // //用户输入进来的最终量，如果非法的（带有汉字|出现负数），带给服务器数字零
-          if (isNaN(disNum) || disNum < 1) {
-            disNum = 0;
-          } else {
-            //属于正常情况（小数：取证），带给服务器变化的量 用户输入进来的 - 产品的起始个数
-            disNum = parseInt(disNum) - cart.skuNum;
-          }
-          // disNum = (isNaN(disNum)||disNum<1)?0:parseInt(disNum) - cart.skuNum;
-          break;
-      }
-      //派发action
-      try {
-        //代表的是修改成功
-        await this.$store.dispatch("addOrUpdateShopCart", {
-          skuId: cart.skuId,
-          skuNum: disNum,
-        });
-        //再一次获取服务器最新的数据进行展示
-        this.getData();
-      } catch (error) {}
-    }, 500),
-    //删除某一个产品的操作
+      // switch (type) {
+      //   case "add":
+      //     disNum = 1;
+      //     break;
+      //   case "minus":
+      //     disNum = cart.skuNum > 1 ? -1 : 0;
+      //     break;
+      //   case "change":
+      //     if (isNaN(disNum) || disNum < 1) {
+      //       disNum = 0;
+      //     } else {
+      //       disNum = parseInt(disNum) - cart.skuNum;
+      //     }
+      //     break;
+      // }
+      // try {
+      //   //验证修改成功
+      //   await this.$store.dispatch("UpdateShopCart", {
+      //     skuId: cart.skuId,
+      //     skuNum: disNum,
+      //   });
+      //   this.getShowData();
+      // } catch (error) {}
+    }, 500)},
+    //删除产品。
     async deleteCartById(cart) {
-      try {
-        //如果删除成功再次发请求获取新的数据进行展示
-        await this.$store.dispatch("deleteCartListBySkuId", cart.skuId);
-        this.getData();
-      } catch (error) {
-        alert(error.message);
-      }
+      // try {
+      //   await this.$store.dispatch("deleteCartByGoodId", cart.skuId);
+      //   this.getShowData();
+      // } catch (error) {
+      //   alert(error.message);
+      // }
     },
-    //修改某个产品的勾选状态
+    //修改产品勾选状态
     async updateChecked(cart, event) {
-      //带给服务器的参数isChecked，不是布尔值，应该是0|1
-      try {
-        //如果修改数据成功，再次获取服务器数据（购物车）
-        let isChecked = event.target.checked ? "1" : "0";
-        await this.$store.dispatch("updateCheckedById", {
-          skuId: cart.skuId,
-          isChecked,
-        });
-        this.getData();
-      } catch (error) {
-        //如果失败提示
-        alert(error.message);
-      }
+      // try {
+      //   let isChecked = event.target.checked ? "1" : "0";
+      //   await this.$store.dispatch("updateCheckedById", {
+      //     skuId: cart.skuId,
+      //     isChecked,
+      //   });
+      //   this.getData();
+      // } catch (error) {
+      //   //如果失败提示
+      //   alert(error.message);
+      // }
     },
-    //删除全部选中的产品
-    //这个回调函数咱门没办法手机到一些有用数据
+    //删除全部选中的产品。
     async deleteAllCheckedCart() {
-      try {
-        //派发一个action
-        await this.$store.dispatch("deleteAllCheckedCart");
-        //再发请求获取购物车列表
-        this.getData();
-      } catch (error) {
-        alert(error.message);
-      }
+      // try {
+      //   await this.$store.dispatch("deleteAllCheckedCart");
+      //   this.getShowData();
+      // } catch (error) {
+      //   alert(error.message);
+      // }
     },
-    //修改全部产品的选中状态
+
+    //全选。
     async updateAllCartChecked(event) {
-      try {
-        let isChecked = event.target.checked ? "1" : "0";
-        //派发action
-        await this.$store.dispatch("updateAllCartIsChecked", isChecked);
-        this.getData();
-      } catch (error) {
-        alert(error.message);
-      }
-    },
+    //   try {
+    //     let isChecked = event.target.checked ? "1" : "0";
+    //     await this.$store.dispatch("updateAllCartIsChecked", isChecked);
+    //     this.getData();
+    //   } catch (error) {
+    //     alert(error.message);
+    //   }
+    // },
   },
   computed: {
     ...mapGetters(["cartList"]),
@@ -199,22 +182,22 @@ export default {
     cartInfoList() {
       return this.cartList.cartInfoList || [];
     },
+
     //计算购买产品的总价
     totalPrice() {
-      let sum = 0;
-      this.cartInfoList.forEach((item) => {
-        sum += item.skuNum * item.skuPrice;
-      });
-      return sum;
+      // let sum = 0;
+      // this.cartInfoList.forEach((item) => {
+      //   sum += item.skuNum * item.skuPrice;
+      // });
+      // return sum;
+      return 0
     },
-    //判断底部复选框是否勾选【全部产品都选中，采勾选】
     isAllCheck() {
-      //遍历数组里面原理，只要全部元素isChecked属性都为1===>真 true
-      //只要有一个不是1======>假false
-      return this.cartInfoList.every((item) => item.isChecked == 1);
+      // return this.cartInfoList.every((item) => item.isChecked == 1);
+      return 1
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>

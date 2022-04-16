@@ -12,3 +12,12 @@
 #        max-wait: -1
 #
 #
+
+spring:
+  redis:
+    port: 6379
+    host: localhost
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/cloud
+
