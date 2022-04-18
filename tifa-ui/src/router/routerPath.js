@@ -78,5 +78,14 @@ export const routes = [
         showHeader:false,
         showFooter:true,
       }
-    }
+    },
+    {
+      path: '/pageheader',
+      name:'pageheader',
+      component: () => import('_components/PageHeader'),
+      meta:{
+        showHeader:false,
+        showFooter:true,
+      }
+    },
   ]

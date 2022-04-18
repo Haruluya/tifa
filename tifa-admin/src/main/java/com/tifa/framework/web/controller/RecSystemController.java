@@ -106,7 +106,7 @@ public class RecSystemController {
      * @param amount 数量
      * @return  product
      */
-    @GetMapping("/alsrec")
+    @GetMapping("/onlinerec")
     @ResponseBody
     public AjaxReturnValue getOnlineRecProducts(@RequestParam(value = "amount",defaultValue = "10")int amount,@RequestParam("username")String username) {
         int userid = userService.getIdByName(username);

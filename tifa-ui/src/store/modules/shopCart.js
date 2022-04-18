@@ -1,4 +1,4 @@
-import { getShopCartData, postDeleteCartByGoodId, reqUpdateCheckedByid } from "@/api";
+// import { getShopCartData, postDeleteCartByGoodId, reqUpdateCheckedByid } from "@/api";
 const state = {
   cartList: [],
 };
