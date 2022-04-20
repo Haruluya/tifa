@@ -13,6 +13,7 @@ module.exports = {
 
     //代理。 
     devServer:{
+        port:8080,
 	    proxy:{
         '/tifai':{
             target: 'http://localhost:8081',

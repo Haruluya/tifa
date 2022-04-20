@@ -43,13 +43,14 @@ router.beforeEach(async (to, from, next) => {
      }
    }else{
       //未登录：某些组件拒绝访问。
-      let toPath = to.path;
-      if(toPath.indexOf('/CRUD')!=-1 || toPath.indexOf('/classNav')!=-1){
-        alert("请登录！");
-        next('/login?redirect='+toPath);
-      }else{
-         next();
-      }
+      // let toPath = to.path;
+      // if(toPath.indexOf('/CRUD')!=-1 || toPath.indexOf('/classNav')!=-1){
+      //   alert("请登录！");
+      //   next('/login?redirect='+toPath);
+      // }else{
+      //    next();
+      // }
+      next();
    }
 });
 

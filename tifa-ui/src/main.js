@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import '_assets/iconfont.css'
+
 import * as icons from '@element-plus/icons-vue' 
 import mitt from "mitt"
 
@@ -15,6 +17,7 @@ import Header from '_components/Header';
 import Footer from '_components/Footer';
 import ClassNav from '_components/ClassNav';
 import PageHelper from '_components/PageHelper'
+import BackToTop from '_components/BackToTop'
 
 const app = createApp(App);
 
@@ -25,8 +28,8 @@ app.use(router).use(store).use(ElementPlus);
 app.component('Header',Header)
     .component('Footer',Footer)
     .component('ClassNav',ClassNav)
-    .component('PageHelper',PageHelper);
-
+    .component('PageHelper',PageHelper)
+    .component('BackToTop',BackToTop);
 
 
 //icon组件。

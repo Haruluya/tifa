@@ -12,6 +12,14 @@
 
 **Just a simple e-commerce project for practice.**
 
+#### Name
+
+**tifa**
+
+![tifa](https://img1.ali213.net/glpic/2021/12/27/584_2021122715107237.jpg)
+
+蒂法·洛克哈特（日文：ティファ・ロックハート；英文：Tifa Lockhart），是史克威尔公司旗下《最终幻想7》系列作品中的女主角之一。
+
 ## Development Environment
 
 **Front end**
