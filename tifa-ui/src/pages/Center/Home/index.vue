@@ -1,5 +1,5 @@
 <template>
-
+  <Header></Header>
   <div class="hero">
     <div class="container">
       
@@ -48,11 +48,14 @@
 <script>
 
 
-
+import Header from '_components/Header'
 
 
 export default {
     name: "home",
+    components:{
+      Header
+    },
     mounted() {
       // new Swiper ('.swiper', {
       //     // direction: 'vertical', // 垂直切换选项

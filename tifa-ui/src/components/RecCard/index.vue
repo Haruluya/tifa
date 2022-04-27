@@ -1,17 +1,25 @@
 <template>
     <div class="mainContainer">
-        <el-card shadow="hover" :body-style="{ padding: '0px'}">
-            <img
-            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-            class="image"
-            />
-            <div style="padding: 14px" class="bottom">
-            <span>Yummy hamburger....</span>
+        <div class="content">
+            <dvi class="image">
+                <img src="https://img20.360buyimg.com/jdcms/s300x300_jfs/t1/132402/26/27105/290037/62690eabEb253d9d8/23f0daa07a98a190.jpg.webp" alt="" srcset="">
+            </dvi>
+            <div class="title">
+                <div class="tag">
+                    <el-tag type="danger"> 
+                        自营
+                    </el-tag>
+                </div>
+                <span>
+                    雷士（NVC）智能轻触风暖浴霸 超宽风口 
+                </span>
+            </div>
             <div class="price">
-                <el-link type="danger">$45</el-link>
+                <a>
+                    <span>$88</span>
+                </a>
             </div>
-            </div>
-        </el-card>
+        </div>
     </div>
 </template>
 
@@ -20,16 +28,33 @@
 
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .mainContainer{
-    margin-bottom: 14px;
+    width: 200px;
+    margin: 0 auto;
+    .content{
+
+        .image{
+            img{
+                width: 90%;
+            }
+        }
+        .title{
+            display: flex;
+            .tag{
+
+            }
+        }
+        .price{
+            text-align: left;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 18px;
+            color:red;
+            margin-left: 20px;
+        }
+        
+    }
 }
 
 
-
-
-.image {
-  width: 80%;
-  display: block;
-}
 </style>

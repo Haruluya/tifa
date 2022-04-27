@@ -1,54 +1,29 @@
 <template>
-  <div class="swiper-container" ref="cur">
-    <div class="swiper-wrapper">
-      <div
-        class="swiper-slide"
-        v-for="(carousel, index) in list"
-        :key="index"
-      >
-        <img :src="carousel" />
-      </div>
-    </div>
-
-    <div class="swiper-pagination"></div>
-
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+  <div class="mainContainer">
+    <el-carousel :height="heighty + 'px'" pause-on-hover>
+      <el-carousel-item v-for="item in 2" :key="item">
+        <el-image :src="list[0]">
+        </el-image>
+      </el-carousel-item>
+    </el-carousel>
   </div>
 </template>
 
 <script>
 
-// swpier,图片由父组件传入。
-import Swiper from "swiper";
-
 export default {
   name: "carsouselSmall",
-  props: ["list"],
-  watch: {
-    list: {
-      immediate: true,
-      handler() {
-        this.$nextTick(() => {
-          var mySwiper = new Swiper(this.$refs.cur, {
-            loop: true,
-            // 分页器
-            pagination: {
-              el: ".swiper-pagination",
-              clickable: true,
-            },
-            // 前进后退按钮
-            navigation: {
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            },
-          });
-        });
-      },
-    },
-  },
-};
+  props: ["list","heighty"]
+
+
+}
+
 </script>
 
-<style scoped>
+<style scoped lang="less">
+.mainContainer{
+  border-radius: 10px;
+  overflow: hidden;
+}
+
 </style>

@@ -48,7 +48,7 @@
                 </div>
               <div class="adImg">
                   <el-link :underline="false">
-                    <el-image :src="`https://fc1tn.baidu.com/it/u=172705470,3322382919&fm=202&src=903&ernie_sim_online&mola=new&crop=v1`">
+                    <el-image :src="`https://img1.360buyimg.com/da/jfs/t1/14716/32/11447/94000/5c90a83bEaa611013/18490bf08654ba09.gif?v=0.6260315480407526`">
                     </el-image>
                   </el-link>
               </div>

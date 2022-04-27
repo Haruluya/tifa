@@ -1,54 +1,15 @@
 <template>
-  <div class="swiper-container" ref="cur">
-    <div class="swiper-wrapper">
-      <div
-        class="swiper-slide"
-        v-for="(carousel, index) in list"
-        :key="index"
-      >
-        <img :src="carousel" />
-      </div>
-    </div>
+  <div class="mainContainer">
+    <el-carousel :interval="5000" arrow="always" height="500px">
+      <el-carousel-item v-for="item in 4" :key="item">
+        <el-image src="https://img11.360buyimg.com/pop/s1180x940_jfs/t1/134808/21/21405/93557/62678dedEa54e482a/5094b9f2f1eab83e.jpg.webp">
 
-    <div class="swiper-pagination"></div>
-
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+        </el-image>
+      </el-carousel-item>
+    </el-carousel>
   </div>
 </template>
 
-<script>
-
-// swpier,图片由父组件传入。
-import Swiper from "swiper";
-
-export default {
-  name: "carsouselCop",
-  props: ["list"],
-  watch: {
-    list: {
-      immediate: true,
-      handler() {
-        this.$nextTick(() => {
-          var mySwiper = new Swiper(this.$refs.cur, {
-            loop: true,
-            // 分页器
-            pagination: {
-              el: ".swiper-pagination",
-              clickable: true,
-            },
-            // 前进后退按钮
-            navigation: {
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            },
-          });
-        });
-      },
-    },
-  },
-};
-</script>
-
 <style scoped>
+
 </style>

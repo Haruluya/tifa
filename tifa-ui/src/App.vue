@@ -1,7 +1,6 @@
 <template>
   <div class="app">
-    <PageHeader v-show="showHeader" class="nav"></PageHeader>
-    <Header  v-show="$route.meta.showHeader"></Header>
+    <PageHeader v-if="showHeader" class="nav"></PageHeader>
     <BackToTop></BackToTop>
     <div>
       <router-view></router-view> 
@@ -32,7 +31,7 @@ export default {
   methods: {
     isScroll(){
         const top = document.documentElement.scrollTop
-        if (top > 100) {	
+        if (top > 100 && this.$route.path != '/' && this.$route.path != '/home') {	
           this.showHeader = true
         } else {
           this.showHeader= false
@@ -57,7 +56,7 @@ export default {
 
 <style>
 body{
-  background-color: rgba(204, 198, 198, 0.352);
+  background-color: #f4f4f4;
 }
 
 #app {

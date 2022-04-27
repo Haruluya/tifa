@@ -3,7 +3,6 @@ export const routes = [
       path: '/',
       component: () => import('../pages/Center/Home'),
       meta:{
-        showHeader:true,
         showFooter:true,
       },
     },
@@ -12,8 +11,8 @@ export const routes = [
       name: 'home',
       component: () => import('../pages/Center/Home'),
       meta:{
-        showHeader:true,
         showFooter:true,
+  
       },
     },
     {
@@ -21,7 +20,6 @@ export const routes = [
       name: 'shopHome',
       component: () => import('../pages/ShopHome'),
       meta:{
-        showHeader:false,
         showFooter:true,
       },
     },
@@ -30,7 +28,6 @@ export const routes = [
       name: 'login',
       component: () => import('../pages/Center/Login'),
       meta:{
-        showHeader:false,
         showFooter:false,
       },
     },
@@ -39,7 +36,6 @@ export const routes = [
       name: 'CRUD',
       component: () => import('../pages/Center/CRUD'),
       meta:{
-        showHeader:false,
         showFooter:false,
       },
     },
@@ -48,7 +44,6 @@ export const routes = [
       name:'register',
       component: () => import('../pages/Center/Register'),
       meta:{
-        showHeader:false,
         showFooter:false,
       }
     },
@@ -57,7 +52,6 @@ export const routes = [
       name:'classNav',
       component: () => import('_components/ClassNav'),
       meta:{
-        showHeader:false,
         showFooter:false,
       }
     },
@@ -66,7 +60,6 @@ export const routes = [
       name:'search',
       component: () => import('_pages/Center/Search'),
       meta:{
-        showHeader:false,
         showFooter:true,
       }
     },
@@ -75,7 +68,6 @@ export const routes = [
       name:'gooddetail',
       component: () => import('_pages/Center/GoodDetail'),
       meta:{
-        showHeader:false,
         showFooter:true,
       }
     },
@@ -84,7 +76,6 @@ export const routes = [
       name:'shopcart',
       component: () => import('_pages/Center/ShopCart'),
       meta:{
-        showHeader:false,
         showFooter:true,
       }
     },
@@ -93,7 +84,6 @@ export const routes = [
       name:'pageheader',
       component: () => import('_components/PageHeader'),
       meta:{
-        showHeader:false,
         showFooter:true,
       }
     },
