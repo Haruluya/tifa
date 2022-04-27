@@ -17,6 +17,15 @@ export const routes = [
       },
     },
     {
+      path: '/shopHome',
+      name: 'shopHome',
+      component: () => import('../pages/ShopHome'),
+      meta:{
+        showHeader:false,
+        showFooter:true,
+      },
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('../pages/Center/Login'),

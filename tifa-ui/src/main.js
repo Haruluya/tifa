@@ -12,12 +12,15 @@ import '@/mock/index.js'
 import router from './router/routers';
 import store from './store/index.js';
 
+//引入swiper样式
+import "swiper/css/swiper.css";
 
 import Header from '_components/Header';
 import Footer from '_components/Footer';
 import ClassNav from '_components/ClassNav';
 import PageHelper from '_components/PageHelper'
 import BackToTop from '_components/BackToTop'
+import PageHeader from '_components/PageHeader'
 
 const app = createApp(App);
 
@@ -29,7 +32,8 @@ app.component('Header',Header)
     .component('Footer',Footer)
     .component('ClassNav',ClassNav)
     .component('PageHelper',PageHelper)
-    .component('BackToTop',BackToTop);
+    .component('BackToTop',BackToTop)
+    .component('PageHeader',PageHeader)
 
 
 //icon组件。

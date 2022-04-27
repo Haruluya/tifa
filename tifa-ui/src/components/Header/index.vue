@@ -3,6 +3,7 @@
       <div class="container">
         <h1 class="logo"><a href="/index.html">TIFA</a></h1>
         <ul>
+          <li><a href="shopHome" >ShopHome</a></li>
           <li><a href="CRUD" >CRUD</a></li>
           <li><a href="classNav">ClassNav</a></li>
           <li><a href="login">Login</a></li>

@@ -1,5 +1,5 @@
 <template>
-    <el-header style="background-color: #ffffff">
+   <div class="mainContainer">
         <el-row type="flex" justify="space-around" style="align-items: center" :gutter="20">
             <el-col :span="2">
                 <div class="logo">
@@ -72,7 +72,7 @@
                 </el-menu>
             </el-col>
         </el-row>
-    </el-header>
+   </div>
 </template>
 <script>
 import {mapState,mapMutations,mapAction,mapGetters} from 'vuex';
@@ -103,8 +103,14 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.el-header{
-    background-color: whitesmoke;
+
+.mainContainer{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: white;
+    z-index: 10;
 }
 a{
     text-decoration: none;

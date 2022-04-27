@@ -59,7 +59,7 @@ public class RecSystemController {
     }
 
     /**
-     * 获取评分最多的商品
+     * 获取评分最高的商品
      * @param amount 数量
      * @return  product
      */

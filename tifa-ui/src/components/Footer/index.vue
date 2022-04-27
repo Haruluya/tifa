@@ -1,13 +1,13 @@
 <template>
     <el-container class="backgroudSpilt">
         <el-row type="flex" style="align-items: center" :gutter="20">
-            <el-col :span="6" :push="2">
+            <!-- <el-col :span="6" :push="2">
                 <el-steps :active="1">
                     <el-step title="Step 1" description="浏览商品" />
                     <el-step title="Step 2" description="下单购买" />
                     <el-step title="Step 3" description="签收收货" />
                 </el-steps>
-            </el-col>
+            </el-col> -->
             <el-col :span="6" :push="3" v-for="(colItem,index) in footerTIFALinkList" :key="index">
                 <div class="TIFALinkContainer">
                     <span class="TIFALinkTitle">{{colItem.title}}</span>
@@ -19,6 +19,7 @@
                     <el-divider v-if="index==0"/>
                 </div>
             </el-col>
+            <el-col :span="6"></el-col>
             <el-col :span="6" :push="4" class="popoverGroup">
                 <el-popover
                     placement="top-start"
@@ -105,7 +106,7 @@ export default {
 
 <style lang="less" scoped>
 .el-container{
-    background-color: rgba(204, 198, 198, 0.352);
+    // background-color: rgba(204, 198, 198, 0.352);
     height: 150px;
 }
 

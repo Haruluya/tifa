@@ -21,7 +21,7 @@ Mock.mock("http://localhost:8081/tifai/property/searchProperty",'post',searchLis
 Mock.mock("http://localhost:8081/tifai/product/detailData",'get',goodsdetail);
 Mock.mock("http://localhost:8081/tifai/product/updateShopCart",'post',updateshopcart);
 Mock.mock("http://localhost:8081/tifai/product/getShopCartData",'get',shopcartdata);
-Mock.mock("http://localhost:8081/tifai/user/registerConfirm",'post',registerData);
-Mock.mock("http://localhost:8081/tifai/user/loginConfirm",'post',token);
-Mock.mock("http://localhost:8081/tifai/user/logout",'post',logoutData);
-Mock.mock("http://localhost:8081/tifai/user/userData",'post',userData);
+// Mock.mock("http://localhost:8081/tifai/user/registerConfirm",'post',registerData);
+// Mock.mock("http://localhost:8081/tifai/user/loginConfirm",'post',token);
+// Mock.mock("http://localhost:8081/tifai/user/logout",'post',logoutData);
+// Mock.mock("http://localhost:8081/tifai/user/userData",'post',userData);
