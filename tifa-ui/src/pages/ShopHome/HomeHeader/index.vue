@@ -1,13 +1,16 @@
 <template>
     <div class="mainContainer">
         <el-row align="middle">
-          <el-col :span="5" class="logo">
+          <el-col :span="6" class="logo" :push="1">
+              <el-link :underline="false" class="title">
+                  TIFA
+              </el-link>
               <el-link :underline="false">
-                <el-image src="https://img1.360buyimg.com/da/jfs/t1/14716/32/11447/94000/5c90a83bEaa611013/18490bf08654ba09.gif?v=0.6260315480407526">
+                <el-image :src="logo">
                 </el-image>
               </el-link>
           </el-col>
-          <el-col :span="11" class="search">
+          <el-col :span="10" class="search">
             <el-input
             v-model="searchContent"
             placeholder="Please input"
@@ -15,30 +18,23 @@
             size="large"
 
             >
-            <template #prepend>
-                <el-select v-model="select" placeholder="Select" style="width: 115px">
-                <el-option label="Restaurant" value="1" />
-                <el-option label="Order No." value="2" />
-                <el-option label="Tel" value="3" />
-                </el-select>
-            </template>
             <template #append>
-                <el-button type="danger">Danger</el-button>
+                <el-button type="primary"><el-icon><search /></el-icon></el-button>
             </template>
             </el-input>
             <div class="tags">
-                <el-link v-for="index in 6" :key="index" class="tag">
-                    品质好品
+                <el-link v-for="(item,index) in tags" :key="index" class="tag" :underline="false">
+                    {{item}}
                 </el-link>
             </div>
           </el-col>
-          <el-col :span="8" class="user">
+          <el-col :span="8" class="user" :push="1">
                 <el-link :underline="false" class="shopCart">
-                    我的购物车
+                   <el-badge :value="0" :max="99" class="item"> <el-icon><shopping-cart-full /></el-icon>我的购物车</el-badge>
                 </el-link> 
               <div class="adImg">
                   <el-link :underline="false">
-                    <el-image :src="`https://img12.360buyimg.com/img/jfs/t1/67481/15/565/28110/5cec9234E71c47244/dc4cf353fd96922e.png.webp`">
+                    <el-image :src="erweima">
                     </el-image>
                   </el-link>
               </div>
@@ -47,14 +43,16 @@
     </div>
 </template>
 <script>
-
-
+import logo from '../../../assets/logo.png' 
+import erweima from '../../../assets/erweima.png'
 export default {
     name: 'homeHeader',
     data() {
         return {
             searchContent:'',
-
+            tags:['五五乐享周','五一爆品','手机好店','买一赠一','全场八折','tifa手办','ff7收藏'],
+            logo,
+            erweima,
         }
     },
 }
@@ -68,30 +66,57 @@ export default {
     background-color: white;
     box-shadow: rgba(18, 18, 18, 0.1) 0px 1px 3px 0px;
     .logo{
-
+        .title{
+            font-size: 45px;
+            font-weight: bold;
+            &:hover{
+                color: #e1251b;
+            }
+        }
+        .el-image{
+            width: 150px;
+        }
     }
     .search{
-        transform: translateY(-10px);
-        .tag{
-            margin-left: 8px;
+        .tags{
+            margin-top: 8px;
+            .tag{
+                margin-left: 12px;
+                color: #9d9d9d;
+                &:hover{
+                    color: #e1251b;
+                }
+            }
         }
     }
     .user{
         display: flex;
-        justify-content: center;
         align-content: center;
-
         .shopCart{
-            text-align: center;
-            margin-left: 20px;
+            font-size: 16px;
+            height: 30px;
+            padding: 5px 20px;
+            border: 1px solid rgb(238, 238, 238);
+            transform: translateX(-45px) translateY(20px);
+            .el-icon{
+                margin-right: 5px;
+                font-size: 25px;
+            }
+            &:hover{
+                color: #e1251b;
+                border: 1px solid #e1251b;
+            }
         }
         .adImg{
-            margin-left: 20px;
-            width: 150px;
-            height: 90%;
+            margin-left: 40px;
+            width: 100px;
         }
     }
 }
+// .el-button{
+//     height: 40px;
+//     background-color: #409eff !important;
+// }
 
 
 </style>

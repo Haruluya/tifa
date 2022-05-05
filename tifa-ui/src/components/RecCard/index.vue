@@ -5,12 +5,7 @@
                 <img src="https://img14.360buyimg.com/ceco/s300x300_jfs/t1/147923/30/18586/454087/5fdc028eE9518ec6b/1e4e64b14043aa71.png.webp" alt="" srcset="">
             </dvi>
             <div class="title">
-                <div class="tag">
-                    <el-tag type="danger"> 
-                        自营
-                    </el-tag>
-                </div>
-                <span>
+                <span class="des">
                     雷士（NVC）智能轻触风暖浴霸 超宽风口 
                 </span>
             </div>
@@ -51,11 +46,12 @@
             font-size: 13px;
             color: #4c4c4c;
             &:hover{
-                        color: #e1251b;
+                color: #e1251b;
             }
-            .tag{
+            .des{
+                margin-left: 5px;
+            }
 
-            }
         }
         .price{
             text-align: center;
@@ -63,6 +59,7 @@
             font-size: 18px;
             color:#e1251b;
             margin-left: 20px;
+            margin-top: 8px;
         }
         
     }

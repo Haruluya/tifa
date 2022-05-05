@@ -10,5 +10,7 @@
 </template>
 
 <style scoped>
-
+  .el-carousel{
+    background-color: #e3e4e5 ;
+  }
 </style>

@@ -21,6 +21,7 @@
                     <el-row :gutter="10">
                         <el-col :span="6">
                         <div class="leftClassNav">
+                            <ClassNav/>
                         </div>
                         </el-col>
                         <el-col :span="18">
@@ -37,6 +38,30 @@
                         </div>
                     </div>
                     <div class="sideRight">
+                        <el-avatar :size="100" :src="avatar">
+                        </el-avatar>
+                        <div class="name">
+                            <el-link :underline="false">
+                                Haruluya
+                            </el-link>
+                        </div>
+                        <div class="buttons">
+                            <el-button type="warning" size="large" round="true">注册</el-button>
+                            <el-button type="warning" size="large" round="true">登录</el-button>
+                            <el-button type="warning" size="large" round="true">开店</el-button>
+                        </div>
+                        <el-divider/>
+                        <div class="messages">
+                            <div v-for="(item,index) in messages" :key="index" class="message">
+                                <el-tag type="warning">
+                                    资讯
+                                </el-tag>
+                                <span>{{item}}</span>
+                            </div>
+                        </div>
+                        <div>
+                            
+                        </div>
                     </div>
                 </el-aside>
             </el-container>
@@ -46,21 +71,25 @@
             <DiscountCard class="rightCard"/>
         </div>
         <div class="hotGoods">
-            <HotGoodsPanel/>
+            <RecPanel :title="recTitle[0]"/>
         </div>
         <div class="mostRates">
-            <MostRatesPanel/>
+            <RecPanel :title="recTitle[1]"/>
         </div>
         <div class="onlineRec">
-            <OnLineRecPanel/>
+            <RecPanel :title="recTitle[2]"/>
         </div>
-        <div class="channels">
+        <div class="ALSRec">
+            <div class="title">
+                <el-icon><arrow-left-bold /></el-icon>
+                基于ALS的用户商品推荐
+                <el-icon><arrow-right-bold /></el-icon>
+            </div>
             <div class="channel" v-for="index in 4" :key="index">
-                <div class="title">title</div>
                 <el-row v-for="indexx in 4" :key="index" align="middle" justify="center">
-                  <el-col :span="6" v-for="indexy in 4" key="index">
+                  <el-col :span="4" v-for="indexy in 5" key="index">
                       <div class="card">
-                          <ChannelCard/>
+                         <GoodCard/>
                       </div>
                   </el-col> 
                 </el-row>
@@ -76,29 +105,39 @@ import { ArrowRight } from '@element-plus/icons-vue'
 
 import CarsouelCop from '@/components/CarsouelCop'
 import CarsouelSmall from '@/components/CarsouelSmall'
-import HotGoodsPanel from './HotGoodsPanel'
-import ChannelCard from '@/components/ChannelCard'
-import MostRatesPanel from './MostRatesPanel'
-import OnLineRecPanel from './OnLineRecPanel'
+import GoodCard from '@/components/GoodCard'
 import HomeHeader from './HomeHeader'
 import DiscountCard from '@/components/DiscountCard'
+import RecPanel from './RecPanel'
+import ClassNav from './ClassNav'
 
 export default {
     name: 'shopHome',
     components:{    
         CarsouelCop,
         CarsouelSmall,
-        HotGoodsPanel,
-        ChannelCard,
-        MostRatesPanel,
-        OnLineRecPanel,
         HomeHeader,
         ArrowRight,
-        DiscountCard
+        DiscountCard,
+        RecPanel,
+        GoodCard,
+        ClassNav
     },
     data() {
         return {
-            imgList:['https://img13.360buyimg.com/babel/s380x300_jfs/t1/218488/40/5653/59138/619f5baeE41826177/b34b03472140e1a7.jpg.webp']
+            imgList:['https://img13.360buyimg.com/babel/s380x300_jfs/t1/218488/40/5653/59138/619f5baeE41826177/b34b03472140e1a7.jpg.webp'],
+            avatar:'https://avatars.githubusercontent.com/u/91101915?v=4',
+            messages:['中华老字号同仁堂：“同修仁德，济世养生”',
+                        '全自动化正当道，传统坐便器已经out啦！',
+                        '夏日里一个清凉的机会都不要错过，就连吃也是一样',
+                        '教科书般的网游小说，《斗破苍穹》的大热原因',
+                        '一只狗的自述：我可不想陪主子贴秋膘',
+                        '猫王霹雳唱机，带你穿越回80年代',
+                        '秋季养生正当时，顺季食补滋阴养肺'],
+            recTitle:["基于Spark SQL的最近热点商品推荐",
+                        "基于Spark SQL的最多评分推荐",
+                        "基于kafka,spark stream的实时推荐",
+                        ]
         }
     },
 }
@@ -151,6 +190,7 @@ export default {
         .mainSwiper{
             margin-left: 25px;
             overflow: hidden;
+            border-radius: 10px;
         }
     }
     .el-aside{
@@ -170,7 +210,41 @@ export default {
             width: 320px;
             margin-left: 15px;
             background-color: white;
+            padding: 20px;
             border-radius: 3%;
+            box-shadow: rgba(18, 18, 18, 0.1) 0px 1px 3px 0px;
+            .name{
+                margin-top: 10px;
+                .el-link{
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #53585c;
+                    &:hover{
+                        color: #e1251b;
+                    }
+                }
+            }
+            .buttons{
+                margin-top: 10px;
+            }
+            .messages{
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+                .message{
+                    font-size: 13px;
+                    height: 25px;
+                    overflow: hidden;
+                    margin-bottom: 10px;
+                    color: #666666; 
+                    span{
+                        margin-left: 8px;
+                    }
+                    &:hover{
+                        color: #e1251b;
+                    }
+                }
+            }
         }
     } 
 }
@@ -207,22 +281,26 @@ export default {
     margin: 100px auto;
 }
 
-// 频道面板。
+// als推荐面板。
 
-.channels{
-    width: 1400px;
-    margin: 60px auto;
-
-    .channel{
-        margin: 10px;
-        .title{
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 20px;
-        }
-        .card{
-            
+.ALSRec{
+    margin: 10px;
+    .title{
+        text-align: center;
+        font-family: "Microsoft YaHei", "Heiti SC", tahoma, arial, "Hiragino Sans GB";
+        font-size: 25px;
+        font-weight: bold;
+        color: #747171;
+        margin: 30px 0;
+        .el-icon{
+            transform: translateY(4px);
+            color: #e1251b;
         }
     }
+    .card{
+        
+    }
 }
+
 
 </style>
