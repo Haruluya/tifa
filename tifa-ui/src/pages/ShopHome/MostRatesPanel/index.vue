@@ -1,7 +1,7 @@
 <template>
     <div class="mainContainer">
         <div class="panelTitle">
-            基于Spark SQL的最多评分推荐。
+            <!-- 基于Spark SQL的最多评分推荐。 -->
         </div>
         <div class="cardPanel">
             <el-row>

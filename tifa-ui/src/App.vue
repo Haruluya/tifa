@@ -54,7 +54,7 @@ export default {
 
 </script>
 
-<style>
+<style lang="less">
 body{
   background-color: #f4f4f4;
 }
@@ -73,5 +73,13 @@ body{
 .el-row{
   width: 100%;
   height: 100%;
+}
+/* 全局taps字体样式 */
+.el-tabs__item {
+    font-size: 18px !important;
+    color:#999999 !important;
+    &:hover{
+      color: #e6251b !important;
+    }
 }
 </style>

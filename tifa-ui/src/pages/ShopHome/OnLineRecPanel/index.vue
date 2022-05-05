@@ -1,7 +1,7 @@
 <template>
     <div class="mainContainer">
         <div class="panelTitle">
-            基于kafka,spark stream的实时推荐。
+            <!-- 基于kafka,spark stream的实时推荐。 -->
         </div>
         <div class="cardPanel">
             <el-row>

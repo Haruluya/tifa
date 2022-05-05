@@ -15,35 +15,35 @@
             </div> 
         </div>
         <div class="showPart">
-            <el-container class="mainElContainer">
-                <el-header style="margin: 0; padding: 0">
-                    <HomeHeader/>
-                </el-header>
-                <el-container class="centerElContainer">
-                    <el-main>
-                        <el-row :gutter="20">
-                          <el-col :span="7">
-                            <div class="leftClassNav">
-                            </div>
-                          </el-col>
-                          <el-col :span="17">
-                            <div class="mainSwiper">
-                                <CarsouelCop :list="imgList" />
-                            </div>
-                          </el-col>
-                        </el-row>
-                    </el-main>
-                    <el-aside width="450px">
-                        <div class="sideLeft">
-                            <div v-for="index in 3" :key="index" class="swiperItem">
-                                <CarsouelSmall  :list="imgList" :heighty="160"/>
-                            </div>
+            <HomeHeader/>
+            <el-container class="centerElContainer">
+                <el-main>
+                    <el-row :gutter="10">
+                        <el-col :span="6">
+                        <div class="leftClassNav">
                         </div>
-                        <div class="sideRight">
+                        </el-col>
+                        <el-col :span="18">
+                        <div class="mainSwiper">
+                            <CarsouelCop :list="imgList" />
                         </div>
-                    </el-aside>
-                </el-container>
+                        </el-col>
+                    </el-row>
+                </el-main>
+                <el-aside>
+                    <div class="sideLeft">
+                        <div v-for="index in 3" :key="index" class="swiperItem">
+                            <CarsouelSmall  :list="imgList" :heighty="160"/>
+                        </div>
+                    </div>
+                    <div class="sideRight">
+                    </div>
+                </el-aside>
             </el-container>
+        </div>
+        <div class="discountCard">
+            <DiscountCard class="leftCard"/>
+            <DiscountCard class="rightCard"/>
         </div>
         <div class="hotGoods">
             <HotGoodsPanel/>
@@ -81,7 +81,7 @@ import ChannelCard from '@/components/ChannelCard'
 import MostRatesPanel from './MostRatesPanel'
 import OnLineRecPanel from './OnLineRecPanel'
 import HomeHeader from './HomeHeader'
-
+import DiscountCard from '@/components/DiscountCard'
 
 export default {
     name: 'shopHome',
@@ -93,7 +93,8 @@ export default {
         MostRatesPanel,
         OnLineRecPanel,
         HomeHeader,
-        ArrowRight 
+        ArrowRight,
+        DiscountCard
     },
     data() {
         return {
@@ -113,7 +114,7 @@ export default {
         display: flex;
         justify-content: center;
         align-content: center;
-        background-color: #f5f5f5;
+        background-color: #e3e4e5;
         
         height: 35px;
         .info{
@@ -129,45 +130,44 @@ export default {
     }
 
     .showPart{
-        margin-top: 10px;
-        .mainElContainer{
+        .centerElContainer{
             width: 1400px;
-            // !
-            height: 650px;
+            height: 550px;
             margin: 0 auto;
+            margin-top: 20px;
 
-
-            .el-header{
-                height: 150px;
-                background-color: white;
-                border-radius: 10px;
-            }
         }
     }
 }
-
+// 中间部分。
 .centerElContainer{
-    margin-top: 20px;
     .el-main{
-
         .leftClassNav{
             height: 100%;
             width: 220px;
             background-color: white;
+            border-radius: 10px;
+        }
+        .mainSwiper{
+            margin-left: 25px;
+            overflow: hidden;
         }
     }
     .el-aside{
-        display: flex;  
+        width: 550px;
+        display: flex;
+        padding: 20px;
+        transform: translateX(-35px);  
         .sideLeft{
-            width: 50%;
-            margin-left: 15px;
+            width: 230px;
+            transform: translateY(-10px);
             .swiperItem{
                 margin-top: 10px;
             }
 
         }   
         .sideRight{
-            width: 50%;
+            width: 320px;
             margin-left: 15px;
             background-color: white;
             border-radius: 3%;
@@ -175,26 +175,36 @@ export default {
     } 
 }
 
+// 打折面板。
+.discountCard{
+    margin: 0 auto;
+    display: flex;
+    margin-top: 50px;
+    width: 1400px;
+    .leftCard{
+        margin-right: 30px;
+    }
+}
+
+
 // 热点商品面板。
 .hotGoods{
     width: 1400px;
     margin: 60px auto;
-
-
 }
 
 
 // 最多评分商品面板。
 .mostRates{
     width: 1400px;
-    margin: 60px auto;
+    margin: 100px auto;
 
 }
 
 // 实施推荐面板。
 .onlineRec{
     width: 1400px;
-    margin: 60px auto;
+    margin: 100px auto;
 }
 
 // 频道面板。
