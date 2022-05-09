@@ -64,8 +64,8 @@ export const routes = [
       }
     },
     {
-      path: '/gooddetail/:goodId',
-      name:'gooddetail',
+      path: '/agooddetail/:goodId',
+      name:'agooddetail',
       component: () => import('_pages/Center/GoodDetail'),
       meta:{
         showFooter:true,
@@ -83,6 +83,14 @@ export const routes = [
       path: '/pageheader',
       name:'pageheader',
       component: () => import('_components/PageHeader'),
+      meta:{
+        showFooter:true,
+      }
+    },
+    {
+      path: '/gooddetail',
+      name:'gooddetail',
+      component: () => import('_pages/GoodDetail'),
       meta:{
         showFooter:true,
       }

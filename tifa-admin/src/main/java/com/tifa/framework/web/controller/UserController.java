@@ -30,6 +30,8 @@ public class UserController {
     @Resource
     private JwtConfig jwtConfig;
 
+    
+
     @GetMapping("/tableNames")
     public String[] tableNames(Model model){
         String[] result = userService.getAllTableNames();
