@@ -111,4 +111,12 @@ export const routes = [
         showFooter:true,
       }
     },
+    {
+      path: '/tifashopcart',
+      name:'tifashopcart',
+      component: () => import('_pages/TifaShopCart'),
+      meta:{
+        showFooter:true,
+      }
+    },
   ]

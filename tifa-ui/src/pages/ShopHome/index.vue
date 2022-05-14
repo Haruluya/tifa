@@ -186,6 +186,7 @@ export default {
             width: 220px;
             background-color: white;
             border-radius: 10px;
+            box-shadow: rgba(18, 18, 18, 0.1) 0px 1px 3px 0px;
         }
         .mainSwiper{
             margin-left: 25px;

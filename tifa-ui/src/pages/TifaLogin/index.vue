@@ -42,7 +42,7 @@
                             </div>
                             <div class="registerLink">
                                 <el-icon><DArrowRight /></el-icon>
-                                <el-link :underline="false">立即注册</el-link>
+                                <el-link :underline="false" href="tifaregister">立即注册</el-link>
                             </div>
                         </div>
                     </el-tab-pane>
@@ -75,6 +75,7 @@ export default {
             z-index: -1;
             overflow: hidden;
             img{
+                opacity: 0.8;
                 width: 1800px;
                 transform: rotateY(180deg) translateX(100px);
             }
@@ -89,7 +90,7 @@ export default {
                 border-radius: 10px;
                 padding: 20px;
                 background-color: white;
-                opacity: 0.8;
+                opacity: 0.9;
             }
         }
     }
