@@ -95,4 +95,20 @@ export const routes = [
         showFooter:true,
       }
     },
+    {
+      path: '/tifalogin',
+      name:'tifalogin',
+      component: () => import('_pages/TifaLogin'),
+      meta:{
+        showFooter:true,
+      }
+    },
+    {
+      path: '/tifaregister',
+      name:'tifaregister',
+      component: () => import('_pages/TifaRegister'),
+      meta:{
+        showFooter:true,
+      }
+    },
   ]
