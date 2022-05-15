@@ -119,4 +119,20 @@ export const routes = [
         showFooter:true,
       }
     },
+    {
+      path: '/tifasearch',
+      name:'tifasearch',
+      component: () => import('_pages/TifaSearch'),
+      meta:{
+        showFooter:true,
+      }
+    },
+    {
+      path: '/userinfo',
+      name:'userinfo',
+      component: () => import('_pages/UserInfo'),
+      meta:{
+        showFooter:true,
+      }
+    },
   ]

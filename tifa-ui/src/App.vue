@@ -82,4 +82,11 @@ body{
       color: #e6251b !important;
     }
 }
+
+// radio字体全局设置。
+.el-radio-button__inner{
+  font-size: 18px !important;
+  font-weight: bold !important;
+  font-family: tahoma, arial, 宋体 !important;
+}
 </style>

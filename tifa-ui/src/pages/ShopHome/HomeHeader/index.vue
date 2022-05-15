@@ -16,10 +16,9 @@
             placeholder="Please input"
             class="input-with-select,searchInput"
             size="large"
-
             >
             <template #append>
-                <el-button type="primary"><el-icon><search /></el-icon></el-button>
+                <el-button type="primary" @click="toSearchPage()"><el-icon><search /></el-icon></el-button>
             </template>
             </el-input>
             <div class="tags">
@@ -53,6 +52,11 @@ export default {
             tags:['五五乐享周','五一爆品','手机好店','买一赠一','全场八折','tifa手办','ff7收藏'],
             logo,
             erweima,
+        }
+    },
+    methods: {
+        toSearchPage(){
+            this.$router.push('tifasearch');
         }
     },
 }

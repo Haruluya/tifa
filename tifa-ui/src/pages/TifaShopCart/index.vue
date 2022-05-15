@@ -36,6 +36,7 @@
                     </div>
                 </div>
                 <div class="summit">
+                    <el-radio v-model="selectAll" border>全选</el-radio>
                     <el-button type="success" size="large">
                         提交订单
                     </el-button>
@@ -53,6 +54,7 @@ export default {
     data() {
         return {
             isSelect:"false",
+            selectAll:"false"
         }
     },
 }
@@ -124,6 +126,10 @@ export default {
 
     }
     .summit{
-        margin-left: 1000px;
+        display: flex;
+        margin-left: 50px;
+        .el-button{
+            transform: translateX(900px);
+        }
     }
 </style>

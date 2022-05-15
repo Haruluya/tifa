@@ -41,8 +41,8 @@
                         <el-avatar :size="100" :src="avatar">
                         </el-avatar>
                         <div class="name">
-                            <el-link :underline="false">
-                                Haruluya
+                            <el-link :underline="false" href="userinfo">
+                                未登录
                             </el-link>
                         </div>
                         <div class="buttons">
@@ -126,7 +126,7 @@ export default {
     data() {
         return {
             imgList:['https://img13.360buyimg.com/babel/s380x300_jfs/t1/218488/40/5653/59138/619f5baeE41826177/b34b03472140e1a7.jpg.webp'],
-            avatar:'https://avatars.githubusercontent.com/u/91101915?v=4',
+            avatar:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
             messages:['中华老字号同仁堂：“同修仁德，济世养生”',
                         '全自动化正当道，传统坐便器已经out啦！',
                         '夏日里一个清凉的机会都不要错过，就连吃也是一样',

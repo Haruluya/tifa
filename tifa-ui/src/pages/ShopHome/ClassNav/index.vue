@@ -29,6 +29,7 @@ export default {
             text-align: left;
             padding-top: 5px;
             padding-left: 20px;
+            font-family: tahoma, arial, 宋体;
             color: #333333;
             &:hover{
                 color: red;
