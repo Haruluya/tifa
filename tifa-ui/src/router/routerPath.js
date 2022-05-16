@@ -133,6 +133,28 @@ export const routes = [
       component: () => import('_pages/UserInfo'),
       meta:{
         showFooter:true,
+      },
+      children:[
+        {
+          path:"",
+          component:() => import('_pages/UserInfo/Outline')
+        },
+        {
+          path:"myfocus",
+          component:() => import('_pages/UserInfo/MyFocus')
+        },
+        {
+          path:"myOrder",
+          component:() => import('_pages/UserInfo/MyOrder')
+        },
+      ]
+    },
+    {
+      path: '/settlement',
+      name:'settlement',
+      component: () => import('_pages/Settlement'),
+      meta:{
+        showFooter:true,
       }
     },
   ]

@@ -10,52 +10,14 @@
                         </div>
                         <el-divider></el-divider>
                         <div class="nav" v-for="(item,index) in navList" :key="index">
-                            <el-link :underline="false">
-                                {{item}}
+                            <el-link :underline="false" :href="item.path">
+                                {{item.label}}
                             </el-link>
                         </div>
                     </div>
                 </el-aside>
                 <el-main>
-                    <div class="info">
-                        <div>
-                            
-                        </div>
-                        <div>
-                            <div class="myMoney">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panels">
-                        <div class="myorder">
-                            <div class="title">
-                                我的订单
-                            </div>
-                            <el-divider></el-divider>
-                            <div class="options">
-
-                            </div>
-                        </div>
-                        <div class="sidePanel">
-                            <div class="myfocus">
-                                <div class="title">
-                                    我的关注
-                                </div>
-                                <div class="options">
-
-                                </div>
-                            </div>
-                            <div class="service">
-                                <div class="title">
-                                    生活服务
-                                </div>
-                                <div class="options">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <router-view></router-view>
                 </el-main>
             </el-container>
         </div>
@@ -70,7 +32,32 @@ export default {
     },
     data() {
         return {
-            navList:['我的信息','我的订单','我的收藏','生活服务','退出登录']
+            navList:[
+                {
+                    label:'我的信息',
+                    path:'myinfo'
+                },
+                {
+                    label:'我的订单',
+                    path:'myorder'
+                },
+                {
+                    label:'我的收藏',
+                    path:'myfocus'
+                },
+                {
+                    label:'生活服务',
+                    path:'liveserver'
+                },
+                {
+                    label:'关于TIFA',
+                    path:'abouttifa'
+                },
+                {
+                    label:'退出登录',
+                    path:'logout'
+                }
+            ]
         }
     },
 }
@@ -78,6 +65,7 @@ export default {
 <style lang="less" scoped>
     .mainContainer{
         .infoContent{
+            transform: scale(0.9) translateY(-80px);
             width: 1400px;
             margin: 0 auto;
             margin-top: 100px;
@@ -103,7 +91,17 @@ export default {
             }
             &:hover{
                 background-color: #e3e4e5;
+                .el-link{
+                    font-weight: bold;
+                }
             }
         }
+
     }
+    .el-main{
+        transform: translateY(-20px);
+        width: 1100px;
+        overflow: hidden;
+    }
+
 </style>

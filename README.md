@@ -164,6 +164,14 @@ git pull https://github.com/Haruluya/MallShoppingProj.git master
 
 ![image-20220515113118241](./document/images/image-20220515113118241.png)
 
+##### UserInfo
+
+![image-20220516141107379](./document/images/image-20220516141107379.png)
+
+##### myfocus
+
+![image-20220516140930116](./document/images/image-20220516140930116.png)
+
 ##### ShopCart
 
 ![image-20220515113155144](./document/images/image-20220515113155144.png)
