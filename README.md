@@ -134,62 +134,6 @@ git pull https://github.com/Haruluya/MallShoppingProj.git master
 
 **The following images do not represent the final templates.**
 
-##### ShopHome
-
-![image-20220515112729140](./document/images/image-20220515112729140.png)
-
-![image-20220515112754052](./document/images/image-20220515112754052.png)
-
-
-
-![image-20220515112818778](./document/images/image-20220515112818778.png)
-
-
-
-##### Footer
-
-![image-20220515112923669](./document/images/image-20220515112923669.png)
-
-
-
-##### Login
-
-![image-20220515113008692](./document/images/image-20220515113008692.png)
-
-##### Register
-
-![image-20220515113027076](./document/images/image-20220515113027076.png)
-
-![image-20220515113037886](./document/images/image-20220515113037886.png)
-
-![image-20220515113118241](./document/images/image-20220515113118241.png)
-
-##### UserInfo
-
-![image-20220516141107379](./document/images/image-20220516141107379.png)
-
-##### myfocus
-
-![image-20220516140930116](./document/images/image-20220516140930116.png)
-
-##### ShopCart
-
-![image-20220515113155144](./document/images/image-20220515113155144.png)
-
-##### Search
-
-![image-20220515113217129](./document/images/image-20220515113217129.png)
-
-
-
-##### GoodDetail
-
-![image-20220515113326886](./document/images/image-20220515113326886.png)
-
-
-
-![image-20220515113401126](./document/images/image-20220515113401126.png)
-
 
 
 
