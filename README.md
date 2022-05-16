@@ -190,7 +190,9 @@ git pull https://github.com/Haruluya/MallShoppingProj.git master
 
 ![image-20220515113401126](./document/images/image-20220515113401126.png)
 
+##### Settlement
 
+![image-20220516165313523](./document/images/image-20220516165313523.png)
 
 
 
