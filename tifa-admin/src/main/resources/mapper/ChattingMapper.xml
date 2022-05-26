@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tifa.mapper.ChattingMapper">
+
+    <resultMap id="BaseResultMap" type="com.tifa.framework.web.pojo.Chatting">
+            <id property="uid" column="uid" jdbcType="INTEGER"/>
+            <id property="bid" column="bid" jdbcType="INTEGER"/>
+            <id property="sendtime" column="sendTime" jdbcType="TIMESTAMP"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="isbusiness" column="isbusiness" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        uid,bid,sendTime,
+        content,isbusiness
+    </sql>
+</mapper>

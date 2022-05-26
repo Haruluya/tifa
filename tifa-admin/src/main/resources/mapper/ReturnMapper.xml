@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tifa.mapper.ReturnMapper">
+
+    <resultMap id="BaseResultMap" type="com.tifa.framework.web.pojo.Return">
+            <id property="rid" column="rid" jdbcType="INTEGER"/>
+            <result property="oid" column="oid" jdbcType="INTEGER"/>
+            <result property="lid" column="lid" jdbcType="INTEGER"/>
+            <result property="logisticsway" column="LogisticsWay" jdbcType="VARCHAR"/>
+            <result property="logisticsdes" column="LogisticsDes" jdbcType="VARCHAR"/>
+            <result property="detime" column="deTime" jdbcType="TIMESTAMP"/>
+            <result property="deendtime" column="deEndTime" jdbcType="TIMESTAMP"/>
+            <result property="returndes" column="returnDes" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        rid,oid,lid,
+        LogisticsWay,LogisticsDes,deTime,
+        deEndTime,returnDes
+    </sql>
+</mapper>

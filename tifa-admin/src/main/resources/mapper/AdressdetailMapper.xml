@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tifa.mapper.AdressdetailMapper">
+
+    <resultMap id="BaseResultMap" type="com.tifa.framework.web.pojo.Adressdetail">
+            <id property="aid" column="aid" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+            <result property="standbyphone" column="standbyPhone" jdbcType="VARCHAR"/>
+            <result property="countries" column="countries" jdbcType="VARCHAR"/>
+            <result property="provinces" column="provinces" jdbcType="VARCHAR"/>
+            <result property="city" column="city" jdbcType="VARCHAR"/>
+            <result property="detailaddress" column="detailAddress" jdbcType="VARCHAR"/>
+            <result property="postalcode" column="postalCode" jdbcType="VARCHAR"/>
+            <result property="isdefault" column="isDefault" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        aid,name,phone,
+        standbyPhone,countries,provinces,
+        city,detailAddress,postalCode,
+        isDefault
+    </sql>
+</mapper>

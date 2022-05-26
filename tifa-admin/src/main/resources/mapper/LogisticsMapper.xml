@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tifa.mapper.LogisticsMapper">
+
+    <resultMap id="BaseResultMap" type="com.tifa.framework.web.pojo.Logistics">
+            <id property="lid" column="lid" jdbcType="INTEGER"/>
+            <result property="oid" column="oid" jdbcType="INTEGER"/>
+            <result property="dename" column="dename" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+            <result property="postalcode" column="postalCode" jdbcType="VARCHAR"/>
+            <result property="deid" column="deid" jdbcType="VARCHAR"/>
+            <result property="deprice" column="dePrice" jdbcType="FLOAT"/>
+            <result property="logisticsdes" column="LogisticsDes" jdbcType="VARCHAR"/>
+            <result property="detime" column="deTime" jdbcType="TIMESTAMP"/>
+            <result property="deendtime" column="deEndTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        lid,oid,dename,
+        phone,postalCode,deid,
+        dePrice,LogisticsDes,deTime,
+        deEndTime
+    </sql>
+</mapper>
