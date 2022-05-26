@@ -120,7 +120,7 @@ export const routes = [
       }
     },
     {
-      path: '/tifasearch',
+      path: '/tifasearch/:searchKey',
       name:'tifasearch',
       component: () => import('_pages/TifaSearch'),
       meta:{

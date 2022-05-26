@@ -12,7 +12,7 @@
           </el-col>
           <el-col :span="10" class="search">
             <el-input
-            v-model="searchContent"
+            v-model="searchKey"
             placeholder="Please input"
             class="input-with-select,searchInput"
             size="large"
@@ -48,15 +48,15 @@ export default {
     name: 'homeHeader',
     data() {
         return {
-            searchContent:'',
             tags:['五五乐享周','五一爆品','手机好店','买一赠一','全场八折','tifa手办','ff7收藏'],
             logo,
             erweima,
+            searchKey:""
         }
     },
     methods: {
         toSearchPage(){
-            this.$router.push('tifasearch');
+            this.$router.push('/tifasearch/'+(this.searchKey == '' ? 'all':this.searchKey));
         }
     },
 }

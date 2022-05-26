@@ -2,11 +2,12 @@
 
 // 导入请求方法。
 import {
-    postSearchDataRequest
+    postSearchDataRequest,
 } from "@/api";
 
 const state = {
-    searchData:{}
+    searchData:{},
+    pageIndex:1
 };
 
 const mutations = {
@@ -33,14 +34,17 @@ const getters = {
     //产品列表。
     goodsList(state){
       return state.searchData.goodsList||[];
-    }
-    ,
-    trademarkList(state){
-      return state.searchData.trademarkList||[];
     },
-    attrsList(state){
-      return state.searchData.attrsList||[];
+
+    pageIndex(state){
+      return state.pageIndex;
     }
+    // trademarkList(state){
+    //   return state.searchData.trademarkList||[];
+    // },
+    // attrsList(state){
+    //   return state.searchData.attrsList||[];
+    // }
  };
 
 

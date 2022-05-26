@@ -1,5 +1,5 @@
 <template>
-    <div class="mainContainer">
+    <div class="mainContainer" @click="toGoodDetail()">
         <div class="content">
             <dvi class="image">
                 <img src="https://img14.360buyimg.com/ceco/s300x300_jfs/t1/147923/30/18586/454087/5fdc028eE9518ec6b/1e4e64b14043aa71.png.webp" alt="" srcset="">
@@ -18,8 +18,18 @@
     </div>
 </template>
 
-<script setup>
+<script>
+export default{
+    name:"reccard",
+    data(){
 
+    },
+    methods: {
+        toGoodDetail(){
+            this.$router.push('/gooddetail');
+        }
+    },
+}
 
 </script>
 

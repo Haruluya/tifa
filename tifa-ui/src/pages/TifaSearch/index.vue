@@ -64,6 +64,8 @@
 <script>
 import HomeHeader from '../ShopHome/HomeHeader'
 import SearchGoodCard from '_components/SearchGoodCard'
+import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
+import { ElNotification} from 'element-plus'
 export default {
     name:"tifasearch",
     components:{
@@ -72,10 +74,35 @@ export default {
     },
     data() {
         return {
-            
+
         }
     },
+    computed:{
+      ...mapState({
 
+        }),
+      ...mapGetters(['pageIndex'])
+    },
+    methods: {
+        async getSearchData(){
+            try {
+                await this.$store.dispatch("getSearchData", {
+                    'searchKey':this.$route.params.searchKey,
+                    'pageIndex':this.pageIndex
+                });
+               
+            } catch (error) {
+                ElNotification({
+                    title: '获取搜索数据失败',
+                    message: error,
+                    type: 'error',
+                })
+            }
+        }
+    },
+    mounted() {
+        this.getSearchData();
+    },
 }
 </script>
 <style lang="less" scoped>

@@ -17,9 +17,21 @@ public class ProductController {
 
     @Autowired
     private ProductServiceImpl productService;
-    @GetMapping("/pageData")
-    public Page<Product> productData(@RequestParam(value = "pageIndex",defaultValue = "1")Integer pageNum, Model model){
-        Page<Product> productPage = new Page<>(pageNum,10);
-        return productService.page(productPage,null);
+//    @GetMapping("/pageData")
+//    public Page<Product> productData(@RequestParam(value = "pageIndex",defaultValue = "1")Integer pageNum, Model model){
+//        Page<Product> productPage = new Page<>(pageNum,10);
+//        return productService.page(productPage,null);
+//    }
+    @GetMapping("/searchGoods")
+    public Page<Product> productData(@RequestBody Integer pageIndex, @RequestBody String searchKey){
+        if ("all".equals(searchKey)){
+            Page<Product> productPage = new Page<>(pageIndex, 20);
+            return productService.page(productPage,null);
+        }
+         Page<Product> productPage = new Page<>(pageIndex, 20);
+            return productService.page(productPage,null);
     }
+
+
+
 }
