@@ -83,7 +83,7 @@
                     />
                 </div>
                 <el-divider></el-divider>
-                <div class="addShopCart">
+                <div class="addShopCart" @click="toShopCart()">
                     <el-icon><shopping-cart-full /></el-icon>加入购物车
                 </div>
             </div>
@@ -444,6 +444,11 @@ export default {
               "http://img30.360buyimg.com/popWareDetail/jfs/t1/49166/38/17259/156232/627cfeb7E9a1d614a/bb0d9130bca47697.jpg",
               "https://img30.360buyimg.com/imgzone/jfs/t1/211557/24/5722/178695/616d2211E8263408d/fe2931d8ee3f6cc3.jpg"]
         }
+    },
+    methods: {
+      toShopCart(){
+        this.$router.push('tifashopcart');
+      }
     },
 
 }

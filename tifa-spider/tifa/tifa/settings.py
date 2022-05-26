@@ -40,7 +40,14 @@ DEFAULT_REQUEST_HEADERS = {
 
 ITEM_PIPELINES = {
    'tifa.pipelines.TifaPipeline': 300,
+
 }
+
+
+MYSQL_HOST = 'localhost'
+MYSQL_DBNAME = 'tifa'
+MYSQL_USER = 'root'
+MYSQL_PASSWD = '2455851377a'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32

@@ -37,7 +37,7 @@
                 </div>
                 <div class="summit">
                     <el-radio v-model="selectAll" border>全选</el-radio>
-                    <el-button type="success" size="large">
+                    <el-button type="success" size="large" @click="commitOrder()">
                         提交订单
                     </el-button>
                 </div>
@@ -55,6 +55,11 @@ export default {
         return {
             isSelect:"false",
             selectAll:"false"
+        }
+    },
+    methods: {
+        commitOrder(){
+            this.$router.push('/settlement');
         }
     },
 }

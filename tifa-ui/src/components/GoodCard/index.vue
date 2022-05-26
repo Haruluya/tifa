@@ -1,5 +1,5 @@
 <template>
-    <div class="mainContainer">
+    <div class="mainContainer" @click="toGoodInfo()">
         <div class="titleImg">
             <el-image src="https://img14.360buyimg.com/n7/jfs/t1/69468/27/17416/141766/626baaecE202ac55d/d65dd608458c8c0b.jpg">
             </el-image>
@@ -36,6 +36,11 @@ export default {
             logo,
         }
     },
+    methods: {
+        toGoodInfo(){
+            this.$router.push('/gooddetail');
+        }
+    },
 }
 </script>
 <style lang="less" scoped>
@@ -59,6 +64,7 @@ export default {
             font-size: 18px;
             font-weight: bold;
             color: #e1251b;
+
         }
         .title{
             font-size: 16px;
@@ -66,6 +72,7 @@ export default {
         .des{
             font-size: 14px;
             color: #666666;
+
         }
         .tags{
             margin: 10px 0;

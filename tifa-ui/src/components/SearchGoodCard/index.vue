@@ -1,5 +1,5 @@
 <template>
-    <div class="mainContainer">
+    <div class="mainContainer" @click="toGoodDetail()">
         <div class="goodImg">
             <el-image src="https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i3/1202660057/O1CN01uNfPU21CI9JN2th58_!!0-saturn_solar.jpg_580x580Q90.jpg_.webp">
             </el-image>
@@ -32,6 +32,11 @@
 <script>
 export default {
     name:"searchgoodcard",
+    methods: {
+        toGoodDetail(){
+            this.$router.push('/gooddetail');
+        }
+    },
 }
 </script>
 <style lang="less" scoped>
@@ -44,6 +49,7 @@ export default {
         &:hover{
             transform: scale(1.005);
             border: 1px solid #e4393c;
+            cursor: pointer;
         }
         .goodImg{
 
@@ -53,11 +59,17 @@ export default {
                 margin-top: 5px;
                 font-size: 22px;
                 color: #e4393c;
+                &:hover{
+                    font-weight: bold;
+                }
             }
             .title{
                 margin-top: 10px;
                 font-size: 13px;
                 color: #666666;
+                &:hover{
+                    font-weight: bold;
+                }
             }
             .commentCount{
                 margin-top: 10px;

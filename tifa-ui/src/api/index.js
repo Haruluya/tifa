@@ -71,7 +71,7 @@ export const getUserData = (token)=>
 export const postSearchDataRequest= (data)=>
     requests({
         method:'POST',
-        url:`/property/searchProperty`,
+        url:`/product/searchGoods`,
         data
     })
 
@@ -81,6 +81,8 @@ export const getGoodDetailById= (id)=>
         method:'get',
         url:`/product/detailData`,
     })
+
+
 // 添加、更新购物车。
 export const postUpdateShopCart= (goodId,goodAmount)=>
     requests({
@@ -102,3 +104,5 @@ export const postDeleteCartByGoodId= (goodId)=>
         url:`/product/deleteCart`,
         data:{goodId}
     })
+
+

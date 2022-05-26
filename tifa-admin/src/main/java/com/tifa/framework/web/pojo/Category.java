@@ -17,7 +17,7 @@ public class Category implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.AUTO )
+    @TableId(type = IdType.AUTO)
     private Integer cid;
 
     /**
@@ -28,17 +28,17 @@ public class Category implements Serializable {
     /**
      * 
      */
-    private Integer firstparentcid;
+    private String firstparentcname;
 
     /**
      * 
      */
-    private Integer secondparentcid;
+    private String secondparentcname;
 
     /**
      * 
      */
-    private String cname;
+    private String categoryname;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

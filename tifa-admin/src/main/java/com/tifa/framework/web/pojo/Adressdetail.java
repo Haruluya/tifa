@@ -21,7 +21,7 @@ public class Adressdetail implements Serializable {
     private Integer aid;
 
     /**
-     * 
+     *
      */
     private String name;
 

@@ -57,7 +57,7 @@ class DangdangIndexpageSpider(scrapy.Spider):
             item['name'] = jsonpath(media,'$.mediaList[0].title')[0]
             item['subTitle'] = jsonpath(media,'$.mediaList[0].authorPenname')[0]
             item['orignalPrice'] = jsonpath(media,'$.mediaList[0].originalPrice')[0]
-            item['promotePrice'] = jsonpath(media,'$.mediaList[0].lowestPrice')[0]
+            item['promotePrice'] = jsonpath(media,'$.mediaList[0].lowestPrice')[0]*0.9
             item['stock'] = 0
             item['createDate'] = 0
             item['className1'] = catagoryData['first_category']

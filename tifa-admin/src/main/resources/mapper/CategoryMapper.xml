@@ -7,13 +7,13 @@
     <resultMap id="BaseResultMap" type="com.tifa.framework.web.pojo.Category">
             <id property="cid" column="cid" jdbcType="INTEGER"/>
             <result property="pid" column="pid" jdbcType="INTEGER"/>
-            <result property="firstparentcid" column="firstParentCid" jdbcType="INTEGER"/>
-            <result property="secondparentcid" column="secondParentCid" jdbcType="INTEGER"/>
-            <result property="cname" column="cname" jdbcType="VARCHAR"/>
+            <result property="firstparentcname" column="firstParentCName" jdbcType="VARCHAR"/>
+            <result property="secondparentcname" column="secondParentCName" jdbcType="VARCHAR"/>
+            <result property="categoryname" column="categoryName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        cid,pid,firstParentCid,
-        secondParentCid,cname
+        cid,pid,firstParentCName,
+        secondParentCName,categoryName
     </sql>
 </mapper>
