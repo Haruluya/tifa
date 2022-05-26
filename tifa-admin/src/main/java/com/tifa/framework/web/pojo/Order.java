@@ -10,41 +10,26 @@ import lombok.Data;
 
 /**
  * 
- * @TableName order_
+ * @TableName order
  */
-@TableName(value ="order_")
+@TableName(value ="order")
 @Data
 public class Order implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+    @TableId(type = IdType.AUTO )
+    private Integer oid;
 
     /**
      * 
      */
-    private String ordercode;
+    private Integer uid;
 
     /**
      * 
      */
-    private String address;
-
-    /**
-     * 
-     */
-    private String post;
-
-    /**
-     * 
-     */
-    private String receiver;
-
-    /**
-     * 
-     */
-    private String mobile;
+    private Integer aid;
 
     /**
      * 
@@ -70,11 +55,6 @@ public class Order implements Serializable {
      * 
      */
     private Date confirmdate;
-
-    /**
-     * 
-     */
-    private Integer uid;
 
     /**
      * 

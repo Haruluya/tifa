@@ -65,7 +65,7 @@ const actions = {
 
 const getters = {
     userName(state){
-        return state.userData.name;
+        return !state.userData.name ? "未登录" :state.userData.name;
     }
 };
 

@@ -2,22 +2,21 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tifa.framework.web.mapper.ProductMapper">
+<mapper namespace="com.tifa.mapper.ProductMapper">
 
     <resultMap id="BaseResultMap" type="com.tifa.framework.web.pojo.Product">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <id property="pid" column="pid" jdbcType="INTEGER"/>
+            <result property="pname" column="pname" jdbcType="VARCHAR"/>
             <result property="subtitle" column="subTitle" jdbcType="VARCHAR"/>
             <result property="orignalprice" column="orignalPrice" jdbcType="FLOAT"/>
             <result property="promoteprice" column="promotePrice" jdbcType="FLOAT"/>
             <result property="stock" column="stock" jdbcType="INTEGER"/>
-            <result property="cid" column="cid" jdbcType="INTEGER"/>
             <result property="createdate" column="createDate" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,subTitle,
+        pid,pname,subTitle,
         orignalPrice,promotePrice,stock,
-        cid,createDate
+        createDate
     </sql>
 </mapper>

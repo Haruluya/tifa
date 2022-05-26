@@ -6,34 +6,60 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.Data;
-import lombok.ToString;
-
-
 
 /**
  * 
  * @TableName user
  */
 @TableName(value ="user")
-@ToString
 @Data
 public class User implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+
+    @TableId(type = IdType.AUTO )
+    private Integer uid;
 
     /**
      * 
      */
-    private String name;
+    private String uname;
 
     /**
      * 
      */
     private String password;
 
+    /**
+     * 
+     */
+    private String phone;
+
+    /**
+     * 
+     */
+    private String email;
+
+    /**
+     * 
+     */
+    private String headpicture;
+
+    /**
+     * 
+     */
+    private String nickname;
+
+    /**
+     * 
+     */
+    private Integer bid;
+
+    /**
+     * 
+     */
+    private String persignature;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

@@ -2,16 +2,18 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tifa.framework.web.mapper.CategoryMapper">
+<mapper namespace="com.tifa.mapper.CategoryMapper">
 
     <resultMap id="BaseResultMap" type="com.tifa.framework.web.pojo.Category">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <id property="cid" column="cid" jdbcType="INTEGER"/>
+            <result property="pid" column="pid" jdbcType="INTEGER"/>
+            <result property="firstparentcid" column="firstParentCid" jdbcType="INTEGER"/>
+            <result property="secondparentcid" column="secondParentCid" jdbcType="INTEGER"/>
+            <result property="cname" column="cname" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name
+        cid,pid,firstParentCid,
+        secondParentCid,cname
     </sql>
-
-
 </mapper>

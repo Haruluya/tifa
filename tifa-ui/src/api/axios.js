@@ -40,7 +40,11 @@ requests.interceptors.response.use(
     },
     // 处理所有err。
     (err) => {
-      alert("服务器响应数据失败");
+      ElNotification({
+        title: '请求失败',
+        message: err,
+        type: 'error',
+      })
     }
 );
 

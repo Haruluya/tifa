@@ -18,13 +18,8 @@ public class Review implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.AUTO)
-    private Integer id;
-
-    /**
-     * 
-     */
-    private String content;
+    @TableId(type = IdType.AUTO )
+    private Integer rid;
 
     /**
      * 
@@ -35,6 +30,11 @@ public class Review implements Serializable {
      * 
      */
     private Integer pid;
+
+    /**
+     * 
+     */
+    private String content;
 
     /**
      * 

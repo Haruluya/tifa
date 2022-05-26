@@ -1,9 +1,9 @@
-package com.tifa.service.impl;
+package com.tifa.framework.web.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tifa.framework.web.pojo.Chatting;
-import com.tifa.service.ChattingService;
-import com.tifa.mapper.ChattingMapper;
+import com.tifa.framework.web.service.ChattingService;
+import com.tifa.framework.web.mapper.ChattingMapper;
 import org.springframework.stereotype.Service;
 
 /**

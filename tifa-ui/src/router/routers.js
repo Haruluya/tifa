@@ -23,7 +23,7 @@ router.beforeEach(async (to, from, next) => {
    //登录状态。
    if(token){
     // 拒绝访问login、register页面。
-      if(to.path=="/login"||to.path=='/register'){
+      if(to.path=="/tifalogin"||to.path=='/tifaregister'){
         next('/');
       }else{
       if(name){
@@ -37,7 +37,7 @@ router.beforeEach(async (to, from, next) => {
            //token失效从新登录。
            console.log(error);
            await store.dispatch('userLogout');
-           next('/login')
+           next('/tifalogin')
          }
        }
      }
@@ -46,7 +46,7 @@ router.beforeEach(async (to, from, next) => {
       let toPath = to.path;
       if(toPath.indexOf('/CRUD')!=-1 || toPath.indexOf('/classNav')!=-1){
         alert("请登录！");
-        next('/login?redirect='+toPath);
+        next('/tifalogin?redirect='+toPath);
       }else{
          next();
       }

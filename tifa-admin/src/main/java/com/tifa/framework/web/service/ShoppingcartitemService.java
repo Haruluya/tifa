@@ -1,4 +1,4 @@
-package com.tifa.service;
+package com.tifa.framework.web.service;
 
 import com.tifa.framework.web.pojo.Shoppingcartitem;
 import com.baomidou.mybatisplus.extension.service.IService;

@@ -19,7 +19,7 @@ import java.io.Serializable;
 
 @Repository
 public interface UserMapper extends BaseMapper<User> {
-    @Select("select table_name from information_schema.TABLES where TABLE_SCHEMA='tmall'")
+    @Select("select table_name from information_schema.TABLES where TABLE_SCHEMA='tifa'")
     public String[] getAllTableNames();
 
 

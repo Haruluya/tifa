@@ -17,7 +17,7 @@ public class Business implements Serializable {
     /**
      * 
      */
-    @TableId
+    @TableId(type = IdType.AUTO )
     private Integer bid;
 
     /**

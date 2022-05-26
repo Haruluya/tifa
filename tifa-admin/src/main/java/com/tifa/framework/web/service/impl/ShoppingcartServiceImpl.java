@@ -1,9 +1,9 @@
-package com.tifa.service.impl;
+package com.tifa.framework.web.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tifa.framework.web.pojo.Shoppingcart;
-import com.tifa.service.ShoppingcartService;
-import com.tifa.mapper.ShoppingcartMapper;
+import com.tifa.framework.web.service.ShoppingcartService;
+import com.tifa.framework.web.mapper.ShoppingcartMapper;
 import org.springframework.stereotype.Service;
 
 /**

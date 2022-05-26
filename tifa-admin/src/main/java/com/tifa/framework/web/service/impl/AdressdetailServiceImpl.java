@@ -1,9 +1,9 @@
-package com.tifa.service.impl;
+package com.tifa.framework.web.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tifa.framework.web.pojo.Adressdetail;
-import com.tifa.service.AdressdetailService;
-import com.tifa.mapper.AdressdetailMapper;
+import com.tifa.framework.web.service.AdressdetailService;
+import com.tifa.framework.web.mapper.AdressdetailMapper;
 import org.springframework.stereotype.Service;
 
 /**

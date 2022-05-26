@@ -2,18 +2,18 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tifa.framework.web.mapper.OrderitemMapper">
+<mapper namespace="com.tifa.mapper.OrderitemMapper">
 
     <resultMap id="BaseResultMap" type="com.tifa.framework.web.pojo.Orderitem">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="pid" column="pid" jdbcType="INTEGER"/>
+            <result property="bid" column="bid" jdbcType="INTEGER"/>
             <result property="oid" column="oid" jdbcType="INTEGER"/>
-            <result property="uid" column="uid" jdbcType="INTEGER"/>
             <result property="number" column="number" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,pid,oid,
-        uid,number
+        id,pid,bid,
+        oid,number
     </sql>
 </mapper>

@@ -15,7 +15,7 @@
                         <div class="username">
                             <div class="loginIcon"><el-icon><UserFilled /></el-icon></div>
                             <el-input
-                            v-model="username"
+                            v-model="uname"
                             size="large"
                             placeholder="Please Input"
                             />
@@ -25,13 +25,14 @@
                             <el-input
                             v-model="password"
                             size="large"
+                            type="password"
                             placeholder="Please Input"
                             />
                         </div>
                         <div class="forgetPassword">
                             <el-link :underline="false">忘记密码</el-link>
                         </div>
-                        <div class="commit">
+                        <div class="commit" @click="confirmLogin()">
                             登 录
                         </div>
                         <el-divider></el-divider>
@@ -53,6 +54,7 @@
     </div>
 </template>
 <script>
+import { ElMessage } from 'element-plus'
 import HomeHeader from '../ShopHome/HomeHeader'
 export default {
     name:"tifalogin",
@@ -61,9 +63,29 @@ export default {
     },
     data() {
         return {
-            loginActiveTab:"inputeLogin"
+            loginActiveTab:"inputeLogin",
+            uname:"",
+            password:""
         }
     },
+    methods: {
+      async confirmLogin(){
+          console.log("xx");
+        try {
+          //登录成功
+          const { uname, password } = this;
+          uname&&password&&(await this.$store.dispatch("confirmLogin", { uname, password }));
+            ElMessage({
+                message: '登陆成功！',
+                type: 'success',
+            })
+          let toPath = this.$route.query.redirect||"/shophome";
+          this.$router.push(toPath);
+        } catch (error) {
+          ElMessage.error(error);
+        }
+      },
+    }
 }
 </script>
 <style lang="less" scoped>

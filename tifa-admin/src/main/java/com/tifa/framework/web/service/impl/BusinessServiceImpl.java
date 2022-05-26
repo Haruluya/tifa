@@ -1,9 +1,9 @@
-package com.tifa.service.impl;
+package com.tifa.framework.web.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tifa.framework.web.pojo.Business;
-import com.tifa.service.BusinessService;
-import com.tifa.mapper.BusinessMapper;
+import com.tifa.framework.web.service.BusinessService;
+import com.tifa.framework.web.mapper.BusinessMapper;
 import org.springframework.stereotype.Service;
 
 /**

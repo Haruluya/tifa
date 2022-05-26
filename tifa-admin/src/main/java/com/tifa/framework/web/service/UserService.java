@@ -24,13 +24,13 @@ public interface UserService extends IService<User> {
      * 判断email是否在数据库中已经存在。
      * @return boolean。
      */
-    public Boolean emailExisted(String name);
+    public Boolean uNameExisted(String name);
 
     /**
      * 验证用户信息是否正确。
      * @return
      */
-    public Boolean userExisted(User loginData);
+    public Boolean userExisted(String username, String password);
 
     /**
      * 通过name查询id。
@@ -41,4 +41,20 @@ public interface UserService extends IService<User> {
      * 通过id查询name。
      */
     public String getNameById(Integer id);
+
+//
+//    /**
+//     * 验证手机号是否已经注册。
+//     * @param phone
+//     * @return
+//     */
+//    public Boolean phoneExisted(String phone);
+//
+//    /**
+//     * 验证邮箱是否已经注册。
+//     * @param email
+//     * @return
+//     */
+//    public Boolean emailExisted(String email);
+
 }

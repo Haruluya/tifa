@@ -18,16 +18,11 @@ const mutations = {
 
 const actions = {
     async commitRegister({ commit }, registerData) {
-        let {name, code, password} = registerData;
-        let result = await postRegisterConfim({
-            name,
-            password
-        });
+        let result = await postRegisterConfim(registerData);
         console.log(result);
         if (result.statusCode == 200) {
         } else {
             return Promise.reject(new Error("faile"));
-            
         }
     },
 }

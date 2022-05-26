@@ -1,7 +1,7 @@
 export const routes = [
     {
       path: '/',
-      component: () => import('../pages/Center/Home'),
+      component: () => import('../pages/ShopHome'),
       meta:{
         showFooter:true,
       },

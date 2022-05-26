@@ -18,13 +18,13 @@ public class Product implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+    @TableId(type = IdType.AUTO )
+    private Integer pid;
 
     /**
      * 
      */
-    private String name;
+    private String pname;
 
     /**
      * 
@@ -45,11 +45,6 @@ public class Product implements Serializable {
      * 
      */
     private Integer stock;
-
-    /**
-     * 
-     */
-    private Integer cid;
 
     /**
      * 

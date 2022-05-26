@@ -18,19 +18,17 @@ public class Chatting implements Serializable {
     /**
      * 
      */
-    @TableId
+    @TableId(type = IdType.AUTO )
     private Integer uid;
 
     /**
      * 
      */
-    @TableId
     private Integer bid;
 
     /**
      * 
      */
-    @TableId
     private Date sendtime;
 
     /**

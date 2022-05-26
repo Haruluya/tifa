@@ -55,7 +55,8 @@ public class UserController {
      */
     @PostMapping("/registerConfirm")
     public AjaxReturnValue registerConfim(@RequestBody User user, Model model){
-        if (userService.emailExisted(user.getName())){
+        //不允许重名。
+        if (userService.uNameExisted(user.getUname())){
             return AjaxReturnValue.error(438);
         }
         //未注册则插入数据。
@@ -83,7 +84,6 @@ public class UserController {
         if (jwtConfig.isTokenExpired(expirationDate)){
             return  AjaxReturnValue.error(438,"token timeOut!");
         }
-        System.out.println(claims.getSubject());
         String name = userService.getNameById(Integer.parseInt(claims.getSubject()));
         JSONData data = new JSONData();
         data.put("name",name);
@@ -104,11 +104,11 @@ public class UserController {
      * @return
      */
     @PostMapping("/loginConfirm")
-    public AjaxReturnValue loginConfirm(@RequestBody User loginData){
-        if (userService.userExisted(loginData)){
+    public AjaxReturnValue loginConfirm(@RequestBody User user){
+        if (userService.userExisted(user.getUname(),user.getPassword())){
             JSONData data = new JSONData();
             //获取id和token。
-            Integer id = userService.getIdByName(loginData.getName());
+            Integer id = userService.getIdByName(user.getUname());
             String token = jwtConfig.createToken(id.toString());
             data.put("token",token);
             return AjaxReturnValue.success("OK",data);

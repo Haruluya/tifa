@@ -35,26 +35,40 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      * @return boolean。
      */
     @Override
-    public Boolean emailExisted(String name) {
-        long count = this.count(new QueryWrapper<User>().eq("name",name));
+    public Boolean uNameExisted(String name) {
+        long count = this.count(
+                new QueryWrapper<User>()
+                        .eq("uname",name)
+        );
         return count != 0;
     }
 
     @Override
-    public Boolean userExisted(User loginData) {
-        long count = this.count(new QueryWrapper<User>().eq("name",loginData.getName()).eq("password",loginData.getPassword()));
+    public Boolean userExisted(String name, String password) {
+        long count = this.count(
+                new QueryWrapper<User>()
+                        .eq("uname",name)
+                        .eq("password",password)
+        );
         return count != 0;
     }
 
     @Override
     public Integer getIdByName(String name) {
-        return this.getOne(new QueryWrapper<User>().eq("name",name)).getId();
+        return this.getOne(
+                new QueryWrapper<User>()
+                .eq("uname",name)
+        ).getUid();
     }
 
     @Override
     public String getNameById(Integer id) {
-        return this.getOne(new QueryWrapper<User>().eq("id",id)).getName();
+        return this.getOne(
+                new QueryWrapper<User>()
+                        .eq("uid",id)
+        ).getUname();
     }
+
 
 
 }

@@ -42,12 +42,17 @@
                         </el-avatar>
                         <div class="name">
                             <el-link :underline="false" href="userinfo">
-                                未登录
+                                {{userName}}
                             </el-link>
                         </div>
                         <div class="buttons">
-                            <el-button type="warning" size="large" round="true">注册</el-button>
-                            <el-button type="warning" size="large" round="true">登录</el-button>
+                            <div v-if="userName == '未登录'" class="loginButtons">
+                                <el-button type="warning" size="large" round="true" @click="toRegister()">注册</el-button>
+                                <el-button type="warning" size="large" round="true" @click="toLogin()">登录</el-button>
+                            </div>
+                            <div v-else class="logoutButton"> 
+                                <el-button type="danger" size="large" round="true" @click="logout()">退出登录</el-button>
+                            </div>
                             <el-button type="warning" size="large" round="true">开店</el-button>
                         </div>
                         <el-divider/>
@@ -110,7 +115,8 @@ import HomeHeader from './HomeHeader'
 import DiscountCard from '@/components/DiscountCard'
 import RecPanel from './RecPanel'
 import ClassNav from './ClassNav'
-
+import { ElMessage } from 'element-plus'
+import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
 export default {
     name: 'shopHome',
     components:{    
@@ -140,6 +146,32 @@ export default {
                         ]
         }
     },
+    methods: {
+        toLogin(){
+            this.$router.push('tifalogin');
+        },
+        toRegister(){
+            this.$router.push('tifaregister');
+        },
+        async logout(){
+            try{
+                await this.$store.dispatch("userLogout");
+                ElMessage({
+                    message: '退出登录成功！',
+                    type: 'success',
+                })
+            }catch(error){
+                ElMessage.error(error);
+            }
+        }
+    },
+    computed:{
+      ...mapState({
+
+        }),
+      ...mapGetters(['userName'])
+    },
+
 }
 </script>
 <style lang="less" scoped>
@@ -227,6 +259,10 @@ export default {
             }
             .buttons{
                 margin-top: 10px;
+                div{
+                    display: inline-block;
+                    margin-right: 10px;
+                }
             }
             .messages{
                 display: flex;

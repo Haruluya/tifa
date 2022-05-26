@@ -17,7 +17,7 @@ public class Property implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.AUTO )
     private Integer id;
 
     /**
@@ -28,7 +28,7 @@ public class Property implements Serializable {
     /**
      * 
      */
-    private String name;
+    private String ptname;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

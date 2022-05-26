@@ -17,7 +17,7 @@ public class Productimage implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.AUTO )
     private Integer id;
 
     /**

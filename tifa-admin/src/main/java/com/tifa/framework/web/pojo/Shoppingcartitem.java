@@ -18,13 +18,12 @@ public class Shoppingcartitem implements Serializable {
     /**
      * 
      */
-    @TableId
+    @TableId(type = IdType.AUTO )
     private Integer sid;
 
     /**
      * 
      */
-    @TableId
     private Integer pid;
 
     /**

@@ -18,7 +18,7 @@ public class Return implements Serializable {
     /**
      * 
      */
-    @TableId
+    @TableId(type = IdType.AUTO )
     private Integer rid;
 
     /**

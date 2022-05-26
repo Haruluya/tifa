@@ -17,7 +17,7 @@ public class Orderitem implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.AUTO )
     private Integer id;
 
     /**
@@ -28,12 +28,12 @@ public class Orderitem implements Serializable {
     /**
      * 
      */
-    private Integer oid;
+    private Integer bid;
 
     /**
      * 
      */
-    private Integer uid;
+    private Integer oid;
 
     /**
      * 

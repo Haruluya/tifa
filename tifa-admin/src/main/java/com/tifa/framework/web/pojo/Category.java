@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 /**
  * 
@@ -18,13 +17,28 @@ public class Category implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+    @TableId(type = IdType.AUTO )
+    private Integer cid;
 
     /**
      * 
      */
-    private String name;
+    private Integer pid;
+
+    /**
+     * 
+     */
+    private Integer firstparentcid;
+
+    /**
+     * 
+     */
+    private Integer secondparentcid;
+
+    /**
+     * 
+     */
+    private String cname;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

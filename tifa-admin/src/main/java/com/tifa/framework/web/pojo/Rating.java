@@ -1,26 +1,45 @@
 package com.tifa.framework.web.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.util.Date;
+/**
+ * 
+ * @TableName rating
+ */
+@TableName(value ="rating")
 @Data
-@NoArgsConstructor
-public class Rating {
-    private String _id;
+public class Rating implements Serializable {
+    /**
+     * 
+     */
+    @TableId(type = IdType.AUTO )
+    private Integer rid;
 
-    private int userId;
+    /**
+     * 
+     */
+    private Integer uid;
 
-    private int productId;
+    /**
+     * 
+     */
+    private Integer pid;
 
-    private double score;
+    /**
+     * 
+     */
+    private Integer score;
 
-    private long timestamp;
+    /**
+     * 
+     */
+    private String timestamp;
 
-    public Rating(int userId, int productId, double score) {
-        this.userId = userId;
-        this.productId = productId;
-        this.score = score;
-        this.timestamp = System.currentTimeMillis();
-    }
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 }

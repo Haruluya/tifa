@@ -17,7 +17,7 @@ public class Adressdetail implements Serializable {
     /**
      * 
      */
-    @TableId
+    @TableId(type = IdType.AUTO )
     private Integer aid;
 
     /**

@@ -1,4 +1,4 @@
-package com.tifa.mapper;
+package com.tifa.framework.web.mapper;
 
 import com.tifa.framework.web.pojo.Chatting;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
