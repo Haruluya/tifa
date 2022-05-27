@@ -76,33 +76,45 @@ export const postSearchDataRequest= (data)=>
     })
 
 // 通过商品id获取商品详细信息。
-export const getGoodDetailById= (id)=>
+export const postGoodDetailById= (data)=>
     requests({
-        method:'get',
+        method:'post',
         url:`/product/detailData`,
+        data
     })
 
-
 // 添加、更新购物车。
-export const postUpdateShopCart= (goodId,goodAmount)=>
+export const postUpdateShopCart= (data)=>
     requests({
         method:'post',
         url:`/product/updateShopCart`,
+        data
     })
 
 //  获取购物车数据。
-export const getShopCartData= ()=>
+export const getShopCartData= (data)=>
     requests({
-        method:'get',
+        method:'post',
         url:`/product/getShopCartData`,
+        data
     })
     
 //  删除购物车某商品。
-export const postDeleteCartByGoodId= (goodId)=>
+export const postDeleteCartByGoodId= (data)=>
     requests({
         method:'post',
         url:`/product/deleteCart`,
-        data:{goodId}
+        data
+    })
+
+
+
+//添加收货地址。
+export const postAddAdressRequest= (data)=>
+    requests({
+        method:'post',
+        url:`/user/addAdress`,
+        data
     })
 
 

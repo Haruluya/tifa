@@ -2,17 +2,17 @@
     <div class="mainContainer">
         <div class="info">
             <div class="userInfo">
-                <el-avatar :size="100" :src="avatar">
+                <el-avatar :size="100" :src="userData.headpicture">
                 </el-avatar>
                 <div class="name">
                     <el-link :underline="false" href="userinfo">
-                    未登录
+                    {{userData.uname}}
                     </el-link>
                 </div>
             </div>
             <div>
                 <div class="myMoney">
-
+                    
                 </div>
             </div>
         </div>
@@ -119,9 +119,15 @@
     </div>
 </template>
 <script>
+import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
+import {ElNotification} from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'  
 export default {
     name:"outline",
+    computed:{
+      ...mapGetters(['userData']), 
 
+    },
 }
 </script>
 <style lang="less" scoped>

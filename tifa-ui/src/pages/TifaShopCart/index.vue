@@ -2,34 +2,32 @@
     <div class="mainContainer"> 
         <div class="homeHeader"><HomeHeader/></div> 
         <div class="shopCartContent">
-            <div class="shopCartTitle">TIFA-全部商品 3</div>
+            <div class="shopCartTitle">TIFA-全部商品 {{cartList.length}}</div>
 
-                <div class="shopCartItemContainer" v-for="index in 3">
+                <div class="shopCartItemContainer" v-for="(item,index) in cartList.productInfo">
                     <div class="shopCartItem">
                         <div class="select">
                             <el-radio v-model="isSelect" size="large"></el-radio>
                         </div>
-                        <div class="img">
-                            <el-image src="https://img30.360buyimg.com/n0/s80x80_jfs/t1/96412/28/25770/102064/62563f21E4ab91643/7a7b78edf7fe81f2.jpg.dpg">
+                        <div class="img"  @click="toGoodDetail(index)">
+                            <el-image :src="cartList.imgList[index]">
                             </el-image>
                         </div>
                         <div class="title">
                             <el-tag type="danger">TIFA</el-tag>
-                            Amazfit 跃我 GTR 3 Pro 曜石黑<br/>
-                            血压筛查研究 150种运动模式 <br/>
-                            50米防水 心率监测 品
+                            {{item.pname}}
                         </div>
                         <div class="unitPrice">
-                            ￥999.00
+                            ￥{{item.promoteprice}}
                         </div>
                         <div class="num">
-                            <el-input-number v-model="num" :step="1" size="small"/>
+                            <el-input-number v-model="cartList.numList[index]" :step="1" size="small"/>
                         </div>
                         <div class="sumPrice">
-                            ￥999.00
+                            ￥{{item.promoteprice * cartList.numList[index]}}
                         </div>
                         <div class="delete">
-                            <el-button type="danger">
+                            <el-button type="danger" @click="deleteSelectItem(index)">
                                 删除
                             </el-button>
                         </div>
@@ -46,6 +44,9 @@
 </template>
 <script>
 import HomeHeader from '../ShopHome/HomeHeader'
+import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
+import {ElNotification} from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'  
 export default {
     name:"tifaShopCart",
     components:{
@@ -54,14 +55,102 @@ export default {
     data() {
         return {
             isSelect:"false",
-            selectAll:"false"
+            selectAll:"false",
         }
     },
+    computed:{
+      ...mapGetters(['cartList']), 
+
+    },
+
     methods: {
         commitOrder(){
-            this.$router.push('/settlement');
+            ElMessageBox.confirm(
+                '你确定要提交订单吗?',
+                '询问',
+                {
+                confirmButtonText: '确认',
+                cancelButtonText: '取消',
+                type: 'Info',
+                }
+            )
+            .then(() => {
+                this.$router.push('/settlement');
+                ElMessage({
+                    type: 'success',
+                    message: '完善订单信息',
+                })
+            })
+            .catch(() => {
+                ElMessage({
+                    type: 'info',
+                    message: '取消提交',
+                })
+            })
+        },
+        async getShopCartData(){
+            try {
+                await this.$store.dispatch("getCartListData", 
+                    this.$store.getters.userData
+                );
+                } catch (error) {
+                    ElNotification({
+                        title: '获取购物车数据失败！',
+                        message: error,
+                        type: 'error'
+                    })
+                }
+        },
+        toGoodDetail(index){
+            this.$router.push('/gooddetail/'+this.cartList.productInfo[index].pid)
+        },
+        deleteSelectItem(index){
+            ElMessageBox.confirm(
+                '你确定要删除此项吗?',
+                '⚠警告',
+                {
+                confirmButtonText: '确认',
+                cancelButtonText: '取消',
+                type: 'warning',
+                }
+            )
+            .then(() => {
+                this.deleteItem(index);
+                this.getShopCartData();
+                ElMessage({
+                    type: 'success',
+                    message: '删除成功',
+                })
+            })
+            .catch(() => {
+                ElMessage({
+                    type: 'info',
+                    message: '取消删除',
+                })
+            })
+
+        },
+        async deleteItem(index){
+            try {
+                await this.$store.dispatch("deleteCartByGoodId",
+                {
+                    "sid":this.$store.getters.userData.uid, 
+                    "pid":this.cartList.productInfo[index].pid
+                }
+                );
+                } catch (error) {
+                    ElNotification({
+                        title: '删除购物项失败！',
+                        message: error,
+                        type: 'error'
+                    })
+                }
         }
+        
     },
+    mounted(){
+        this.getShopCartData();
+    }
 }
 </script>
 <style lang="less">
@@ -94,6 +183,12 @@ export default {
         border: 1px solid #eee;
         background-color: #f5f5f5;
         overflow: hidden;
+
+        &:hover{
+            cursor: pointer;
+            transform: scale(1.01);
+        }
+
         .select{
             margin-left: 5px;
         }
@@ -126,6 +221,7 @@ export default {
             color:#e1251b;
         }
         .delete{
+            text-align: right;
             margin-left: 100px;
         }
 

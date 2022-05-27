@@ -63,14 +63,7 @@ export const routes = [
         showFooter:true,
       }
     },
-    {
-      path: '/agooddetail/:goodId',
-      name:'agooddetail',
-      component: () => import('_pages/Center/GoodDetail'),
-      meta:{
-        showFooter:true,
-      }
-    },
+
     {
       path: '/shopcart',
       name:'shopcart',
@@ -88,7 +81,7 @@ export const routes = [
       }
     },
     {
-      path: '/gooddetail',
+      path: '/gooddetail/:pid',
       name:'gooddetail',
       component: () => import('_pages/GoodDetail'),
       meta:{
@@ -142,6 +135,10 @@ export const routes = [
         {
           path:"myfocus",
           component:() => import('_pages/UserInfo/MyFocus')
+        },
+        {
+          path:"myinfo",
+          component:() => import('_pages/UserInfo/MyInfo')
         },
         {
           path:"myOrder",

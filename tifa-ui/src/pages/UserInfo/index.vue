@@ -10,7 +10,7 @@
                         </div>
                         <el-divider></el-divider>
                         <div class="nav" v-for="(item,index) in navList" :key="index">
-                            <el-link :underline="false" :href="item.path">
+                            <el-link :underline="false" @click="toPanel(item.path)">
                                 {{item.label}}
                             </el-link>
                         </div>
@@ -20,11 +20,15 @@
                     <router-view></router-view>
                 </el-main>
             </el-container>
+
+
         </div>
     </div>
 </template>
 <script>
 import HomeHeader from '../ShopHome/HomeHeader'
+import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
+
 export default {
     name:"userInfo",
     components:{
@@ -34,31 +38,41 @@ export default {
         return {
             navList:[
                 {
-                    label:'我的信息',
-                    path:'myinfo'
+                    label:'我的TIFA',
+                    path:'/userinfo'
                 },
                 {
                     label:'我的订单',
-                    path:'myorder'
+                    path:'/userinfo/myorder'
                 },
                 {
                     label:'我的收藏',
-                    path:'myfocus'
+                    path:'/userinfo/myfocus'
                 },
                 {
-                    label:'生活服务',
-                    path:'liveserver'
+                    label:'我的信息',
+                    path:'/userinfo/myinfo'
                 },
                 {
                     label:'关于TIFA',
-                    path:'abouttifa'
+                    path:'/userinfo/abouttifa'
                 },
                 {
                     label:'退出登录',
-                    path:'logout'
+                    path:'/userinfo/logout'
                 }
-            ]
+            ],
         }
+    },
+    computed:{
+      ...mapGetters(['addAdressVisible']), 
+
+    },
+    methods: {
+        toPanel(path){
+            this.$router.push(path);
+        },
+
     },
 }
 </script>

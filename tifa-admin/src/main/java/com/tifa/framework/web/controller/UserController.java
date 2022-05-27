@@ -4,7 +4,9 @@ package com.tifa.framework.web.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import com.tifa.framework.config.JwtConfig;
+import com.tifa.framework.web.pojo.Adressdetail;
 import com.tifa.framework.web.pojo.User;
+import com.tifa.framework.web.service.impl.AdressdetailServiceImpl;
 import com.tifa.framework.web.service.impl.UserServiceImpl;
 import com.tifa.framework.web.util.AjaxReturnValue;
 import com.tifa.framework.web.util.JSONData;
@@ -27,6 +29,10 @@ import java.util.Date;
 public class UserController {
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private AdressdetailServiceImpl adressdetailService;
+
     @Resource
     private JwtConfig jwtConfig;
 
@@ -84,10 +90,8 @@ public class UserController {
         if (jwtConfig.isTokenExpired(expirationDate)){
             return  AjaxReturnValue.error(438,"token timeOut!");
         }
-        String name = userService.getNameById(Integer.parseInt(claims.getSubject()));
-        JSONData data = new JSONData();
-        data.put("name",name);
-        return AjaxReturnValue.success("OK",data);
+        User user = userService.getById(Integer.parseInt(claims.getSubject()));
+        return AjaxReturnValue.success("OK",user);
     }
 
     /**
@@ -115,5 +119,12 @@ public class UserController {
         }
         return AjaxReturnValue.error(438);
     }
+
+    @PostMapping("/addAdress")
+    public AjaxReturnValue addAddress(@RequestBody Adressdetail adressdetail){
+        adressdetailService.save(adressdetail);
+        return AjaxReturnValue.success();
+    }
+
 
 }

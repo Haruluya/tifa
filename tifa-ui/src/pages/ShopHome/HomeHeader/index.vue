@@ -2,7 +2,7 @@
     <div class="mainContainer">
         <el-row align="middle">
           <el-col :span="6" class="logo" :push="1">
-              <el-link :underline="false" class="title" href="shophome">
+              <el-link :underline="false" class="title" @click="toShopHome()">
                   TIFA
               </el-link>
               <el-link :underline="false">
@@ -28,7 +28,7 @@
             </div>
           </el-col>
           <el-col :span="8" class="user" :push="1">
-                <el-link :underline="false" class="shopCart" href="tifashopcart">
+                <el-link :underline="false" class="shopCart" @click="toShopCart()">
                    <el-badge :value="0" :max="99" class="item"> <el-icon><shopping-cart-full /></el-icon>我的购物车</el-badge>
                 </el-link> 
               <div class="adImg">
@@ -57,6 +57,12 @@ export default {
     methods: {
         toSearchPage(){
             this.$router.push('/tifasearch/'+(this.searchKey == '' ? 'all':this.searchKey));
+        },
+        toShopHome(){
+            this.$router.push('/shophome');
+        },
+        toShopCart(){
+            this.$router.push('/tifashopcart');
         }
     },
 }

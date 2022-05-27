@@ -1,9 +1,10 @@
 
 import {
-    getGoodDetailById,
-    postUpdateShopCart
+    postGoodDetailById,
+    postUpdateShopCart,
+    
 } from "@/api";
-
+import defaultImg from '_assets/images/tifa_default_card_img.webp'
 const state = {
     goodData: {}
 };
@@ -16,18 +17,20 @@ const mutations = {
 
 const actions = {
   //请求获取界面商品信息数据。
- async getGoodData({ commit }, goodId) {
-    let result = await getGoodDetailById(goodId);
-    console.log(goodId);
-    if (result.code == 200) {
+ async getGoodData({ commit }, pid) {
+    let result = await postGoodDetailById(pid);
+    console.log(result);
+    if (result.statusCode == 200) {
       commit("GETGOODDATA", result.data);
+    }else{
+      return Promise.reject(new Error("faile"));
     }
   },
 
 
   //请求更新购物车。
-  async updateShopCart({commit}, {goodId,goodAmount}){
-    let result = await postUpdateShopCart(goodId, goodAmount);
+  async addGoddToShopCart({commit}, {sid,pid, num}){
+    let result = await postUpdateShopCart({sid,pid, num});
     console.log(result);
     if (result.statusCode == 200) {
       return "ok";
@@ -35,19 +38,29 @@ const actions = {
       return Promise.reject(new Error("faile"));
     }
   }
+
+
 }
 
 
 const getters = {
-  categoryView(state) {
-    return state.goodData.categoryView || {};
+  goodData(state){
+    return state.goodData || "";
   },
-  skuInfo(state) {
-    return state.goodData.skuInfo || {};
+  goodDetailInfo(state) {
+    return state.goodData.productInfo || ""
+  },  
+  goodImg(state){
+    if (state.goodData.productImageInfo){
+      if (state.goodData.productImageInfo.type == "images/model/guan/url_none.png"){
+        state.goodData.productImageInfo.type = defaultImg;
+      }
+    }
+    return state.goodData.productImageInfo || ""
   },
-  spuSaleAttrList(state) {
-    return state.goodData.spuSaleAttrList || [];
-  },
+  categorys(state){
+    return state.goodData.productCategoryInfo || ""
+  }
 };
 
 

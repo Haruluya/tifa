@@ -1,22 +1,22 @@
 <template>
     <div class="mainContainer" @click="toGoodDetail()">
         <div class="goodImg">
-            <el-image src="https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i3/1202660057/O1CN01uNfPU21CI9JN2th58_!!0-saturn_solar.jpg_580x580Q90.jpg_.webp">
+            <el-image :src="goodImg.type">
             </el-image>
         </div>
         <div class="searchContent">
             <div class="price">
-                ￥6999.00
+                ￥{{goodInfo.orignalprice}}
             </div>
             <div class="tags">
                 <el-tag class="ml-2" type="danger" effect="plain">自营</el-tag>
                 <el-tag class="ml-2" type="danger" effect="plain">官方</el-tag>
             </div>
             <div class="title">
-                MECHREVO/机械革命蛟龙蛟龙7旷世钛坦plus3070x10pro笔记本电脑
+               {{goodInfo.pname}}
             </div>
             <div class="commentCount">
-                5000+评论
+                {{goodInfo.stock}}评论
             </div>
             <div class="merchant">
                 HUWI旗舰店<el-icon><Present /></el-icon>
@@ -30,13 +30,41 @@
     </div>
 </template>
 <script>
+import goodDefaultImg from '_assets/images/tifa_default_card_img.webp'
+
 export default {
     name:"searchgoodcard",
-    methods: {
-        toGoodDetail(){
-            this.$router.push('/gooddetail');
+    data() {
+        return {
         }
     },
+    methods: {
+        toGoodDetail(){
+            this.$router.push('/gooddetail/'+this.goodInfo.pid);
+        }
+    },
+    props:{
+        goodInfo:{
+            type:Object,
+            default:{}
+        },
+        goodImg:{
+            type:Object,
+            default:{}
+        }
+    },
+    mounted(){
+        if (this.goodImg.type == "images/model/guan/url_none.png"){
+            this.goodImg.type = goodDefaultImg
+        }
+    },
+
+    updated() {
+        if (this.goodImg.type == "images/model/guan/url_none.png"){
+            this.goodImg.type = goodDefaultImg
+        }
+    },
+
 }
 </script>
 <style lang="less" scoped>

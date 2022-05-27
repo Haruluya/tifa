@@ -91,7 +91,7 @@ export default {
   text-align: center;
   button {
     margin: 0 5px;
-    background-color: #f4f4f5;
+    background-color: white;
     color: #606266;
     outline: none;
     border-radius: 2px;

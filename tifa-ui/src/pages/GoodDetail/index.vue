@@ -3,11 +3,11 @@
         <div class="homeHeader"><HomeHeader/></div>
         <div class="topInfo">
             <div class="leftInfo">
-                <el-image src="https://img12.360buyimg.com/n1/s450x450_jfs/t1/92268/16/25934/75321/62592d7cEa8474210/94e9750d0719ff07.jpg"></el-image>
+                <el-image :src="goodImg.type"></el-image>
                 <el-carousel :interval="4000" type="card" height="100px">
                     <el-carousel-item v-for="item in 6" :key="item">
                     <h3 text="2xl" justify="center">
-                        <img src="https://img12.360buyimg.com/n5/s54x54_jfs/t1/92268/16/25934/75321/62592d7cEa8474210/94e9750d0719ff07.jpg"/>
+                        <img :src="goodImg.type"/>
                     </h3>
                     </el-carousel-item>
                 </el-carousel>
@@ -15,20 +15,20 @@
             <div class="rightOpration">
                 <div class="classBread">
                     <el-breadcrumb separator="/">
-                        <el-breadcrumb-item :to="{ path: '/' }">数码</el-breadcrumb-item>
+                        <el-breadcrumb-item :to="{ path: '/' }">{{categorys.firstparentcname}}</el-breadcrumb-item>
                         <el-breadcrumb-item
-                        ><a href="/">智能设备</a></el-breadcrumb-item
+                        ><a href="/">{{categorys.secondparentcname}}</a></el-breadcrumb-item
                         >
-                        <el-breadcrumb-item>智能手表</el-breadcrumb-item>
-                        <el-breadcrumb-item>ZeppOs</el-breadcrumb-item>
+                        <el-breadcrumb-item>{{categorys.categoryname}}</el-breadcrumb-item>
+                       
                     </el-breadcrumb>
                 </div>
                 <div class="title">
                     <el-tag type="danger" effect="dark">TIFA</el-tag>
-                    <span>Amazfit 跃我 GTR 3 Pro 曜石黑 血压筛查研究 150种运动模式 50米防水 心率监测 智能运动手表华米科技出品</span>
+                    <span>{{goodDetailInfo.pname}}</span>
                 </div>
                 <div class="des">
-                    <span>【超值单品，数量有限，先到先得】 【ZeppOS系统丨12天超长续航丨150+运动模式】 【白条6期免息】更多福利戳此</span>
+                    <span>{{goodDetailInfo.subtitle}}</span>
                 </div>
                 <div class="pricePanel">
                     <div class="header"><el-icon><shopping-bag /></el-icon>TIFA限购</div>
@@ -36,11 +36,11 @@
                         <div class="labels">
                             <div class="label">
                                 原价格：
-                                <div class="prePrice">￥9999</div>
+                                <div class="prePrice">￥{{goodDetailInfo.orignalprice}}</div>
                             </div>
                             <div class="label">
                                 现价格：
-                                <div class="nowPrice">￥9999
+                                <div class="nowPrice">￥{{goodDetailInfo.promoteprice}}
                                     <el-tag class="ml-2" type="danger">特价</el-tag>
                                     <el-tag class="ml-2" type="danger">满9999减1</el-tag>
                                 </div>
@@ -51,7 +51,7 @@
                             <el-divider direction="vertical"></el-divider>
                             累计销量：
                             <div class="salesNum">
-                                888
+                                {{goodDetailInfo.stock}}
                             </div>
                         </div>
                     </div>
@@ -59,18 +59,19 @@
                 <div class="location">
                     <span>配送至：</span>
                     <div class="locationCas">
-                        <el-cascader
-                        v-model=" locationValue"
-                        :options="options"
-                        :props="props"
-                        @change="handleChange"
-                        />
-                    </div>
+                    <el-cascader
+                      size="large"
+                      :options="options"
+                      v-model="selectedOptions"
+                      @change="handleChange">
+                    </el-cascader>
+
+             </div>
                 </div>
                 <div class="color">
-                    <span>颜色：</span>
-                    <el-radio v-model="goodColor" label="1"  border>黄色</el-radio>
-                    <el-radio v-model="goodColor" label="2"  border>蓝色</el-radio>
+                    <span>物流方式: </span>
+                    <el-radio v-model="goodColor" label="1"  border>顺丰</el-radio>
+                    <el-radio v-model="goodColor" label="2"  border>申通</el-radio>
                 </div>
                 <div class="amount">
                     <span>数量：</span>
@@ -96,7 +97,7 @@
             <el-aside width="300px">
               <div class="merchant">
                 <div class="title">
-                  希箭厨房卫浴旗舰店
+                  {{categorys.categoryname}}
                 </div>
                 <el-divider></el-divider>
                 <div class="score">
@@ -145,6 +146,11 @@
 <script>
 import HomeHeader from '../ShopHome/HomeHeader'
 import RecPanel from '../ShopHome/RecPanel'
+
+import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
+import { ElNotification} from 'element-plus'
+import {regionData,CodeToText} from 'element-china-area-data'
+
 // 级联地址选项。
 const props = {
   expandTrigger: 'hover',
@@ -152,274 +158,7 @@ const props = {
 const handleChange = (value) => {
   console.log(value)
 }
-const options = [
-  {
-    value: 'guide',
-    label: 'Guide',
-    children: [
-      {
-        value: 'disciplines',
-        label: 'Disciplines',
-        children: [
-          {
-            value: 'consistency',
-            label: 'Consistency',
-          },
-          {
-            value: 'feedback',
-            label: 'Feedback',
-          },
-          {
-            value: 'efficiency',
-            label: 'Efficiency',
-          },
-          {
-            value: 'controllability',
-            label: 'Controllability',
-          },
-        ],
-      },
-      {
-        value: 'navigation',
-        label: 'Navigation',
-        children: [
-          {
-            value: 'side nav',
-            label: 'Side Navigation',
-          },
-          {
-            value: 'top nav',
-            label: 'Top Navigation',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'component',
-    label: 'Component',
-    children: [
-      {
-        value: 'basic',
-        label: 'Basic',
-        children: [
-          {
-            value: 'layout',
-            label: 'Layout',
-          },
-          {
-            value: 'color',
-            label: 'Color',
-          },
-          {
-            value: 'typography',
-            label: 'Typography',
-          },
-          {
-            value: 'icon',
-            label: 'Icon',
-          },
-          {
-            value: 'button',
-            label: 'Button',
-          },
-        ],
-      },
-      {
-        value: 'form',
-        label: 'Form',
-        children: [
-          {
-            value: 'radio',
-            label: 'Radio',
-          },
-          {
-            value: 'checkbox',
-            label: 'Checkbox',
-          },
-          {
-            value: 'input',
-            label: 'Input',
-          },
-          {
-            value: 'input-number',
-            label: 'InputNumber',
-          },
-          {
-            value: 'select',
-            label: 'Select',
-          },
-          {
-            value: 'cascader',
-            label: 'Cascader',
-          },
-          {
-            value: 'switch',
-            label: 'Switch',
-          },
-          {
-            value: 'slider',
-            label: 'Slider',
-          },
-          {
-            value: 'time-picker',
-            label: 'TimePicker',
-          },
-          {
-            value: 'date-picker',
-            label: 'DatePicker',
-          },
-          {
-            value: 'datetime-picker',
-            label: 'DateTimePicker',
-          },
-          {
-            value: 'upload',
-            label: 'Upload',
-          },
-          {
-            value: 'rate',
-            label: 'Rate',
-          },
-          {
-            value: 'form',
-            label: 'Form',
-          },
-        ],
-      },
-      {
-        value: 'data',
-        label: 'Data',
-        children: [
-          {
-            value: 'table',
-            label: 'Table',
-          },
-          {
-            value: 'tag',
-            label: 'Tag',
-          },
-          {
-            value: 'progress',
-            label: 'Progress',
-          },
-          {
-            value: 'tree',
-            label: 'Tree',
-          },
-          {
-            value: 'pagination',
-            label: 'Pagination',
-          },
-          {
-            value: 'badge',
-            label: 'Badge',
-          },
-        ],
-      },
-      {
-        value: 'notice',
-        label: 'Notice',
-        children: [
-          {
-            value: 'alert',
-            label: 'Alert',
-          },
-          {
-            value: 'loading',
-            label: 'Loading',
-          },
-          {
-            value: 'message',
-            label: 'Message',
-          },
-          {
-            value: 'message-box',
-            label: 'MessageBox',
-          },
-          {
-            value: 'notification',
-            label: 'Notification',
-          },
-        ],
-      },
-      {
-        value: 'navigation',
-        label: 'Navigation',
-        children: [
-          {
-            value: 'menu',
-            label: 'Menu',
-          },
-          {
-            value: 'tabs',
-            label: 'Tabs',
-          },
-          {
-            value: 'breadcrumb',
-            label: 'Breadcrumb',
-          },
-          {
-            value: 'dropdown',
-            label: 'Dropdown',
-          },
-          {
-            value: 'steps',
-            label: 'Steps',
-          },
-        ],
-      },
-      {
-        value: 'others',
-        label: 'Others',
-        children: [
-          {
-            value: 'dialog',
-            label: 'Dialog',
-          },
-          {
-            value: 'tooltip',
-            label: 'Tooltip',
-          },
-          {
-            value: 'popover',
-            label: 'Popover',
-          },
-          {
-            value: 'card',
-            label: 'Card',
-          },
-          {
-            value: 'carousel',
-            label: 'Carousel',
-          },
-          {
-            value: 'collapse',
-            label: 'Collapse',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'resource',
-    label: 'Resource',
-    children: [
-      {
-        value: 'axure',
-        label: 'Axure Components',
-      },
-      {
-        value: 'sketch',
-        label: 'Sketch Templates',
-      },
-      {
-        value: 'docs',
-        label: 'Design Documentation',
-      },
-    ],
-  },
-]
+
 
 const handleEvaluationTabClick = (value)=>{
 }
@@ -429,6 +168,10 @@ export default {
         HomeHeader,
         RecPanel
     },
+    
+
+
+
     data() {
         return {
             locationValue:'',
@@ -442,15 +185,87 @@ export default {
             evaluationImgList:["https://img10.360buyimg.com/imgzone/jfs/t1/202058/20/11876/172626/616d220eE1705e703/5ca6d504dbd2f305.jpg",
               "http://img30.360buyimg.com/popWareDetail/jfs/t1/65795/25/18154/185329/627cfef4E08b0df77/ae09124e913d1704.jpg",
               "http://img30.360buyimg.com/popWareDetail/jfs/t1/49166/38/17259/156232/627cfeb7E9a1d614a/bb0d9130bca47697.jpg",
-              "https://img30.360buyimg.com/imgzone/jfs/t1/211557/24/5722/178695/616d2211E8263408d/fe2931d8ee3f6cc3.jpg"]
+              "https://img30.360buyimg.com/imgzone/jfs/t1/211557/24/5722/178695/616d2211E8263408d/fe2931d8ee3f6cc3.jpg"],     
+            options: regionData,
+            selectedOptions: [],
+            addtions:{},
         }
     },
-    methods: {
-      toShopCart(){
-        this.$router.push('tifashopcart');
-      }
+    computed:{
+      ...mapGetters(['goodData','goodDetailInfo','goodImg','categorys']), 
+
     },
 
+    methods: {
+      toShopCart(){
+        this.addShopCard(this.goodDetailInfo.pid, this.goodNum);
+        this.addLocation(CodeToText[this.selectedOptions['0']],
+          CodeToText[this.selectedOptions['1']],
+          CodeToText[this.selectedOptions['2']]
+        )
+        this.$router.push('/tifashopcart');
+        ElNotification({
+            title: '加入购物车成功！',
+            message: "已成功加入购物车",
+            type: 'success'
+        })
+      },
+
+      handleChange (value) {
+        this.addtions.selectedOptions = value
+      },
+      async addLocation(countries, provinces, city){
+        try {
+              await this.$store.dispatch("addAddress", {
+                name:this.$store.getters.userData.uname,
+                phone:this.$store.getters.userData.phone,
+                countries,
+                provinces,
+                city
+              });
+            } catch (error) {
+                ElNotification({
+                    title: '添加收货地址失败！',
+                    message: error,
+                    type: 'error'
+                })
+            }
+      },
+      async addShopCard(pid, num){
+          try {
+              await this.$store.dispatch("addGoddToShopCart", {
+                sid:this.$store.getters.userData.uid,
+                pid,
+                num
+              });
+            } catch (error) {
+                ElNotification({
+                    title: '加入购物车失败！',
+                    message: error,
+                    type: 'error'
+                })
+            }
+      },
+      async getGoodData(){
+        try {
+              await this.$store.dispatch("getGoodData", {
+                    'pid':this.$route.params.pid
+              });
+            } catch (error) {
+                ElNotification({
+                    title: '获取商品数据失败！',
+                    message: error,
+                    type: 'error'
+                })
+            }
+      },
+    },
+
+  mounted(){
+    this.getGoodData()
+  },
+
+    
 }
 </script>
 <style lang="less" scoped>
@@ -490,6 +305,7 @@ export default {
                 }
             }
             .title{
+                text-align: left;
                 color: #666666;
                 font-size: 18px;
                 font-weight: bold;
@@ -501,7 +317,9 @@ export default {
                 }
             }
             .des{
+                text-align: left;
                 margin-top: 15px;
+                margin-left: 25px;
                 font-size: 12px;
                 color: red;
                 cursor: pointer;

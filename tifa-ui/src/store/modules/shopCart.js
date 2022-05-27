@@ -1,6 +1,9 @@
-// import { getShopCartData, postDeleteCartByGoodId, reqUpdateCheckedByid } from "@/api";
+import { getShopCartData, postDeleteCartByGoodId} from "@/api";
+import defaultImg from '_assets/images/tifa_default_card_img.webp'
+
+
 const state = {
-  cartList: [],
+  cartList: {},
 };
 const mutations = {
   GETCARTLIST(state, cartList) {
@@ -9,17 +12,17 @@ const mutations = {
 };
 const actions = {
   //获取购物车列表数据
-  async getCartListData({ commit }) {
-    let result = await getShopCartData();
-    if (result.code == 200) {
+  async getCartListData({ commit }, userData) {
+    let result = await getShopCartData(userData);
+    if (result.statusCode == 200) {
       commit("GETCARTLIST", result.data);
     }
   },
 
   //删除购物车某一个产品
-  async deleteCartByGoodId({ commit }, goodId) {
-    let result = await postDeleteCartByGoodId(goodId);
-    if (result.code == 200) {
+  async deleteCartByGoodId({ commit }, data) {
+    let result = await postDeleteCartByGoodId(data);
+    if (result.statusCode == 200) {
       return "ok";
     } else {
       return Promise.reject(new Error("faile"));
@@ -68,7 +71,14 @@ const actions = {
 };
 const getters = {
   cartList(state) {
-    return state.cartList[0] || {};
+    if (state.cartList && state.cartList.imgList){
+        state.cartList.imgList.forEach((item,index)=>{
+        if (item == 'images/model/guan/url_none.png'){
+          state.cartList.imgList[index] = defaultImg
+        }
+      })
+    }
+    return state.cartList || {};
   },
 };
 export default {

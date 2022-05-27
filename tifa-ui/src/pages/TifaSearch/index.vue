@@ -39,10 +39,15 @@
 
                     </div>
                     <div class="goodCards" >
-                        <el-row v-for="index in 5">
-                          <el-col :span="6" v-for="index in 4" :key="index">
-                              <SearchGoodCard/>
+                        <el-row v-for="indexRow in searchGoodsList.length / 4" :key="indexRow">
+                        <template v-for="indexCol in 4" :key="indexCol">
+                          <el-col :span="6" >
+                              <SearchGoodCard 
+                              :goodImg='searchGoodsImg[(indexRow-1) * 4 + indexCol - 1]' 
+                              :goodInfo= 'searchGoodsList[(indexRow-1) * 4 + indexCol - 1]'/>
                           </el-col>
+                        </template>
+
                         </el-row>
                     </div>
                 </el-main>
@@ -59,6 +64,16 @@
                 </el-aside>
             </el-container>
         </div>
+        <div class="pageHelper">
+           <el-pagination
+            background
+            v-model:currentPage="currentPage"
+            page-size="20"
+            layout="prev, pager, next, jumper"
+            :total="searchTotalItem"
+            @current-change="handleCurrentChange"
+            />
+        </div>
     </div>
 </template>
 <script>
@@ -66,22 +81,22 @@ import HomeHeader from '../ShopHome/HomeHeader'
 import SearchGoodCard from '_components/SearchGoodCard'
 import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
 import { ElNotification} from 'element-plus'
+
 export default {
     name:"tifasearch",
     components:{
         HomeHeader,
-        SearchGoodCard
+        SearchGoodCard,
+
     },
     data() {
         return {
-
+          currentPage:1,
         }
     },
     computed:{
-      ...mapState({
-
-        }),
-      ...mapGetters(['pageIndex'])
+      ...mapState([]),
+      ...mapGetters(['pageIndex','searchGoodsList','searchGoodsImg','searchTotalItem']),
     },
     methods: {
         async getSearchData(){
@@ -90,7 +105,6 @@ export default {
                     'searchKey':this.$route.params.searchKey,
                     'pageIndex':this.pageIndex
                 });
-               
             } catch (error) {
                 ElNotification({
                     title: '获取搜索数据失败',
@@ -98,11 +112,16 @@ export default {
                     type: 'error',
                 })
             }
+        },
+        handleCurrentChange(){
+            this.$store.dispatch("changeCurrentPage", this.currentPage);
+            this.getSearchData();
         }
     },
     mounted() {
         this.getSearchData();
     },
+
 }
 </script>
 <style lang="less" scoped>
@@ -173,6 +192,11 @@ export default {
             border-radius: 10px;
             margin-top: 40px;
         }
+    }
+    .pageHelper{
+        width: 600px;
+        margin: 0 auto;
+        margin-top: 100px;
     }
     
 </style>
