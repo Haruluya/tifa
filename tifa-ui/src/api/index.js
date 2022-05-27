@@ -118,3 +118,23 @@ export const postAddAdressRequest= (data)=>
     })
 
 
+export const postLocationDataRequest = (data)=>
+    requests({
+        method:'post',
+        url:`/user/locationData`,
+        data
+    })
+
+export const postDeleteAdrDataRequest = (data)=>
+    requests({
+        method:'post',
+        url:`/user/deleteAdress`,
+        data
+    })
+
+export const postUpdateUserInfoRequest = (data)=>
+    requests({
+        method:'post',
+        url:`/user/updateUserInfo`,
+        data
+    })

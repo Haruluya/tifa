@@ -152,6 +152,30 @@ export const routes = [
       component: () => import('_pages/Settlement'),
       meta:{
         showFooter:true,
-      }
+      },
     },
+    {
+      path: '/purchase',
+      name:'purchase',
+      component: () => import('_pages/Settlement/Purchase'),
+      meta:{
+        showFooter:true,
+      },
+    },
+    {
+      path: '/delivery',
+      name:'delivery',
+      component: () => import('_pages/Settlement/Delivery'),
+      meta:{
+        showFooter:true,
+      },
+    },
+    {
+      path: '/comments',
+      name:'comments',
+      component: () => import('_pages/Settlement/Comments'),
+      meta:{
+        showFooter:true,
+      },
+    }
   ]

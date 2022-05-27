@@ -40,38 +40,26 @@
             </div>
             <el-divider></el-divider>
             <div class="locationCards">
-            <div class="locationCard">
+            <div class="locationCard" v-for="(item,index) in locationData" @click="selectLocationCard(index)">
                 <div class="border">
                     <div class="name"> 
-                        <el-icon><User /></el-icon>Haruluya收
+                        <el-icon><User /></el-icon>{{userData.uname}}收
                     </div>
                     <el-divider></el-divider>
-                    <div class="locationDetail">
-                        <el-icon><OfficeBuilding /></el-icon>环翠怡园文化西路180号山东大学<br/>威海校区
+                    <div class="locationDetail" >
+                        <el-icon><OfficeBuilding /></el-icon>
+                        {{item.countries + '/' + item.provinces + '/' + item.city + '/' + item.detailaddress}}
                     </div>
                     <div class="modify">
-                        <el-link :underline="false">修改地址<el-icon><ArrowRight /></el-icon></el-link>
+                        <el-link :underline="false"  @click="deleteAdress(index)">删除地址<el-icon><ArrowRight /></el-icon></el-link>
                     </div>
                 </div>
             </div>
-            <div class="locationCard none" >
-                <div class="border">
-                    <div class="name"> 
-                        <el-icon><User /></el-icon>Haruluya收
-                    </div>
-                    <el-divider></el-divider>
-                    <div class="locationDetail">
-                        <el-icon><OfficeBuilding /></el-icon>环翠怡园文化西路180号山东大学<br/>威海校区
-                    </div>
-                    <div class="modify">
-                        <el-link :underline="false">修改地址<el-icon><ArrowRight /></el-icon></el-link>
-                    </div>
-                </div>
-            </div>
+    
   
             </div>
             <div class="addLocation">
-                <el-button type=""><el-icon><Plus /></el-icon>添加新地址</el-button>
+            <el-button type=""  @click="showAddDialog()"><el-icon><Plus /></el-icon>添加新地址</el-button>
             </div>
         </div>
         <div class="goodsCar">
@@ -79,33 +67,174 @@
                 确认订单消息
             </div>
             <el-divider></el-divider>
+            <ShopCartContent :showButton="false"/>
         </div>
         <div class="total">
             <div class="price">
-                实付款:<span>￥99.00</span>
+                实付款:<span>￥{{sumPrice}}</span>
             </div>
             <div class="location">
-                寄送至:<span>山东 威海 环翠 怡园 文化西路180号山东大学威海校区</span>
+                寄送至:<span>{{selectLocation}}</span>
             </div>
             <div class="person">
-                收货人:<span>Haruluya 18720672661</span>
+                收货人:<span>{{userData.uname}} {{userData.phone}}</span>
             </div>
         </div>
         <div class="commit">
-            <el-button type="" >提交订单</el-button>
+            <el-button type="" @click="commitOrder()">提交订单</el-button>
         </div>
+
+         <el-dialog title="添加地址" v-model="addAdressVisible" width="30%"  append-to-body>
+            <div class="detailAdress">
+                详细地址：<el-input v-model="detailaddress" size="large" placeholder="请输入详细信息。" clearable />
+            </div>
+            <div class="cityLabel">
+                城市：
+            </div>
+            <el-cascader
+                size="large"
+                :options="options"
+                v-model="selectedOptions"
+                @change="handleChange">
+            </el-cascader>
+        <span slot="footer" class="dialog-footer">
+            <el-button @click="addAdressVisible = false">取 消</el-button>
+            <el-button type="primary" @click="addLocation()">确 定</el-button>
+        </span>
+        </el-dialog>
+
     </div>
 </template>
 <script>
+import ShopCartContent from '_pages/TifaShopCart/ShopCartContent'
+import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
+import {ElNotification} from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'  
 import logo from '../../assets/logo.png' 
+import {regionData,CodeToText} from 'element-china-area-data'
 export default {
     name:"settlement",
+    components:{
+        ShopCartContent
+    },
     data() {
         return {
             logo,
+            options: regionData,
+            selectedOptions: [],
+            addtions:{},
+            addAdressVisible:false,
+            detailaddress:"",
+            selectLocation:""
         }
     },
+    computed:{
+      ...mapGetters(['userData','locationData','sumPrice']), 
 
+    },
+    methods: {
+        handleChange (value) {
+            this.addtions.selectedOptions = value
+        },
+        showAddDialog(){
+            this.addAdressVisible = true;
+        },
+        async addLocation(){
+            try {
+                this.addAdressVisible = false;
+                let countries = CodeToText[this.selectedOptions['0']];
+                let provinces = CodeToText[this.selectedOptions['1']];
+                let city = CodeToText[this.selectedOptions['2']];
+                let detailaddress = this.detailaddress;
+                await this.$store.dispatch("addAddress", {
+                    name:this.$store.getters.userData.uname,
+                    phone:this.$store.getters.userData.phone,
+                    countries,
+                    provinces,
+                    city,
+                    detailaddress,
+                });
+                this.getLocationData();
+                ElNotification({
+                    title: '添加收货地址成功！',
+                    message: countries+'/'+provinces+'/'+city+'/'+detailAddress,
+                    type: 'success'
+                })
+                } catch (error) {
+                    ElNotification({
+                        title: '添加收货地址失败！',
+                        message: error,
+                        type: 'error'
+                    })
+                }
+        },
+        async getLocationData(){
+          try {
+              await this.$store.dispatch("getLocationData", {
+                phone:this.$store.getters.userData.phone,
+              });
+            } catch (error) {
+                ElNotification({
+                    title: '获取地址数据失败！',
+                    message: error,
+                    type: 'error'
+                })
+            }
+        },
+        deleteAdress(index){
+            try {
+                ElMessageBox.confirm(
+                    '你确定要删除此收货地址吗?',
+                    '询问',
+                    {
+                    confirmButtonText: '确认',
+                    cancelButtonText: '取消',
+                    type: 'Info',
+                    }
+                )
+                .catch(() => {
+                    ElMessage({
+                        type: 'info',
+                        message: '取消提交',
+                    })
+                })
+                .then(async () => {
+                    await this.$store.dispatch("deleteAdress", {
+                        aid:this.locationData[index].aid
+                    });
+                    this.getLocationData();
+                    ElMessage({
+                        type: 'success',
+                        message: '删除成功',
+                    })
+                })
+            } catch (error) {
+                ElNotification({
+                    title: '获取地址数据失败！',
+                    message: error,
+                    type: 'error'
+                })
+            }
+        },
+        selectLocationCard(index){
+            this.selectLocation = 
+                this.locationData[index].countries + '/' + 
+                this.locationData[index].provinces + '/' + 
+                this.locationData[index].city + '/' + 
+                this.locationData[index].detailaddress
+        },
+        commitOrder(){
+            this.$router.push('/purchase')
+            ElNotification({
+                title: '请付款',
+                message: '创建订单成功！',
+                type: 'error'
+            })
+        }
+    },
+    mounted() {
+        this.getLocationData();
+    },
 }
 </script>
 <style lang="less" scoped>
@@ -178,6 +307,11 @@ export default {
             margin-right: 30px;
             background-image: linear-gradient(222deg, rgb(235, 50, 47), rgb(218, 245, 45));
 
+            &:hover{
+                cursor: pointer;
+                transform: scale(1.01);
+            }
+            
             .el-icon{
                 font-size: 20px;
             }
@@ -211,6 +345,7 @@ export default {
         width: 1200px;
         margin: 0 auto;
         margin-top: 50px;
+
     }
     .total{
         width: 300px;
@@ -248,6 +383,33 @@ export default {
         .el-button{
             width: 100%;
             height: 40px;
+        }
+    }
+    .el-dialog{
+        .detailAdress{
+            font-size: 18px;
+            font-weight: bold;
+            color: #666666;
+            margin-bottom: 30px;
+            .el-input{
+                display: block;
+                margin-top: 15px;
+                width: 300px;
+            }
+        }
+        .cityLabel{
+            font-size: 18px;
+            font-weight: bold;
+            color: #666666;
+            margin-bottom: 15px;
+        }
+        .elcascader{
+            display: block;
+        }
+        .dialog-footer{
+            display: block;
+            margin-top: 20px;
+            margin-left: 250px;
         }
     }
 </style>

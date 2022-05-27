@@ -1,6 +1,7 @@
 package com.tifa.framework.web.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import com.tifa.framework.config.JwtConfig;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -73,11 +75,10 @@ public class UserController {
     /**
      * 获取当前用户的信息。
      * @param token
-     * @param model
      * @return
      */
     @PostMapping("/userData")
-    public AjaxReturnValue userInfoData(@RequestBody String token,Model model){
+    public AjaxReturnValue userInfoData(@RequestBody String token){
         //未登录或token失效。
         if (token.isEmpty()){
             return  AjaxReturnValue.error(438,"token not found");
@@ -126,5 +127,26 @@ public class UserController {
         return AjaxReturnValue.success();
     }
 
+    @PostMapping("/locationData")
+    public AjaxReturnValue locationData(@RequestBody JSONData data){
+        String phone = (String) (data.get("phone"));
+        List<Adressdetail> list = adressdetailService.list(new QueryWrapper<Adressdetail>()
+                .eq("phone",phone)
+        );
+        return AjaxReturnValue.success(list);
+    }
+
+    @PostMapping("/deleteAdress")
+    public AjaxReturnValue deleteAdress(@RequestBody JSONData data){
+        Integer aid = (Integer) data.get("aid");
+        adressdetailService.removeById(aid);
+        return AjaxReturnValue.success();
+    }
+
+    @PostMapping("/updateUserInfo")
+    public AjaxReturnValue updateUserInfo(@RequestBody User user){
+        userService.updateById(user);
+        return AjaxReturnValue.success();
+    }
 
 }

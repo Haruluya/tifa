@@ -1,13 +1,16 @@
-import { postAddAdressRequest} from "@/api";
+import { postAddAdressRequest,
+    postLocationDataRequest,
+    postDeleteAdrDataRequest,
+    postUpdateUserInfoRequest} from "@/api";
 
 
 const state = {
-    adressDetail:[],
+    locationData:[]
 }
 
 const mutations = {
-    SHOWADDADRESSDIALOG(state){
-        state.addAdressVisible = true;
+    GETLOCATIONDATA(state,data){
+        state.locationData = data;
     }
 }
 
@@ -21,13 +24,37 @@ const actions = {
             return Promise.reject(new Error("faile"));
         }
     },
+    async getLocationData({ commit }, data) {
+        let result = await postLocationDataRequest(data);
+        if (result.statusCode == 200) {
+            commit("GETLOCATIONDATA", result.data);
+        } else {
+            return Promise.reject(new Error("faile"));
+        }
+    },
+    async deleteAdress({ commit }, data) {
+        let result = await postDeleteAdrDataRequest(data);
+        if (result.statusCode == 200) {
+            commit("GETLOCATIONDATA", result.data);
+        } else {
+            return Promise.reject(new Error("faile"));
+        }
+    },
+    async updateUserInfo({ commit }, data) {
+        let result = await postUpdateUserInfoRequest(data);
+        if (result.statusCode == 200) {
+            commit("GETLOCATIONDATA", result.data);
+        } else {
+            return Promise.reject(new Error("faile"));
+        }
+    },
 
 }
 
 
 const getters = {
-    addAdressVisible(state){
-        return state.addAdressVisible;
+    locationData(state){
+        return state.locationData || [];
     }
 }
 

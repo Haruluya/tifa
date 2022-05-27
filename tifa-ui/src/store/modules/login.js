@@ -68,7 +68,10 @@ const getters = {
         return !state.userData.uname ? "未登录" :state.userData.uname;
     },
     userData(state){
-        return state.userData;
+        return state.userData || {};
+    },
+    token(state){
+        return state.token || "";
     }
 };
 

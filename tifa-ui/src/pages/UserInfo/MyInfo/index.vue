@@ -2,10 +2,10 @@
     <div class="mainContainer">
         <div class="info">
             <div class="userInfo">
-                <el-avatar :size="100" src="">
+                <el-avatar :size="100" :src="userData.headpicture">
                 </el-avatar>
                 <div class="name">
-                    <el-link :underline="false" href="userinfo">
+                    <el-link :underline="false" href="\">
                         {{userData.uname}}
                     </el-link>
                 </div>
@@ -18,7 +18,7 @@
         </div>
         <div class="panel">
             <div class="nickname">
-                昵称：<el-input v-model="input" :placeholder="userData.nickname" clearable size="large" />
+                昵称：<el-input v-model="nickname" :placeholder="userData.nickname" clearable size="large" />
             </div>
             <div class="persignature">
                 <div class="plabel">个性签名：</div>
@@ -30,25 +30,26 @@
                 />
             </div>
             <div class="phone">
-                电话号码:
-                <el-input v-model="input" :placeholder="userData.phone" clearable size="large" />
+                头像:
+                <el-input v-model="headpicture" :placeholder="userData.headpicture" clearable size="large" />
             </div>
             <div class="email">
                 邮箱:
-                <el-input v-model="input" :placeholder="userData.email" clearable size="large" />
+                <el-input v-model="email" :placeholder="userData.email" clearable size="large" />
             </div>
             <div class="locationCards">
-            <div class="locationCard">
+            <div class="locationCard" v-for="(item,index) in locationData">
                 <div class="border">
                     <div class="name"> 
-                        <el-icon><User /></el-icon>Haruluya收
+                        <el-icon><User /></el-icon>{{userData.uname}}收
                     </div>
                     <el-divider></el-divider>
-                    <div class="locationDetail">
-                        <el-icon><OfficeBuilding /></el-icon>环翠怡园文化西路180号山东大学<br/>威海校区
+                    <div class="locationDetail" >
+                        <el-icon><OfficeBuilding /></el-icon>
+                        {{item.countries + '/' + item.provinces + '/' + item.city + '/' + item.detailaddress}}<br/>
                     </div>
                     <div class="modify">
-                        <el-link :underline="false" >删除地址<el-icon><ArrowRight /></el-icon></el-link>
+                        <el-link :underline="false" @click="deleteAdress(index)">删除地址<el-icon><ArrowRight /></el-icon></el-link>
                     </div>
                 </div>
             </div>
@@ -60,14 +61,14 @@
             </div>
         </div>
         <div class="commiteButton">
-            <el-button type="success" size="large">
+            <el-button type="success" size="large" @click="updateUserInfo()">
                 更新个人信息
             </el-button>
         </div>
 
         <el-dialog title="添加地址" v-model="addAdressVisible" width="30%"  append-to-body>
             <div class="detailAdress">
-                详细地址：<el-input v-model="detailAddress" size="large" placeholder="请输入详细信息。" clearable />
+                详细地址：<el-input v-model="detailaddress" size="large" placeholder="请输入详细信息。" clearable />
             </div>
             <div class="cityLabel">
                 城市：
@@ -103,11 +104,17 @@ export default {
             selectedOptions: [],
             addtions:{},
             addAdressVisible:false,
-            detailAddress:""
+            detailaddress:"",
+
+            nickname:this.userData ? this.userData.nickname : "",
+            persignature:this.userData ?this.userData.persignature:"",
+            headpicture:this.userData?this.userData.headpicture:"",
+            email:this.userData?this.userData.email:"",
+
         }
     },
     computed:{
-      ...mapGetters(['userData']), 
+      ...mapGetters(['userData','locationData','token']), 
 
     },
     methods: {
@@ -123,15 +130,16 @@ export default {
                 let countries = CodeToText[this.selectedOptions['0']];
                 let provinces = CodeToText[this.selectedOptions['1']];
                 let city = CodeToText[this.selectedOptions['2']];
-                let detailAddress = this.detailAddress;
+                let detailaddress = this.detailaddress;
                 await this.$store.dispatch("addAddress", {
                     name:this.$store.getters.userData.uname,
                     phone:this.$store.getters.userData.phone,
                     countries,
                     provinces,
                     city,
-                    detailAddress,
+                    detailaddress,
                 });
+                this.getLocationData();
                 ElNotification({
                     title: '添加收货地址成功！',
                     message: countries+'/'+provinces+'/'+city+'/'+detailAddress,
@@ -150,6 +158,83 @@ export default {
               await this.$store.dispatch("getLocationData", {
                 phone:this.$store.getters.userData.phone,
               });
+            } catch (error) {
+                ElNotification({
+                    title: '获取地址数据失败！',
+                    message: error,
+                    type: 'error'
+                })
+            }
+        },
+        deleteAdress(index){
+            try {
+                ElMessageBox.confirm(
+                    '你确定要删除此收货地址吗?',
+                    '询问',
+                    {
+                    confirmButtonText: '确认',
+                    cancelButtonText: '取消',
+                    type: 'Info',
+                    }
+                )
+                .catch(() => {
+                    ElMessage({
+                        type: 'info',
+                        message: '取消提交',
+                    })
+                })
+                .then(async () => {
+                    await this.$store.dispatch("deleteAdress", {
+                        aid:this.locationData[index].aid
+                    });
+                    this.getLocationData();
+                    ElMessage({
+                        type: 'success',
+                        message: '删除成功',
+                    })
+                })
+            } catch (error) {
+                ElNotification({
+                    title: '获取地址数据失败！',
+                    message: error,
+                    type: 'error'
+                })
+            }
+        },
+        async updateUserInfo(){
+            try {
+                ElMessageBox.confirm(
+                    '你确定要更新用户信息吗?',
+                    '询问',
+                    {
+                    confirmButtonText: '确认',
+                    cancelButtonText: '取消',
+                    type: 'Info',
+                    }
+                )
+                .then(async () => {
+                    await this.$store.dispatch("updateUserInfo", {
+                        uid:this.userData.uid,
+                        nickname:this.nickname,
+                        persignature:this.persignature,
+                        headpicture:this.headpicture,
+                        email:this.email
+                    });
+                    await this.$store.dispatch('getNowUserData',this.token);
+                    await this.getLocationData()
+                    ElNotification({
+                        type: 'success',
+                        message: '更新用户信息成功！',
+                        title:'更新成功'
+                    })
+                })
+                .catch(() => {
+                    ElMessage({
+                        type: 'info',
+                        message: '取消提交',
+                    })
+                })
+               
             } catch (error) {
                 ElNotification({
                     title: '获取地址数据失败！',
@@ -261,7 +346,7 @@ export default {
         }
         .addButton{
             font-size: 20px;
-            transform: translateY(150px);
+            transform: translateY(20px);
         }
 
     }
