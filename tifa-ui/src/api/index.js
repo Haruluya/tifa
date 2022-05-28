@@ -138,3 +138,26 @@ export const postUpdateUserInfoRequest = (data)=>
         url:`/user/updateUserInfo`,
         data
     })
+
+export const postPurchaseRequest = (data)=>
+    requests({
+        method:'post',
+        url:`/pay/confirm`,
+        data
+    })
+
+export const postClearCartRequest = (data)=>
+    requests({
+        method:'post',
+        url:`/product/clearCart`,
+        data
+    })
+
+
+
+export const postGetOrderDataRequest = (data)=>
+    requests({
+        method:'post',
+        url:`/order_/getOrderData`,
+        data
+    })

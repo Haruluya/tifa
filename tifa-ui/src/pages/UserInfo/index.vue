@@ -28,6 +28,7 @@
 <script>
 import HomeHeader from '../ShopHome/HomeHeader'
 import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
+import {ElNotification,ElMessageBox,ElMessage} from 'element-plus'
 
 export default {
     name:"userInfo",
@@ -59,7 +60,7 @@ export default {
                 },
                 {
                     label:'退出登录',
-                    path:'/userinfo/logout'
+                    path:''
                 }
             ],
         }
@@ -70,7 +71,33 @@ export default {
     },
     methods: {
         toPanel(path){
-            this.$router.push(path);
+            if (!path){
+                ElMessageBox.confirm(
+                    '你确定要退出登录吗?',
+                    '询问',
+                    {
+                    confirmButtonText: '确认',
+                    cancelButtonText: '取消',
+                    type: 'Info',
+                    }
+                )
+                .then(async () => {
+                    await this.$store.dispatch("userLogout");
+                    ElMessage({
+                        type: 'success',
+                        message: '退出登录成功！',
+                    })
+                    this.$router.push('/');
+                })
+                .catch(() => {
+                    ElMessage({
+                        type: 'info',
+                        message: '取消退出',
+                    })
+                })
+            }else{
+                this.$router.push(path);
+            }
         },
 
     },

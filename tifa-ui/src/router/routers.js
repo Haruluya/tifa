@@ -44,7 +44,7 @@ router.beforeEach(async (to, from, next) => {
    }else{
       //未登录：某些组件拒绝访问。
       let toPath = to.path;
-      if(toPath.indexOf('/userinfo')!=-1 || toPath.indexOf('/classNav')!=-1){
+      if(toPath.indexOf('/userinfo')!=-1 || toPath.indexOf('/tifashopcart')!=-1){
         ElNotification({
           title: '请登录！',
           message: "登录用户可以访问个人信息！",

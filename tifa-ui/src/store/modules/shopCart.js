@@ -1,10 +1,11 @@
-import { getShopCartData, postDeleteCartByGoodId} from "@/api";
+import { getShopCartData, postDeleteCartByGoodId,postClearCartRequest} from "@/api";
 import defaultImg from '_assets/images/tifa_default_card_img.webp'
 
 
 const state = {
   cartList: {},
-  sumPrice:0
+  sumPrice:0,
+  pids:""
 };
 const mutations = {
   GETCARTLIST(state, cartList) {
@@ -12,7 +13,11 @@ const mutations = {
   },
   SETSUMPRICE(state, sumPrice){
     state.sumPrice = sumPrice
+  },
+  SETPIDS(state,data){
+    state.pids = data
   }
+
 };
 const actions = {
   //获取购物车列表数据
@@ -32,8 +37,21 @@ const actions = {
       return Promise.reject(new Error("faile"));
     }
   },
+
+  async clearCart({ commit }, data) {
+    let result = await postClearCartRequest(data);
+    if (result.statusCode == 200) {
+      return "ok";
+    } else {
+      return Promise.reject(new Error("faile"));
+    }
+  },
+
   setSumPrice({ commit }, data){
     commit('SETSUMPRICE', data)
+  },
+  setPids({ commit }, data){
+    commit('SETPIDS', data)
   }
 };
 const getters = {
@@ -49,6 +67,9 @@ const getters = {
   },
   sumPrice(state){
     return state.sumPrice || 0;
+  },
+  pids(state){
+    return state.pids || "";
   }
 };
 export default {

@@ -18,7 +18,10 @@ module.exports = {
         '/tifai':{
             target: 'http://localhost:8081',
 	      }
-      }
+        },
+        allowedHosts: [
+            '5198y370g3.zicp.vip', 
+          ],
 	  },
 
     // 别名配置。

@@ -224,13 +224,14 @@ export default {
                 this.locationData[index].detailaddress
         },
         commitOrder(){
-            this.$router.push('/purchase')
+            this.$router.push('/purchase');
             ElNotification({
                 title: '请付款',
                 message: '创建订单成功！',
-                type: 'error'
+                type: 'sucess'
             })
-        }
+        },
+        
     },
     mounted() {
         this.getLocationData();

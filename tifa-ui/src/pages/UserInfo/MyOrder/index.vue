@@ -6,12 +6,12 @@
         </div>
         <div class="tabs"> 
             <el-tabs v-model="activeTab" @tab-click="handleClick">
-                <el-tab-pane label="全部订单" name="order">
+                <el-tab-pane label="全部订单" name="create">
                     <div class="ordercardItem" v-for="index in 5">
                         <OrderCard/>
                     </div>
                 </el-tab-pane>
-                <el-tab-pane label="待付款" name="pay">
+                <el-tab-pane label="待付款" name="paid">
 
                 </el-tab-pane>
                 <el-tab-pane label="待收货" name="delivery">
@@ -28,16 +28,32 @@
     </div>
 </template>
 <script>
+import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
 import OrderCard from './OrderCard'
 export default {
     name:"myorder",
     components:{
         OrderCard
     },
+    computed:{
+      ...mapGetters(['orderData']), 
+
+    },
     data() {
         return {
-            activeTab:"order",
+            activeTab:"create",
         }
+    },
+    methods: {
+        async getOrderData(statu){
+            await this.$store.dispatch('getOrderData',statu)
+        },
+        handleClick(){
+            this.getOrderData(this.activeTab);
+        }
+    },
+    mounted() {
+        this.getOrderData("create");
     },
 }
 </script>

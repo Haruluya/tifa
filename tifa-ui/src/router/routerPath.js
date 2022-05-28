@@ -177,5 +177,13 @@ export const routes = [
       meta:{
         showFooter:true,
       },
+    },
+    {
+      path: '/purchasefinish',
+      name:'purchasefinish',
+      component: () => import('_pages/Settlement/PurchaseFinish'),
+      meta:{
+        showFooter:true,
+      },
     }
   ]

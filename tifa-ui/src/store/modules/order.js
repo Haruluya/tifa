@@ -1,33 +1,40 @@
-// import { reqAddressInfo, reqOrderInfo } from "@/api";
+import { postPurchaseRequest,postGetOrderDataRequest } from "@/api";
 const state = {
   address: [],
-  orderInfo:{}
+  orderInfo:{},
+  htmlText:""
 };
 const mutations = {
-  GETUSERADDRESS(state, address) {
-    state.address = address;
-  },
-  GETORDERINFO(state,orderInfo){
-     state.orderInfo = orderInfo;
+  PURCHASE(state, result){
+    state.htmlText = result;
   }
 };
 const actions = {
+  async purchase({ commit }, orderData) {
+    let result = await postPurchaseRequest(orderData);
+    console.log(result);
+    if (result) {
+      commit("PURCHASE",result);
+    } else {
+        return Promise.reject(new Error("faile"));
+    }
+  },
+  async getOrderData({ commit }, data) {
+    let result = await postGetOrderDataRequest(data);
+    console.log(result);
+    if (result) {
+      commit("PURCHASE",result);
+    } else {
+        return Promise.reject(new Error("faile"));
+    }
+  },
 
-//   async getUserAddress({ commit }) {
-//     let result = await reqAddressInfo();
-//     if (result.code == 200) {
-//       commit("GETUSERADDRESS", result.data);
-//     }
-//   },
-//   //获取商品清单数据
-//   async getOrderInfo({commit}) {
-//     let result = await reqOrderInfo();
-//     if(result.code==200){
-//       commit("GETORDERINFO",result.data);
-//     }
-//   },
 };
-const getters = {};
+const getters = {
+  htmlText(state){
+    return state.htmlText || ""
+  }
+};
 export default {
   state,
   mutations,

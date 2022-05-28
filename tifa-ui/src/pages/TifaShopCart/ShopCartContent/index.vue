@@ -82,6 +82,11 @@ export default {
                 }
             )
             .then(() => {
+                let pids = "";
+                this.cartList.productInfo.forEach((element)=>{
+                    pids += (element.pid+"#")
+                })
+                this.$store.dispatch('setPids', pids);
                 this.$store.dispatch('setSumPrice',this.sumPrice);
                 this.$router.push('/settlement');
                 ElMessage({
@@ -123,9 +128,9 @@ export default {
                 type: 'warning',
                 }
             )
-            .then(() => {
-                this.deleteItem(index);
-                this.getShopCartData();
+            .then(async () => {
+                await this.deleteItem(index);
+                await this.getShopCartData();
                 ElMessage({
                     type: 'success',
                     message: '删除成功',

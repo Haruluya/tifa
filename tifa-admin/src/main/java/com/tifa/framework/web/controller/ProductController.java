@@ -120,6 +120,14 @@ public class ProductController {
         return AjaxReturnValue.success();
     }
 
+    @PostMapping("/clearCart")
+    public AjaxReturnValue clearCart(@RequestBody JSONData jsonData){
+        Integer uid = (Integer) (jsonData.get("uid"));
+        shoppingcartitemService.remove(
+                new QueryWrapper<Shoppingcartitem>()
+                        .eq("sid",uid));
+        return AjaxReturnValue.success();
+    }
 
 
 }
