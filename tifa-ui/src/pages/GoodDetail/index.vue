@@ -139,7 +139,7 @@
                 <el-tab-pane label="商品评价" name="comment">
                   <div class="ctitle">
                     TIFA商品评价
-                    <el-button type="text" v-show="this.$route.query.tifa">添加评论</el-button>
+                    <el-button type="text" v-show="this.$route.query.tifa" @click="dialogFormVisible = true">添加评论</el-button>
                   </div>
                   <div class="ccard" v-for="(item,index) in comments">
                     <CommentCard :info="item"/>
@@ -149,6 +149,29 @@
             </el-main>
           </el-container>
         </div>
+        <el-dialog v-model="dialogFormVisible" title="商品评价">
+          <el-form :model="form">
+          <el-form-item label="商品评分" :label-width="formLabelWidth">
+               <el-rate v-model="form.rate" allow-half />
+          </el-form-item>
+          <el-form-item label="评论内容" :label-width="formLabelWidth">
+                 <el-input
+                  v-model="form.content"
+                  :autosize="{ minRows: 4, maxRows: 6 }"
+                  type="textarea"
+                  placeholder="Please input"
+                />
+          </el-form-item>
+          </el-form>
+          <template #footer>
+          <span class="dialog-footer">
+              <el-button @click="dialogFormVisible = false">取消</el-button>
+              <el-button type="primary" @click="addComment()"
+              >确认</el-button
+              >
+          </span>
+          </template>
+      </el-dialog>
     </div>
 </template>
 <script>
@@ -156,9 +179,8 @@ import HomeHeader from '../ShopHome/HomeHeader'
 import RecPanel from '../ShopHome/RecPanel'
 import CommentCard from './CommentCard'
 import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
-import { ElNotification} from 'element-plus'
 import {regionData,CodeToText} from 'element-china-area-data'
-
+import {ElNotification,ElMessageBox,ElMessage} from 'element-plus'
 // 级联地址选项。
 const props = {
   expandTrigger: 'hover',
@@ -198,6 +220,11 @@ export default {
             options: regionData,
             selectedOptions: [],
             addtions:{},
+            dialogFormVisible:false,
+            form:{
+              rate:0,
+              content:""
+            }
         }
     },
     computed:{
@@ -282,6 +309,37 @@ export default {
                 })
             }
       },
+      async addComment(){
+        this.dialogFormVisible = false
+        ElMessageBox.confirm(
+            '你确定提交评价吗?',
+            '询问',
+            {
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            type: 'Info',
+            }
+        )
+        .catch(() => {
+            ElMessage({
+                type: 'info',
+                message: '取消提交',
+            })
+        })
+        .then(async () => {
+            await this.$store.dispatch('addComment',{
+              pid:this.goodDetailInfo.pid,
+              uid:this.userData.uid,
+              score:this.form.rate,
+              content:this.form.content
+            }),
+            this.getCommentData();
+            ElMessage({
+                type: 'success',
+                message: '提交成功',
+            })
+        })
+      }
     },
 
   mounted(){

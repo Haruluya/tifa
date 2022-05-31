@@ -157,7 +157,7 @@ export default {
                 this.getLocationData();
                 ElNotification({
                     title: '添加收货地址成功！',
-                    message: countries+'/'+provinces+'/'+city+'/'+detailAddress,
+                    message: countries+'/'+provinces+'/'+city+'/'+this.detailAddress,
                     type: 'success'
                 })
                 } catch (error) {

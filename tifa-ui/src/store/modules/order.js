@@ -1,4 +1,5 @@
-import { postPurchaseRequest,postconfirmDerRequest,postdeleteProductRequest,postconfirmDetoRequest,postSetPaidRequest,postMerchantOrderRequest,postGetOrderDataRequest,postConfirmDeRequest } from "@/api";
+import { postPurchaseRequest,
+  postreturnProductRequest,postconfirmDerRequest,postdeleteProductRequest,postconfirmDetoRequest,postSetPaidRequest,postMerchantOrderRequest,postGetOrderDataRequest,postConfirmDeRequest } from "@/api";
 import defaultImg from '_assets/images/tifa_default_card_img.webp'
 const state = {
   address: [],
@@ -63,6 +64,14 @@ const actions = {
   },
   async confirmDeto({ commit }, data) {
     let result = await postconfirmDetoRequest(data);
+    console.log(result);
+    if (result) {
+    } else {
+        return Promise.reject(new Error("faile"));
+    }
+  },
+  async returnProduct({ commit }, data) {
+    let result = await postreturnProductRequest(data);
     console.log(result);
     if (result) {
     } else {

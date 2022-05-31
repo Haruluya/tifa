@@ -41,6 +41,9 @@ public class Review implements Serializable {
      */
     private Date createdate;
 
+
+    private Integer rate;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

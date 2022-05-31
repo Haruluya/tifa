@@ -8,7 +8,7 @@
                 订单号: {{orderData.ordersData[index].oid}}<el-icon><Collection /></el-icon>
             </div>
             <div class="back" v-if="orderData.ordersData[index].status == 'comment' ">
-                <el-button type="text">请求退货</el-button>
+                <el-button type="text" @click="dialogFormVisible=true">请求退货</el-button>
             </div>
         </div>
         <div class="content">
@@ -44,27 +44,44 @@
                 {{orderData.ordersData[index].status}}
             </div>
         </div>
-        <!-- <el-dialog v-model="dialogFormVisible" title="Shipping address">
+        <el-dialog append-to-body v-model="dialogFormVisible" title="退货申请">
             <el-form :model="form">
-            <el-form-item label="Promotion name" :label-width="formLabelWidth">
-                <el-input v-model="form.name" autocomplete="off" />
+            <el-form-item label="服务类型">
+                <el-radio-group v-model="form.serviceType" size="large">
+                    <el-radio-button label="退货" />
+                    <el-radio-button label="换货" />
+                    <el-radio-button label="补发商品" />
+                </el-radio-group>
             </el-form-item>
-            <el-form-item label="Zones" :label-width="formLabelWidth">
-                <el-select v-model="form.region" placeholder="Please select a zone">
-                <el-option label="Zone No.1" value="shanghai" />
-                <el-option label="Zone No.2" value="beijing" />
+            <el-form-item label="退款类型">
+                <el-radio-group v-model="form.returnType" size="large">
+                    <el-radio-button label="原支付方式返回" />
+                    <el-radio-button label="退款至账户余额" />
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="提交原因">
+                <el-select v-model="form.result" class="m-2" placeholder="Select" size="large">
+                <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+                />
                 </el-select>
             </el-form-item>
+            <el-form-item label="详细描述" :label-width="formLabelWidth">
+                <el-input v-model="form.des" autocomplete="off" type="textarea" />
+            </el-form-item>
             </el-form>
-            <template #footer>
+            <template #footer>  
             <span class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">Cancel</el-button>
-                <el-button type="primary" @click="dialogFormVisible = false"
-                >Confirm</el-button
+                <el-button @click="dialogFormVisible = false">取消</el-button>
+                <el-button type="primary" @click="confirmReturn()"
+                >确认</el-button
                 >
             </span>
             </template>
-        </el-dialog> -->
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -73,9 +90,37 @@ import { ElNotification} from 'element-plus'
 import { ElMessage, ElMessageBox } from 'element-plus'  
 export default {
     name:"ordercard",
-    data:{
-        form:{
-
+    data(){
+        return {
+            dialogFormVisible:false,
+            form:{
+                serviceType:"退货",
+                returnType:"原支付方式返回",
+                result:"1",
+                des:""
+            },
+            options:[
+                {
+                    value:"1",
+                    label:"商品与页面描述不符",
+                },
+                {
+                    value:"2",
+                    label:"质量问题",
+                },
+                {
+                    value:"3",
+                    label:"卖家发错货",
+                },
+                {
+                    value:"4",
+                    label:"发票问题",
+                },
+                {
+                    value:"5",
+                    label:"其他"
+                }
+            ]
         }
     },
     props:{
@@ -146,9 +191,31 @@ export default {
         toComment(){
             this.$router.push("/gooddetail/"+this.orderData.productData[this.index].pid+"?tifa=1");
         },
-        // toBack(){
-
-        // }
+        async confirmReturn(){
+            this.dialogFormVisible = false;
+            ElMessageBox.confirm(
+                '确认提交退货申请?',
+                '询问',
+                {
+                confirmButtonText: '确认',
+                cancelButtonText: '取消',
+                type: 'Info',
+                }
+            )
+            .catch(() => {
+                ElMessage({
+                    type: 'info',
+                    message: '取消提交',
+                })
+            })
+            .then(async () => {
+                await this.$store.dispatch('returnProduct',{oid:this.orderData.ordersData[this.index].oid});
+                ElMessage({
+                    type: 'success',
+                    message: '提交成功',
+                })
+            })
+        }
     },
 }
 </script>

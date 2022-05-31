@@ -59,6 +59,12 @@ const getters = {
       }
       return {};
     },
+    categorys(state){
+      if (state.searchData.categorys){
+        return state.searchData.categorys || [];
+      }
+      return {};
+    },
     searchGoodsImg(state){
       if (state.searchData.imgData){
         return state.searchData.imgData || [];

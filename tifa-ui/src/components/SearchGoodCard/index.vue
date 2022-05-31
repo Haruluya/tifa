@@ -19,7 +19,7 @@
                 {{goodInfo.stock}}评论
             </div>
             <div class="merchant">
-                HUWI旗舰店<el-icon><Present /></el-icon>
+                {{category.categoryname}}<el-icon><Present /></el-icon>
             </div>
 
             <div class="operations">
@@ -49,6 +49,10 @@ export default {
             default:{}
         },
         goodImg:{
+            type:Object,
+            default:{}
+        },
+        category:{
             type:Object,
             default:{}
         }

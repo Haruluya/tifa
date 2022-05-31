@@ -119,4 +119,19 @@ public class OrderController {
         jsonData1.put("productImgData",productimages);
         return AjaxReturnValue.success(jsonData1);
     }
+
+    @PostMapping("/backProduct")
+    public AjaxReturnValue backProduct(@RequestBody JSONData jsonData){
+        Order order = new Order();
+        order.setOid(
+                (Integer) (jsonData.get("oid"))
+        );
+        order.setStatus("return");
+        orderService.updateById(order);
+        return AjaxReturnValue.success();
+    }
+
+
+
+
 }

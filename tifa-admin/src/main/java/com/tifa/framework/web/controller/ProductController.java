@@ -67,14 +67,22 @@ public class ProductController {
                 "pageData",iPage
         );
         ArrayList<Productimage> productimages = new ArrayList<>();
+        ArrayList<Category> categories = new ArrayList<>();
         iPage.getRecords().forEach((item)->{
             productimages.add(productimageService.getOne(
                     new QueryWrapper<Productimage>()
                             .eq("pid",item.getPid())
             ));
+            categories.add(categoryService.getOne(
+                    new QueryWrapper<Category>()
+                            .eq("pid",item.getPid())
+            ));
         });
         rJsonData.put(
                 "imgData",productimages
+        );
+        rJsonData.put(
+                "categorys",categories
         );
         return AjaxReturnValue.success(rJsonData);
     }

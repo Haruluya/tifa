@@ -31,7 +31,7 @@
                         <OrderCard :oData="orderData" :index="index"/>
                     </div>
                 </el-tab-pane>
-                <el-tab-pane label="退货处理" name="back">
+                <el-tab-pane label="退货处理中" name="return">
                     <div class="ordercardItem" v-for="(item,index) in orderData.ordersData">
                         <OrderCard :oData="orderData" :index="index"/>
                     </div>

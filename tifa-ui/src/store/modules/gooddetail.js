@@ -2,7 +2,8 @@
 import {
     postGoodDetailById,
     postUpdateShopCart,
-    postgetCommentData
+    postgetCommentData,
+    postaddCommentData
     
 } from "@/api";
 import defaultImg from '_assets/images/tifa_default_card_img.webp'
@@ -53,8 +54,16 @@ const actions = {
     } else {
       return Promise.reject(new Error("faile"));
     }
+  },
+  async addComment({commit}, data){
+    let result = await postaddCommentData(data);
+    console.log(result);
+    if (result.statusCode == 200) {
+      return "ok";
+    } else {
+      return Promise.reject(new Error("faile"));
+    }
   }
-
 
 }
 

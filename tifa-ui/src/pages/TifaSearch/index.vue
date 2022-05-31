@@ -44,7 +44,8 @@
                           <el-col :span="6" >
                               <SearchGoodCard 
                               :goodImg='searchGoodsImg[(indexRow-1) * 4 + indexCol - 1]' 
-                              :goodInfo= 'searchGoodsList[(indexRow-1) * 4 + indexCol - 1]'/>
+                              :goodInfo= 'searchGoodsList[(indexRow-1) * 4 + indexCol - 1]'
+                              :category='categorys[(indexRow-1) * 4 + indexCol - 1]'/>
                           </el-col>
                         </template>
 
@@ -96,7 +97,7 @@ export default {
     },
     computed:{
       ...mapState([]),
-      ...mapGetters(['pageIndex','searchGoodsList','searchGoodsImg','searchTotalItem']),
+      ...mapGetters(['pageIndex','searchGoodsList','searchGoodsImg','searchTotalItem','categorys']),
     },
     methods: {
         async getSearchData(){

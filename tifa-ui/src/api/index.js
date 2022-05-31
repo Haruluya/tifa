@@ -246,3 +246,17 @@ export const postgetCommentData= (data)=>
         url:`/review/getReviewData`,
         data
     })
+
+export const postreturnProductRequest= (data)=>
+    requests({
+        method:'post',
+        url:`/order_/backProduct`,
+        data
+    })
+
+export const postaddCommentData= (data)=>
+    requests({
+        method:'post',
+        url:`/review/addReview`,
+        data
+    })

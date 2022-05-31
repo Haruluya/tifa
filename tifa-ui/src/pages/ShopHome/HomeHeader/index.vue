@@ -55,8 +55,13 @@ export default {
         }
     },
     methods: {
-        toSearchPage(){
+        async toSearchPage(){
             this.$router.push('/tifasearch/'+(this.searchKey == '' ? 'all':this.searchKey));
+            await this.$store.dispatch("getSearchData", {
+                    'searchKey':this.searchKey,
+                    'pageIndex':1
+                });
+
         },
         toShopHome(){
             this.$router.push('/shophome');
