@@ -22,6 +22,7 @@ module.exports = {
         allowedHosts: [
             '5198y370g3.zicp.vip', 
           ],
+        disableHostCheck:true
 	  },
 
     // 别名配置。

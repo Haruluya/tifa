@@ -129,9 +129,9 @@ public class UserController {
 
     @PostMapping("/locationData")
     public AjaxReturnValue locationData(@RequestBody JSONData data){
-        String phone = (String) (data.get("phone"));
+        String name = (String) (data.get("pname"));
         List<Adressdetail> list = adressdetailService.list(new QueryWrapper<Adressdetail>()
-                .eq("phone",phone)
+                .eq("name",name)
         );
         return AjaxReturnValue.success(list);
     }
@@ -148,5 +148,23 @@ public class UserController {
         userService.updateById(user);
         return AjaxReturnValue.success();
     }
-
+    @PostMapping("/registerMerchantConfim")
+    public AjaxReturnValue registerMerchant(@RequestBody JSONData jsonData){
+        User user = new User();
+        user.setBid(1);
+        user.setUid((Integer) (jsonData.get("uid")));
+        userService.updateById(user);
+        return AjaxReturnValue.success();
+    }
+    @PostMapping("/rePassword")
+    public AjaxReturnValue rePassword(@RequestBody JSONData jsonData){
+        User user = new User();
+        user.setUid(userService.getOne(
+                new QueryWrapper<User>()
+                        .eq("phone",((String) (jsonData.get("phone"))))
+        ).getUid());
+        user.setPassword((String) (jsonData.get("password")));
+        userService.updateById(user);
+        return AjaxReturnValue.success();
+    }
 }

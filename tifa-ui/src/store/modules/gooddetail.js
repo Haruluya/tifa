@@ -2,16 +2,21 @@
 import {
     postGoodDetailById,
     postUpdateShopCart,
+    postgetCommentData
     
 } from "@/api";
 import defaultImg from '_assets/images/tifa_default_card_img.webp'
 const state = {
-    goodData: {}
+    goodData: {},
+    comments:[]
 };
 
 const mutations = {
     GETGOODDATA(state,data){
         state.goodData = data;
+    },
+    SETCOMMENT(state,data){
+      state.comments = data
     }
 }
 
@@ -33,6 +38,17 @@ const actions = {
     let result = await postUpdateShopCart({sid,pid, num});
     console.log(result);
     if (result.statusCode == 200) {
+      return "ok";
+    } else {
+      return Promise.reject(new Error("faile"));
+    }
+  },
+
+  async getCommentData({commit}, data){
+    let result = await postgetCommentData(data);
+    console.log(result);
+    if (result.statusCode == 200) {
+      commit("SETCOMMENT", result.data);
       return "ok";
     } else {
       return Promise.reject(new Error("faile"));
@@ -60,6 +76,9 @@ const getters = {
   },
   categorys(state){
     return state.goodData.productCategoryInfo || ""
+  },
+  comments(state){
+    return state.comments || []
   }
 };
 

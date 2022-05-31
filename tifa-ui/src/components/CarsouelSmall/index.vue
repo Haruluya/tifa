@@ -1,8 +1,8 @@
 <template>
   <div class="mainContainer">
     <el-carousel :height="heighty + 'px'" pause-on-hover>
-      <el-carousel-item v-for="item in 2" :key="item">
-        <el-image :src="list[0]">
+      <el-carousel-item v-for="item in list" :key="item">
+        <el-image :src="item">
         </el-image>
       </el-carousel-item>
     </el-carousel>

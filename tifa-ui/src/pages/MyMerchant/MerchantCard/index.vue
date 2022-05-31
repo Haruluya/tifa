@@ -2,34 +2,23 @@
     <div class="mainContainer">
         <div class="header">
             <div class="time">
-                <el-icon><AlarmClock /></el-icon>{{orderData.ordersData[index].createdate}}
+                <el-icon><AlarmClock /></el-icon>{{merchantProductsData.products[index].createDate}}
             </div>
             <div class="orderId">
-                订单号: {{orderData.ordersData[index].oid}}<el-icon><Collection /></el-icon>
-            </div>
-            <div class="back" v-if="orderData.ordersData[index].status == 'comment' ">
-                <el-button type="text">请求退货</el-button>
+                店铺号: {{merchantProductsData.products[index].bid}}<el-icon><Collection /></el-icon>
             </div>
         </div>
         <div class="content">
             <div class="goodImg">
-                <el-image :src="orderData.productImgData[index].type">
+                <el-image :src="merchantProductsData.productImgs[index].type">
 
                 </el-image>
             </div>
             <div class="title">
-                {{orderData.productData[index].pname}}
+                {{merchantProductsData.products[index].pname}}
             </div>
             <div class="amount">
-                <el-button type="text" @click="confirmDe()" v-if="orderData.ordersData[index].status == 'delivery'">
-                    确认收货
-                </el-button>
-                <el-button type="text" @click="confirmDer()" v-if="orderData.ordersData[index].status == 'paid'">
-                    等待发货
-                </el-button>
-                <el-button type="text" @click="toComment()" v-if="orderData.ordersData[index].status == 'comment' ">
-                    去评价
-                </el-button>
+
             </div>
             <el-divider direction="vertical" />
             <div class="name">
@@ -37,34 +26,16 @@
             </div>
             <el-divider direction="vertical" />
             <div class="price">
-                ￥{{orderData.productData[index].promoteprice}}
+                ￥{{merchantProductsData.products[index].orignalprice}}
             </div>
             <el-divider direction="vertical" />
             <div class="status">
-                {{orderData.ordersData[index].status}}
+                {{merchantProductsData.products[index].stock}}
+            </div>
+            <div class="delete">
+                <el-button type="text" @click="undercarriage()">下架商品</el-button>
             </div>
         </div>
-        <!-- <el-dialog v-model="dialogFormVisible" title="Shipping address">
-            <el-form :model="form">
-            <el-form-item label="Promotion name" :label-width="formLabelWidth">
-                <el-input v-model="form.name" autocomplete="off" />
-            </el-form-item>
-            <el-form-item label="Zones" :label-width="formLabelWidth">
-                <el-select v-model="form.region" placeholder="Please select a zone">
-                <el-option label="Zone No.1" value="shanghai" />
-                <el-option label="Zone No.2" value="beijing" />
-                </el-select>
-            </el-form-item>
-            </el-form>
-            <template #footer>
-            <span class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">Cancel</el-button>
-                <el-button type="primary" @click="dialogFormVisible = false"
-                >Confirm</el-button
-                >
-            </span>
-            </template>
-        </el-dialog> -->
     </div>
 </template>
 <script>
@@ -72,28 +43,20 @@ import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
 import { ElNotification} from 'element-plus'
 import { ElMessage, ElMessageBox } from 'element-plus'  
 export default {
-    name:"ordercard",
-    data:{
-        form:{
-
-        }
-    },
+    name:"merchantcard",
     props:{
-        oData:{
-            default:{}
-        },
         index:{
-            
+            default:0
         }
     },
     computed:{
-      ...mapGetters(['userData','orderData']), 
+      ...mapGetters(['userData','merchantProductsData']), 
 
     },
     methods: {
-        async confirmDe(){
+        async undercarriage(){
             ElMessageBox.confirm(
-                '确认收货?',
+                '确认下架商品?',
                 '询问',
                 {
                 confirmButtonText: '确认',
@@ -108,47 +71,17 @@ export default {
                 })
             })
             .then(async () => {
-                let oid = this.oData.ordersData[this.index].oid;
-                await this.$store.dispatch('confirmDe',{oid});
-                this.$router.push('/userinfo/myorder');
+                let pid = this.merchantProductsData.products[this.index].pid;
+                await this.$store.dispatch('deleteProduct',{pid});
+                await this.$store.dispatch('getMerchantProductData',{uid:this.userData.uid});
                 ElMessage({
                     type: 'success',
                     message: '更新成功',
                 })
             })
-        },
-        async confirmDer(){
-            ElMessageBox.confirm(
-                '确认发货?',
-                '询问',
-                {
-                confirmButtonText: '确认',
-                cancelButtonText: '取消',
-                type: 'Info',
-                }
-            )
-            .catch(() => {
-                ElMessage({
-                    type: 'info',
-                    message: '取消提交',
-                })
-            })
-            .then(async () => {
-                let oid = this.orderData.ordersData[this.index].oid;
-                await this.$store.dispatch('confirmDeto',{oid});
-                this.$router.push('/userinfo/myorder');
-                ElMessage({
-                    type: 'success',
-                    message: '更新成功',
-                })
-            })
-        },
-        toComment(){
-            this.$router.push("/gooddetail/"+this.orderData.productData[this.index].pid+"?tifa=1");
-        },
-        // toBack(){
-
-        // }
+        }
+    },
+    mounted() {
     },
 }
 </script>
@@ -157,7 +90,7 @@ export default {
         border: 1px solid rgb(128, 128, 128);
         margin-top: 15px;
         box-shadow: rgba(18, 18, 18, 0.1) 0px 1px 3px 0px;
-
+        height: 150px !important;
         &:hover{
             transform: scale(1.01);
             cursor: pointer;
@@ -231,6 +164,10 @@ export default {
                 margin-left: 10px;
                 margin-top: 20px;
             }
+        }
+        .delete{
+            margin-top: 20px;
+            margin-left: 15px;
         }
     }
 </style>

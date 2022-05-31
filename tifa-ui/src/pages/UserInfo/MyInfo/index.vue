@@ -33,6 +33,9 @@
                 头像:
                 <el-input v-model="headpicture" :placeholder="userData.headpicture" clearable size="large" />
             </div>
+            <div class="headImg">
+                <el-image v-if="userData.headpicture" :src="userData.headpicture"></el-image>
+            </div>
             <div class="email">
                 邮箱:
                 <el-input v-model="email" :placeholder="userData.email" clearable size="large" />
@@ -381,6 +384,10 @@ export default {
             margin-top: 20px;
             margin-left: 250px;
         }
+
     }
-    
+    .headImg{
+        margin-top: 15px;
+        width: 100px;
+    }
 </style>

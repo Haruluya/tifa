@@ -40,5 +40,12 @@ alipay:
   publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgbOQI8Fajs+MHsJ0/l7pL+UTNKie61PP7zMg+u2gDkjkol3Ei8Na+LA79IsIq2/uyWCm44/oFRpNd9WMOZxfhC8RGKK0lTDYgcBj/FZMevvpbruNC2rFZWKib6I6EDpWyS6LOd8IDfKheAopiHPgvbqHpiYMlCOn6A2NQ6WIS6QCPrgyUQXziv+X68uvXrDtTHkT4r7R/UKMCVu8iCPCZZDaE9TV/NVgoob2YQ8+eywBQOeQDw+2ediPI1fkkx/3pME85IKIfOnEdt2HIw9Lhhh0+qShAg24dbw6r4odSnRV01Jx4sZD1CgQoWTCOPNAiHCFOf2/AWp4L4AQi8ozzQIDAQAB
   gateway: openapi.alipaydev.com
   returnUrl: http://localhost:8082/purchasefinish
-  #支付成功的接口回调，我们还没写，先空着
   notifyUrl: http://5198y370g3.zicp.vip/tifai/pay/fallback
+
+
+
+wx:
+  open:
+    app_id: wxb0a9ca55294303da
+    app_secret: a5078045d4e04086f64f3e4bf918c091
+    redirect_url: http://5198y370g3.zicp.vip/tifai/wx/callback

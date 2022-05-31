@@ -1,7 +1,7 @@
 import axios from "axios";
 import nprogress from "nprogress";
 import "nprogress/nprogress.css";
-
+import { ElNotification} from 'element-plus'
 
 //@date 2022/3/30 
 // INFO:axios配置文件。

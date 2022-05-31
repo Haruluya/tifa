@@ -158,6 +158,91 @@ export const postClearCartRequest = (data)=>
 export const postGetOrderDataRequest = (data)=>
     requests({
         method:'post',
-        url:`/order_/getOrderData`,
+        url:`/order_/orderData`,
+        data
+    })
+
+export const postConfirmDeRequest = (data)=>
+    requests({
+        method:'post',
+        url:`/order_/confimDe`,
+        data
+    })
+export const postSetPaidRequest = (data)=>
+    requests({
+        method:'post',
+        url:`/pay/fallback`,
+        data
+    })
+export const postMerchantProductDataRequest = (data)=>
+    requests({
+        method:'post',
+        url:`/product/getMerchantProductData`,
+        data
+    })
+
+
+export const postAddProductRequest = (data)=>
+    requests({
+        method:'post',
+        url:`/product/addProduct`,
+        data
+    })
+
+export const postMerchantOrderRequest = (data)=>
+    requests({
+        method:'post',
+        url:`/order_/merchantOrders`,
+        data
+    })
+
+export const postconfirmDetoRequest = (data)=>
+    requests({
+        method:'post',
+        url:`/order_/confirmDeto`,
+        data
+    })
+export const postdeleteProductRequest = (data)=>
+    requests({
+        method:'post',
+        url:`/product/deleteMeProduct`,
+        data
+    })
+    
+export const postregisterMerchantConfim= (data)=>
+    requests({
+        method:'post',
+        url:`/user/registerMerchantConfim`,
+        data
+    })
+export const getCode= (data)=>
+    requests({
+        method:'post',
+        url:`/wx/login`,
+        data
+    })
+export const isLogin= (data)=>
+    requests({
+        method:'post',
+        url:`/wx/islogin`,
+        data
+    })
+export const postSendCodeConfim= (data)=>
+    requests({
+        method:'get',
+        url:`/code/fitness`,
+        params:data
+    })
+export const rePassword= (data)=>
+    requests({
+        method:'post',
+        url:`/user/rePassword`,
+        data
+    })
+
+export const postgetCommentData= (data)=>
+    requests({
+        method:'post',
+        url:`/review/getReviewData`,
         data
     })

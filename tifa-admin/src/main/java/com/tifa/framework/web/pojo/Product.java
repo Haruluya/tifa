@@ -46,6 +46,10 @@ public class Product implements Serializable {
      */
     private Integer stock;
 
+
+
+    private Integer bid;
+
     /**
      * 
      */
@@ -53,4 +57,6 @@ public class Product implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
+
 }

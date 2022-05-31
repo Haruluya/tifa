@@ -97,7 +97,7 @@
             <el-aside width="300px">
               <div class="merchant">
                 <div class="title">
-                  {{categorys.categoryname}}
+                  {{goodData.merchantName}}
                 </div>
                 <el-divider></el-divider>
                 <div class="score">
@@ -135,8 +135,16 @@
                     </div>
                   </div>
                 </el-tab-pane>
-                <el-tab-pane label="售后保障" name="guarantee">Config</el-tab-pane>
-                <el-tab-pane label="商品评价" name="comment">Role</el-tab-pane>
+                <el-tab-pane label="售后保障" name="guarantee">暂无</el-tab-pane>
+                <el-tab-pane label="商品评价" name="comment">
+                  <div class="ctitle">
+                    TIFA商品评价
+                    <el-button type="text" v-show="this.$route.query.tifa">添加评论</el-button>
+                  </div>
+                  <div class="ccard" v-for="(item,index) in comments">
+                    <CommentCard :info="item"/>
+                  </div>
+                </el-tab-pane>
               </el-tabs>
             </el-main>
           </el-container>
@@ -146,7 +154,7 @@
 <script>
 import HomeHeader from '../ShopHome/HomeHeader'
 import RecPanel from '../ShopHome/RecPanel'
-
+import CommentCard from './CommentCard'
 import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
 import { ElNotification} from 'element-plus'
 import {regionData,CodeToText} from 'element-china-area-data'
@@ -166,7 +174,8 @@ export default {
     name: 'gooddetail',
     components:{
         HomeHeader,
-        RecPanel
+        RecPanel,
+        CommentCard,
     },
     
 
@@ -192,7 +201,7 @@ export default {
         }
     },
     computed:{
-      ...mapGetters(['goodData','goodDetailInfo','goodImg','categorys']), 
+      ...mapGetters(['goodData','comments','goodDetailInfo','goodImg','categorys','userData']), 
 
     },
 
@@ -231,10 +240,24 @@ export default {
                 })
             }
       },
+      async getCommentData(){
+        try {
+              await this.$store.dispatch("getCommentData", {
+                pid:this.goodDetailInfo.pid
+              });
+            } catch (error) {
+                ElNotification({
+                    title: '请求评论数据失败！',
+                    message: error,
+                    type: 'error'
+                })
+            }
+      },
       async addShopCard(pid, num){
           try {
+            console.log(this.userData.uid,"XXXXXXXXXXX")
               await this.$store.dispatch("addGoddToShopCart", {
-                sid:this.$store.getters.userData.uid,
+                sid:this.userData.uid,
                 pid,
                 num
               });
@@ -262,7 +285,8 @@ export default {
     },
 
   mounted(){
-    this.getGoodData()
+    this.getGoodData();
+    this.getCommentData();
   },
 
     
@@ -458,6 +482,18 @@ export default {
           height: 200px;
 
 
+        }
+        .ctitle{
+          font-size: 25px;
+          color: red;
+          font-weight: bold;
+          .el-button{
+            margin-left: 400px;
+          }
+        }
+        .ccard{
+            overflow: hidden;
+            margin-top: 20px;
         }
     }
 </style>

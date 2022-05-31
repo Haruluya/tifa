@@ -31,6 +31,7 @@ const actions = {
   //删除购物车某一个产品
   async deleteCartByGoodId({ commit }, data) {
     let result = await postDeleteCartByGoodId(data);
+
     if (result.statusCode == 200) {
       return "ok";
     } else {

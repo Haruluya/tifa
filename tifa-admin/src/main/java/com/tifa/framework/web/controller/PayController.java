@@ -1,11 +1,13 @@
 package com.tifa.framework.web.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tifa.framework.web.pojo.Order;
 import com.tifa.framework.web.pojo.Orderitem;
 import com.tifa.framework.web.pojo.PaymentBO;
 import com.tifa.framework.web.service.PayService;
 import com.tifa.framework.web.service.impl.OrderServiceImpl;
+import com.tifa.framework.web.service.impl.ProductServiceImpl;
 import com.tifa.framework.web.util.JSONData;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,6 +36,8 @@ public class PayController {
     @Autowired
     private OrderServiceImpl orderService;
 
+    @Autowired
+    private ProductServiceImpl productService;
     /**
      *  下单支付
      * */
@@ -50,10 +55,12 @@ public class PayController {
         order.setUid((Integer) (jsonData.get("uid")));
         order.setAid((Integer) (jsonData.get("aid")));
         order.setUsermessage((String) (jsonData.get("pids")));
-
+        order.setBid(
+                productService.getById(
+                        Integer.parseInt(((String)(jsonData.get("pids"))).split("#")[0])
+                ).getBid()
+        );
         orderService.save(order);
-
-
         return payService.pay(paymentBO);
     }
 
@@ -65,13 +72,14 @@ public class PayController {
     public Object fallback (HttpServletRequest request) {
 
         Order order = new Order();
-        order.setOid(new Long(orderService.count()).intValue());
+        List<Order> list = orderService.list();
+        order.setOid(list.get(list.size()-1).getOid());
         order.setPaydate(new Timestamp(System.currentTimeMillis()));
         order.setStatus("paid");
 
         orderService.updateById(order);
 
-        return order;
+        return "success";
     }
 
 

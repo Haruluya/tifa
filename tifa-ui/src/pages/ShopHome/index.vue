@@ -34,11 +34,11 @@
                 <el-aside>
                     <div class="sideLeft">
                         <div v-for="index in 3" :key="index" class="swiperItem">
-                            <CarsouelSmall  :list="imgList" :heighty="160"/>
+                            <CarsouelSmall  :list="imgList[index-1]" :heighty="160"/>
                         </div>
                     </div>
                     <div class="sideRight">
-                        <el-avatar :size="100" :src="avatar">
+                        <el-avatar :size="100" :src="userData.headpicture" >
                         </el-avatar>
                         <div class="name">
                             <el-link :underline="false" href="userinfo">
@@ -53,7 +53,8 @@
                             <div v-else class="logoutButton"> 
                                 <el-button type="danger" size="large" round="true" @click="logout()">退出登录</el-button>
                             </div>
-                            <el-button type="warning" size="large" round="true">开店</el-button>
+                            <el-button type="warning" size="large" round="true" @click="rigisterMerchant()"  v-if="userData.bid == 0">开店</el-button>
+                            <el-button type="warning" size="large" round="true" @click="toMyMerchant()" v-if="userData.bid == 1">我的店铺</el-button>
                         </div>
                         <el-divider/>
                         <div class="messages">
@@ -116,6 +117,7 @@ import DiscountCard from '@/components/DiscountCard'
 import RecPanel from './RecPanel'
 import ClassNav from './ClassNav'
 import { ElMessage } from 'element-plus'
+import {setToken,getToken,removeToken} from "_utils/token.js";
 import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
 export default {
     name: 'shopHome',
@@ -131,8 +133,14 @@ export default {
     },
     data() {
         return {
-            imgList:['https://img13.360buyimg.com/babel/s380x300_jfs/t1/218488/40/5653/59138/619f5baeE41826177/b34b03472140e1a7.jpg.webp'],
-            avatar:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+            imgList:[
+                ['https://img30.360buyimg.com/babel/s380x300_jfs/t1/103723/16/29112/51630/628b7875Efc4c213c/d7424fb6e69a4bf1.jpg.webp',
+            'https://img14.360buyimg.com/pop/s380x300_jfs/t1/131225/12/22254/35823/627b8fedE0d4083ce/d8b18935f5e5bef4.jpg.webp',],
+                ['https://img10.360buyimg.com/babel/s380x300_jfs/t1/199340/37/14735/61658/6177b8feE39d10d2d/f8e14e3933664a77.jpg.webp',
+                'https://img12.360buyimg.com/babel/s380x300_jfs/t1/152314/13/19839/57522/603e118dE941f0ce9/fdff58457adbef3e.jpg.webp'],
+                ['https://img11.360buyimg.com/da/s380x300_jfs/t1/113365/25/5075/43154/5eb198d2Eb7072325/c683b2d423b69d94.png.webp',
+                'https://img10.360buyimg.com/da/s380x300_jfs/t1/54919/6/5487/49135/5d31b9c1E616887be/986d66adc9133205.png.webp']
+            ],
             messages:['中华老字号同仁堂：“同修仁德，济世养生”',
                         '全自动化正当道，传统坐便器已经out啦！',
                         '夏日里一个清凉的机会都不要错过，就连吃也是一样',
@@ -143,9 +151,10 @@ export default {
             recTitle:["基于Spark SQL的最近热点商品推荐",
                         "基于Spark SQL的最多评分推荐",
                         "基于kafka,spark stream的实时推荐",
-                        ]
+                        ],
         }
     },
+
     methods: {
         toLogin(){
             this.$router.push('tifalogin');
@@ -163,15 +172,26 @@ export default {
             }catch(error){
                 ElMessage.error(error);
             }
+        },
+        rigisterMerchant(){
+            this.$router.push({name:"tifaregister",query:{isMerchant:true}})
+        },
+        toMyMerchant(){
+            this.$router.push('/mymerchant');
         }
     },
     computed:{
       ...mapState({
 
         }),
-      ...mapGetters(['userName'])
+      ...mapGetters(['userName','userData','token'])
     },
+    mounted() {
+        if (getToken()){
+            this.$store.dispatch('getNowUserData',getToken());
+        }
 
+    },
 }
 </script>
 <style lang="less" scoped>

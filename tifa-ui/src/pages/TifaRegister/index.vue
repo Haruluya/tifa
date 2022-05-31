@@ -8,7 +8,8 @@
             <div class="steps">
                 <el-steps :active="registerStep" finish-status="success" simple style="margin-top: 20px">
                     <el-step title="手机号绑定" />
-                    <el-step title="身份信息填写" />
+                    <el-step title="身份信息填写" v-show="!isMerchant"/>
+                    <el-step title="店铺信息认证" v-show="isMerchant"/>
                     <el-step title="注册成功" />
                 </el-steps>
             </div>
@@ -33,13 +34,13 @@
                         placeholder="输入验证码"
                         />
                     </el-form-item>
-                    <el-button type="primary">发送验证码</el-button>
+                    <el-button type="primary" @click="sendCode()">{{codeButtonCt}}</el-button>
                 </div>
               </div>
             </el-form>
             <el-form :model="secondStepFormModel" :rules="secondStepFormRules" ref="secondStepFormModel">
 
-            <div class="inputPanel" v-if="registerStep == '2'">
+            <div class="inputPanel" v-if="(registerStep == '2' && !isMerchant)">
                 <div class="userName infoInpute" >
                     <div class="loginIcon"><el-icon><User /></el-icon></div>
                     <el-form-item prop="secondStepFormModel.userName">
@@ -86,11 +87,66 @@
                      </el-form-item>
                 </div>
             </div>
+            <div class="merchant" v-if="isMerchant && registerStep == '2' ">
+                <el-form
+                ref="merchantStepFormModelRef"
+                :model="merchantStepFormModel"
+                label-width="120px"
+                :size="formSize"
+            >
+                <el-form-item label="店铺名称" prop="name">
+                <el-input v-model="merchantStepFormModel.merchantName" />
+                </el-form-item>
+                <el-form-item label="开店时间" required>
+                <el-col :span="11">
+                    <el-form-item prop="date1">
+                    <el-date-picker
+                        v-model="merchantStepFormModel.openDate"
+                        type="date"
+                        label="Pick a date"
+                        placeholder="Pick a date"
+                        style="width: 100%"
+                    />
+                    </el-form-item>
+                </el-col>
+                <el-col class="text-center" :span="2">
+                    <span class="text-gray-500">-</span>
+                </el-col>
+                <el-col :span="11">
+                    <el-form-item prop="date2">
+                    <el-time-picker
+                        v-model="merchantStepFormModel.openTime"
+                        label="Pick a time"
+                        placeholder="Pick a time"
+                        style="width: 100%"
+                    />
+                    </el-form-item>
+                </el-col>
+                </el-form-item>
+                <el-form-item label="店铺种类" prop="type">
+                <el-checkbox-group v-model="merchantStepFormModel.type">
+                    <el-checkbox label="售后服务" name="type" />
+                    <el-checkbox label="七天无理由退款" name="type" />
+                    <el-checkbox label="只线上服务" name="type" />
+                    <el-checkbox label="遵守tifa优惠政策" name="type" />
+                </el-checkbox-group>
+                </el-form-item>
+                <el-form-item label="店铺类型" prop="resource">
+                <el-radio-group v-model="merchantStepFormModel.resource">
+                    <el-radio label="个人" />
+                    <el-radio label="企业" />
+                </el-radio-group>
+                </el-form-item>
+                <el-form-item label="店铺描述" prop="desc">
+                <el-input v-model="merchantStepFormModel.desc" type="textarea" />
+                </el-form-item>
+            </el-form>
+            </div>
             </el-form>
          
 
 
-            <div class="inputPanel" v-if="registerStep == '3'">
+            <div class="inputPanel" v-if="registerStep == 3">
                 <el-result
                     icon="success"
                     title="注册成功！"
@@ -118,16 +174,20 @@
 <script>
 import HomeHeader from '../ShopHome/HomeHeader'
 import { ElMessage, ElMessageBox,ElNotification} from 'element-plus'
-
+import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
 export default {
     name:"tifaregister",
     components:{
         HomeHeader,
     },
+    computed:{
+      ...mapGetters(['userData','code'])
+    },
     data() {
         return {
             registerStep:1,
-
+            isMerchant:false,
+            codeButtonCt:"发送验证码",
             firstStepFormModel:{
                 phone:'',
                 code:''
@@ -137,6 +197,14 @@ export default {
                 password:"",
                 confirmPassword:"",
                 email:""  
+            },
+            merchantStepFormModel:{
+                merchantName:"",
+                openDate:"",
+                openTime:"",
+                type:[],
+                resource:"",
+                desc:"",
             },
             firstStepFormRules:{
                 phone:[
@@ -162,7 +230,6 @@ export default {
                     { type: 'email', message: '邮箱格式错误！', trigger: ['blur', 'change']},
                 ]
             },
-           
 
         }
     },
@@ -172,17 +239,17 @@ export default {
         stepAdd(){
             if (this.registerStep == 1){
                 this.$refs['firstStepFormModel'].validate((result) => {
-                    if (result) {
+                    if (result && this.code == this.firstStepFormModel.code) {
                         this.$message.success('验证通过')
                         this.registerStep++;
                     } else {
 
-                        this.$message.error('表单格式不正确！')
+                        this.$message.error('验证码不正确！')
                     }
                 })
 
             }
-            if (this.registerStep == 2){
+            if (this.registerStep == 2 && !this.isMerchant){
                 this.$refs['secondStepFormModel'].validate((result) => {
                     if (result) {
                         ElMessageBox.confirm(
@@ -196,16 +263,40 @@ export default {
                         )
                         .then(() => {
                             this.commitRegister();
+                            this.registerStep++;
+                            ElMessage({
+                                type: 'success',
+                                message: '提交成功',
+                            })
                         })
                         .catch(() => {
-                            ElMessage({
-                                type: 'warning',
-                                message: '取消提交',
-                            })
+
                         })
                     } else {
                         this.$message.error("表单格式错误！")
                     }
+                })
+            }
+            if (this.registerStep == 2 && this.isMerchant){
+                ElMessageBox.confirm(
+                    '提交店铺信息？',
+                    'info',
+                    {
+                        confirmButtonText: '提交',
+                        cancelButtonText: '取消',
+                        type: 'info',
+                    }
+                )
+                .then(() => {
+                    this.$store.dispatch("registerMerchant",{uid:this.userData.uid})
+                    this.registerStep++;
+                    ElMessage({
+                        type: 'success',
+                        message: '提交成功',
+                    })
+                })
+                .catch(() => {
+
                 })
             }
         },
@@ -226,7 +317,6 @@ export default {
                     "phone":this.firstStepFormModel.phone,
                     "email":this.secondStepFormModel.email,
                 });
-                this.$router.push("/tifalogin");
                 ElNotification({
                     title: '注册成功',
                     message: '你已成为TIFA新用户！',
@@ -240,7 +330,16 @@ export default {
                 })
             }
         },
+        async sendCode(){
+            this.codeButtonCt = "请填写验证码";
+            await this.$store.dispatch('sendCode',{phone:this.firstStepFormModel.phone})
+        }
     },
+    mounted() {
+        this.isMerchant = this.$route.query.isMerchant;
+    },
+
+
 }
 </script>
 <style lang="less" scoped>
@@ -344,7 +443,9 @@ export default {
         transform: translateX(-80px);
     }
 
-    
+    .merchant{
+        margin-top: 50px;
+    }
 
     
 </style>

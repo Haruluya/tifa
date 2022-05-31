@@ -1,6 +1,6 @@
 <template>
     <div class="mainContainer">
-        <div v-for="(item, index) in classList" class="firstClass">
+        <div v-for="(item, index) in classList" class="firstClass" @click="this.$router.push('/tifasearch/'+item)">
             <el-icon><ArrowRightBold /></el-icon>
             <span>
                 {{item}}
@@ -13,8 +13,8 @@ export default {
     name:"classnav",
     data() {
         return {
-            classList:["家用电器","手机/运营商","电脑/办公","家居/家具/家装",
-                            "男装/女装/童装/内衣","美妆","女鞋","男鞋","房产",
+            classList:["安莉芳","时尚外穿","淑女睡裙","趣味图案",
+                            "法语","财富","日语能力考试","男鞋","房产",
                             "玩具乐器","食品","艺术","医药保健","图书","机票",
                             "理财","安装","工业品"],
 

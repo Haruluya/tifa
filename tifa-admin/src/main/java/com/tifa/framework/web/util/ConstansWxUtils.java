@@ -1,6 +1,10 @@
 package com.tifa.framework.web.util;
 
-//实现InitializingBean调用afterPropertiesSet()方法进行赋值
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+
 @Component
 public class ConstansWxUtils implements InitializingBean {
     @Value("${wx.open.app_id}")

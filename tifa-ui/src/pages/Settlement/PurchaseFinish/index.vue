@@ -13,6 +13,9 @@
 <script>
 export default {
     name:"purchasefinish",
+    async mounted() {
+        await this.$store.dispatch('setPaid');
+    },
 
 }
 </script>

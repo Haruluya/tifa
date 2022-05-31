@@ -61,6 +61,8 @@ public class Order implements Serializable {
      */
     private String status;
 
+    private Integer bid;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

@@ -3,10 +3,10 @@
         <div class="mainContainer">
             <div class="title">
                 <span>每日特价 <el-icon><arrow-right-bold /></el-icon></span>
-                <img src="https://img20.360buyimg.com/babel/s580x740_jfs/t1/169223/11/9002/236742/603f38feEa4a8d83e/4ace79eafcac855c.jpg!cc_290x370.webp"/>
+                <img src="https://img14.360buyimg.com/n7/jfs/t1/128959/39/25809/179557/61ab35c5Ef63bf787/a70bc4b79e905715.jpg"/>
             </div>
             <div class="taps">
-                <el-tabs v-model="activeTab" class="demo-tabs" @tab-click="handleClick">
+                <el-tabs v-model="evaluationActiveTab" class="demo-tabs" @tab-click="handleClick">
                     <el-tab-pane v-for="(panel,index) in panelInfo" :label="panel.label" :name="panel.name">
                         <div class="infos">
                             <div v-for="(item,index) in cardImgList[panel.name]" :key="index" class="info">
@@ -28,7 +28,7 @@ export default {
     name: 'discountcard',
     data() {
         return {
-            activeTap:'food',
+            evaluationActiveTab:"food",
             cardImgList:{
                 'food' : [
                     {
@@ -37,28 +37,50 @@ export default {
                         price: '6.9'
                     },
                     {
-                        src:'https://img14.360buyimg.com/seckillcms/s144x144_jfs/t1/125505/3/21820/70760/61e13dbaEcb8f3e38/d3eb778ea95216ba.jpg!q70.jpg.webp',
+                        src:'https://img30.360buyimg.com/seckillcms/s144x144_jfs/t1/159275/14/13667/986516/60506604Ebd88b35d/57e1d550983f0d33.png!q70.jpg.webp',
                         title: '金丝黄菊一朵大降价',
-                        price: '6.9'
+                        price: '16.9'
                     },
                     {
-                        src:'https://img14.360buyimg.com/seckillcms/s144x144_jfs/t1/125505/3/21820/70760/61e13dbaEcb8f3e38/d3eb778ea95216ba.jpg!q70.jpg.webp',
+                        src:'https://img12.360buyimg.com/seckillcms/s144x144_jfs/t1/136619/38/24429/176595/6232eb30E085ca9ec/4bb4a4769ca8419f.jpg!q70.jpg.webp',
                         title: '金丝黄菊一朵大降价',
-                        price: '6.9'
+                        price: '16.9'
                     },
                 ],
-                'tool' : [],
-                'car' : [],
-                'weapon' : []
+                'tool' : [
+                    {
+                        src:'https://img11.360buyimg.com/n7/jfs/t1/121041/38/13446/30347/5f6d9c88Eb0e218ea/3e4d4b75899863da.jpg',
+                        title: '金丝黄菊一朵大降价',
+                        price: '666.9'
+                    }
+                ],
+                'car' : [
+                    {
+                        src:'https://img14.360buyimg.com/n7/jfs/t1/173965/27/28226/200160/62172865E8ad007de/9199a2e185d64aaa.jpg',
+                        title: '金丝黄菊一朵大降价',
+                        price: '66666.9'
+                    }
+                ],
+                'weapon' : [
+                    {
+                        src:'https://img11.360buyimg.com/n7/jfs/t1/78468/5/17800/845352/6275fc4dEcf974d3a/10eb90a2cf4aa4d6.png',
+                        title: '金丝黄菊一朵大降价',
+                        price: '7896.99'
+                    }
+                ]
             },
             panelInfo: [
                 {label:"美食", name:"food"},
                 {label:"工具", name:"tool"},
                 {label:"车", name:"car"},
                 {label:"武器", name:"weapon"}
-            ]
+            ],
+
 
         }
+    },
+    mounted() {
+        this.activeTap = "food";
     },
 }
 </script>

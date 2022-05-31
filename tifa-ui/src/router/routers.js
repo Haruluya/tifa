@@ -23,7 +23,7 @@ router.beforeEach(async (to, from, next) => {
    //登录状态。
    if(token){
     // 拒绝访问login、register页面。
-      if(to.path=="/tifalogin"||to.path=='/tifaregister'){
+      if(to.path=="/tifalogin"){
         next('/');
       }else{
       if(name){

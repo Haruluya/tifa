@@ -61,7 +61,7 @@ const getters = {
     },
     searchGoodsImg(state){
       if (state.searchData.imgData){
-        return state.searchData.imgData.records || [];
+        return state.searchData.imgData || [];
       }
       return {};
     }

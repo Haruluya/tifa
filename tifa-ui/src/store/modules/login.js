@@ -1,13 +1,18 @@
 import {
     postLoginConfirm,
     postLogout,
-    getUserData 
+    getUserData,
+    getCode,
+    isLogin,
+    rePassword
   } from "_api";
 import {setToken,getToken,removeToken} from "_utils/token.js";
-
+import { ElNotification} from 'element-plus'
 const state = {
     token: getToken(),
     userData:{},
+    codeUrl:"",
+    isLogin:false
 };
 
 const mutations = {
@@ -22,6 +27,13 @@ const mutations = {
         state.userData={};
         //本地存储数据清空
         removeToken();
+    },
+    SETCODEURL(state,codeUrl){
+        state.codeUrl = codeUrl
+    },
+    ISLOGIN(state,data){
+        setToken(data.token);
+        state.isLogin = true;
     }
 
 };
@@ -53,14 +65,32 @@ const actions = {
     // 获取用户信息。
     async getNowUserData({commit},token){
         let result = await getUserData(token);
-        //action里面不能操作state，提交mutation修改state
+        console.log(result);
         if(result.statusCode==200){
             commit("GETUSERDATA",result.data);
         }else{
             return Promise.reject(new Error('faile'));
         }
     },
+    async getCode({commit},token){
+        let result = await getCode();
+        if(result.statusCode==200){
+            commit("SETCODEURL",result.data);
+        }else{
+            return Promise.reject(new Error('faile'));
+        }
+    },
+    async islogin({commit}){
+        let result = await isLogin();
+        if(result.statusCode==200){
+            commit('ISLOGIN', result.data);
 
+        }
+    },
+    async rePassword({commit},data){
+        let result = await rePassword(data);
+        console.log(result);
+    },
 };
 
 const getters = {
@@ -72,6 +102,12 @@ const getters = {
     },
     token(state){
         return state.token || "";
+    },
+    codeUrl(state){
+        return state.codeUrl || ""
+    },
+    isLogin(state){
+        return state.isLogin || false
     }
 };
 

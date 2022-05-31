@@ -171,7 +171,7 @@ export default {
         async getLocationData(){
           try {
               await this.$store.dispatch("getLocationData", {
-                phone:this.$store.getters.userData.phone,
+                pname:this.$store.getters.userData.uname,
               });
             } catch (error) {
                 ElNotification({

@@ -39,8 +39,8 @@
 
                     </div>
                     <div class="goodCards" >
-                        <el-row v-for="indexRow in searchGoodsList.length / 4" :key="indexRow">
-                        <template v-for="indexCol in 4" :key="indexCol">
+                        <el-row v-for="indexRow in (searchGoodsList.length / 4 < 1 ? 1 :searchGoodsList.length / 4)" :key="indexRow">
+                        <template v-for="indexCol in (searchGoodsList.length / 4 < 1 ?searchGoodsList.length : 4)" :key="indexCol">
                           <el-col :span="6" >
                               <SearchGoodCard 
                               :goodImg='searchGoodsImg[(indexRow-1) * 4 + indexCol - 1]' 
@@ -68,7 +68,7 @@
            <el-pagination
             background
             v-model:currentPage="currentPage"
-            page-size="20"
+            :page-size="20"
             layout="prev, pager, next, jumper"
             :total="searchTotalItem"
             @current-change="handleCurrentChange"

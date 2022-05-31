@@ -185,5 +185,35 @@ export const routes = [
       meta:{
         showFooter:true,
       },
+    },
+    {
+      path: '/loginsuccess',
+      name:'loginsuccess',
+      component: () => import('_pages/TifaLogin/LoginSuccess'),
+      meta:{
+        showFooter:false,
+      },
+    },
+    {
+      path: '/mymerchant',
+      name:'mymerchant',
+      component: () => import('_pages/MyMerchant'),
+      meta:{
+        showFooter:true,
+      },
+      children:[
+        {
+          path:"",
+          component:() => import('_pages/MyMerchant/MyProducts')
+        },
+        {
+          path:"mymorder",
+          component:() => import('_pages/MyMerchant/MyOrders')
+        },
+        {
+          path:"myproduct",
+          component:() => import('_pages/MyMerchant/MyProducts')
+        },
+      ]
     }
   ]

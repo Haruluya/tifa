@@ -21,7 +21,7 @@ export default {
                     pids:this.pids,
                     aid:this.locationData[0].aid
                 });
-                await this.$store.dispatch('clearCart',this.userData.uid);
+                await this.$store.dispatch('clearCart',{uid:this.userData.uid});
                 document.getElementById("content").innerHTML = this.htmlText;
                 document.forms[0].submit();
                 } catch (error) {

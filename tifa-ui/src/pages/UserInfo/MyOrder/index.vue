@@ -6,19 +6,35 @@
         </div>
         <div class="tabs"> 
             <el-tabs v-model="activeTab" @tab-click="handleClick">
-                <el-tab-pane label="全部订单" name="create">
-                    <div class="ordercardItem" v-for="index in 5">
-                        <OrderCard/>
+                <el-tab-pane label="全部订单" name="all">
+                    <div class="ordercardItem" v-for="(item,index) in orderData.ordersData">
+                        <OrderCard :oData="orderData" :index="index"/>
                     </div>
                 </el-tab-pane>
-                <el-tab-pane label="待付款" name="paid">
-
+                <el-tab-pane label="待付款" name="create">
+                    <div class="ordercardItem" v-for="(item,index) in orderData.ordersData">
+                        <OrderCard :oData="orderData" :index="index"/>
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="待发货" name="paid">
+                    <div class="ordercardItem" v-for="(item,index) in orderData.ordersData">
+                        <OrderCard :oData="orderData" :index="index"/>
+                    </div>
                 </el-tab-pane>
                 <el-tab-pane label="待收货" name="delivery">
-
+                    <div class="ordercardItem" v-for="(item,index) in orderData.ordersData">
+                        <OrderCard :oData="orderData" :index="index"/>
+                    </div>
                 </el-tab-pane>
                 <el-tab-pane label="待评价" name="comment">
-
+                    <div class="ordercardItem" v-for="(item,index) in orderData.ordersData">
+                        <OrderCard :oData="orderData" :index="index"/>
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="退货处理" name="back">
+                    <div class="ordercardItem" v-for="(item,index) in orderData.ordersData">
+                        <OrderCard :oData="orderData" :index="index"/>
+                    </div>
                 </el-tab-pane>
             </el-tabs>
         </div>
@@ -30,25 +46,27 @@
 <script>
 import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
 import OrderCard from './OrderCard'
+
 export default {
     name:"myorder",
     components:{
         OrderCard
     },
     computed:{
-      ...mapGetters(['orderData']), 
+      ...mapGetters(['orderData','userData']), 
 
     },
     data() {
         return {
-            activeTab:"create",
+            activeTab:"all",
         }
     },
     methods: {
         async getOrderData(statu){
-            await this.$store.dispatch('getOrderData',statu)
+            await this.$store.dispatch('getOrderData',{uid:this.userData.uid,statu})
         },
         handleClick(){
+            console.log(this.activeTab)
             this.getOrderData(this.activeTab);
         }
     },

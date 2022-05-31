@@ -30,7 +30,7 @@
                             />
                         </div>
                         <div class="forgetPassword">
-                            <el-link :underline="false">忘记密码</el-link>
+                            <el-link :underline="false" @click="this.dialogFormVisible = true">忘记密码</el-link>
                         </div>
                         <div class="commit" @click="confirmLogin()">
                             登 录
@@ -47,30 +47,76 @@
                             </div>
                         </div>
                     </el-tab-pane>
-                    <el-tab-pane label="扫码登录" name="codeLogin">Config</el-tab-pane>
+                    <el-tab-pane label="扫码登录" name="codeLogin">
+                        <div class="title">
+                            扫描微信二维码登录TIFA
+                        </div>
+                        <div class="wxImg">
+                            <el-image :src="imgUrl"></el-image>
+                        </div>
+                        <div class="footer">
+                            未注册用户扫码将使用微信用户信息自动注册
+                        </div>
+                    </el-tab-pane>
                 </el-tabs>
+                
             </div>
         </div>
+        <el-dialog v-model="dialogFormVisible" title="找回密码">
+        <el-form :model="form" class="form">
+        <el-form-item label="手机号" :label-width="formLabelWidth" class="fphone" size="large">
+            <el-input v-model="form.phone" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="密码" :label-width="formLabelWidth" class="fpassword" size="large">
+            <el-input v-model="form.password" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="验证码" :label-width="formLabelWidth" class="fcode" size="large">
+            <el-input v-model="form.code" autocomplete="off" />
+            <el-button type="success" @click="getRCode()">{{codeButtonCt}}</el-button>
+        </el-form-item>
+        </el-form>
+        <template #footer>
+        <span class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取消</el-button>
+            <el-button type="primary" @click="rePassword()"
+            >确认</el-button
+            >
+        </span>
+        </template>
+        </el-dialog>
     </div>
 </template>
 <script>
 import { ElMessage } from 'element-plus'
 import HomeHeader from '../ShopHome/HomeHeader'
+import {mapState,mapMutations,mapAction,mapGetters} from 'vuex'
+import { ElNotification,ElMessageBox} from 'element-plus'
+import QRCode from 'qrcode'
 export default {
     name:"tifalogin",
     components:{
         HomeHeader,
     },
+    computed:{
+      ...mapGetters(['codeUrl','isLogin'])
+    },
     data() {
         return {
             loginActiveTab:"inputeLogin",
             uname:"",
-            password:""
+            password:"",
+            imgUrl:"",
+            codeButtonCt:"获取验证码",
+            dialogFormVisible:false,
+            form:{
+                phone:"",
+                password:"",
+                code:"",
+            }
         }
     },
     methods: {
       async confirmLogin(){
-          console.log("xx");
         try {
           //登录成功
           const { uname, password } = this;
@@ -85,7 +131,70 @@ export default {
           ElMessage.error(error);
         }
       },
-    }
+      async sendCode(){
+            this.codeButtonCt = "请填写验证码";
+            await this.$store.dispatch('sendCode',{phone:this.form.phone})
+        },
+
+      async getCode(){
+          await this.$store.dispatch('getCode');
+          QRCode.toDataURL(this.codeUrl.url)
+            .then(url => {
+                this.imgUrl=url;
+            })
+            .catch(err => {
+                console.error(err,"XXX")
+            })
+      },
+      async isLogin(){
+          await this.$store.dispatch('islogin');
+      },
+      async rePassword(){
+
+            ElMessageBox.confirm(
+                '你确定要重置密码吗?',
+                '⚠警告',
+                {
+                confirmButtonText: '确认',
+                cancelButtonText: '取消',
+                type: 'warning',
+                }
+            )
+            .then(async () => {
+                await this.$store.dispatch('rePassword',this.form);
+                this.dialogFormVisible = false;
+                ElMessage({
+                    type: 'success',
+                    message: '重置成功',
+                })
+            })
+            .catch(() => {
+                ElMessage({
+                    type: 'info',
+                    message: '取消重置',
+                })
+            })
+      }
+    },
+    mounted() {
+        this.getCode();
+        this.timer = setInterval(()=>{
+            this.$store.dispatch('islogin');
+            if (this.isLogin){
+                clearInterval(this.timer);
+                this.$router.push('/shophome');
+                ElNotification({
+                    title: '扫码登录成功！',
+                    message: '已自动导入微信号用户信息！',
+                    type: 'success',
+                })
+            }
+        },3000)
+    },
+    unmounted() {
+        clearInterval(this.timer);
+    },
+
 }
 </script>
 <style lang="less" scoped>
@@ -116,7 +225,7 @@ export default {
             }
         }
     }
-
+    .footer,
     .title{
         font-size: 25px;
         font-weight: bold;
@@ -183,5 +292,31 @@ export default {
             transform: translateX(220px);
         }
         
+    }
+    .wxImg{
+        margin-top: 50px;
+    }
+    .footer{
+
+    }
+    .form{
+        margin-left: 50px;
+        font-size: 20px;
+        font-weight: bold;
+        .fphone{
+            width: 400px;
+        }
+        .fpassword{
+            width: 385px;
+            margin-left: 15px;
+        }
+        .fcode{
+            width: 200px;
+            display: flex;
+            .el-button{
+                margin-top: 15px;
+                transform: translateX(180px) translateY(-55px);
+            }
+        }
     }
 </style>
