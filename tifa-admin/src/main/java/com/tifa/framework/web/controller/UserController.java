@@ -4,14 +4,21 @@ package com.tifa.framework.web.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoCollection;
 import com.tifa.framework.config.JwtConfig;
 import com.tifa.framework.web.pojo.Adressdetail;
 import com.tifa.framework.web.pojo.User;
+import com.tifa.framework.web.pojo.res.MongoDBUser;
 import com.tifa.framework.web.service.impl.AdressdetailServiceImpl;
 import com.tifa.framework.web.service.impl.UserServiceImpl;
 import com.tifa.framework.web.util.AjaxReturnValue;
 import com.tifa.framework.web.util.JSONData;
+import com.tifa.framework.web.util.TifaConstant;
 import io.jsonwebtoken.Claims;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +38,15 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserServiceImpl userService;
-
+    @Autowired
+    private MongoClient mongoClient;
     @Autowired
     private AdressdetailServiceImpl adressdetailService;
 
     @Resource
     private JwtConfig jwtConfig;
-
+    @Autowired
+    private ObjectMapper objectMapper;
     
 
     @GetMapping("/tableNames")
@@ -62,11 +71,18 @@ public class UserController {
      * @return 注册信息。
      */
     @PostMapping("/registerConfirm")
-    public AjaxReturnValue registerConfim(@RequestBody User user, Model model){
+    public AjaxReturnValue registerConfim(@RequestBody User user, Model model) throws JsonProcessingException {
         //不允许重名。
         if (userService.uNameExisted(user.getUname())){
             return AjaxReturnValue.error(438);
         }
+        MongoDBUser mongoDBUser = new MongoDBUser();
+        mongoDBUser.setUsername(user.getUname());
+        mongoDBUser.setPassword(user.getPassword());
+        mongoDBUser.setFirst(true);
+        mongoDBUser.setTimestamp(System.currentTimeMillis());
+        MongoCollection<Document> userCollection = mongoClient.getDatabase(TifaConstant.MONGODB_DATABASE).getCollection(TifaConstant.DB_USER_COLLECTION_NAME);
+        userCollection.insertOne(Document.parse(objectMapper.writeValueAsString(mongoDBUser)));
         //未注册则插入数据。
         userService.save(user);
         return AjaxReturnValue.success("OK");

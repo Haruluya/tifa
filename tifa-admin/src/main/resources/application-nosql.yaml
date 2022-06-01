@@ -19,5 +19,5 @@ spring:
     host: localhost
   data:
     mongodb:
-      uri: mongodb://localhost:27017/cloud
+      uri: mongodb://localhost:27017/recommender
 

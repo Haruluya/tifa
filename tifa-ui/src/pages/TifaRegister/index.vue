@@ -213,7 +213,6 @@ export default {
                     ],
                 code:[
                     {required: true, message: '验证码不为空！', trigger: 'blur' },
-                    { len: 6, message: '请输入六位验证码！', trigger: 'blur' },
                 ]
             },
             secondStepFormRules:{

@@ -15,11 +15,11 @@
             <div class="rightOpration">
                 <div class="classBread">
                     <el-breadcrumb separator="/">
-                        <el-breadcrumb-item :to="{ path: '/' }">{{categorys.firstparentcname}}</el-breadcrumb-item>
+                        <el-breadcrumb-item :to="{ path: '/' }">{{categorysx.firstparentcname}}</el-breadcrumb-item>
                         <el-breadcrumb-item
-                        ><a href="/">{{categorys.secondparentcname}}</a></el-breadcrumb-item
+                        ><a href="/">{{categorysx.secondparentcname}}</a></el-breadcrumb-item
                         >
-                        <el-breadcrumb-item>{{categorys.categoryname}}</el-breadcrumb-item>
+                        <el-breadcrumb-item>{{categorysx.categoryname}}</el-breadcrumb-item>
                        
                     </el-breadcrumb>
                 </div>
@@ -89,8 +89,11 @@
                 </div>
             </div>
         </div>
-        <div class="simRec">
-            <RecPanel title="基于Item-CF的商品相似推荐"/>
+        <div class="simRec" v-if="this.$route.query.tifarec">
+            <RecPanel title="基于Item-CF的商品相似推荐" :recData="itemcfData" v-if="over"/>
+        </div>
+        <div class="simRec" v-if="this.$route.query.tifarec">
+            <RecPanel title="基于TF-IDF的商品相似推荐" :recData="tfidfData" v-if="over"/>
         </div>
         <div class="evaluationContainer">
           <el-container>
@@ -139,7 +142,7 @@
                 <el-tab-pane label="商品评价" name="comment">
                   <div class="ctitle">
                     TIFA商品评价
-                    <el-button type="text" v-show="this.$route.query.tifa" @click="dialogFormVisible = true">添加评论</el-button>
+                    <el-button type="text" v-show="this.$route.query.tifa || this.$route.query.tifarec" @click="dialogFormVisible = true">添加评论</el-button>
                   </div>
                   <div class="ccard" v-for="(item,index) in comments">
                     <CommentCard :info="item"/>
@@ -207,6 +210,7 @@ export default {
         return {
             locationValue:'',
             options,
+            over:false,
             props,
             goodColor: '1',
             goodNum : 1,
@@ -228,12 +232,20 @@ export default {
         }
     },
     computed:{
-      ...mapGetters(['goodData','comments','goodDetailInfo','goodImg','categorys','userData']), 
+      ...mapGetters(['goodData','comments','goodDetailInfo','goodImg','categorysx','userData','itemcfData','tfidfData']), 
 
     },
 
     methods: {
       toShopCart(){
+          if (this.$route.query.tifarec){
+            ElNotification({
+                title: '暂时不支持购买推荐系统商品！',
+                message: "维护需求",
+                type: 'info'
+            })
+            return ;
+          }
         this.addShopCard(this.goodDetailInfo.pid, this.goodNum);
         this.addLocation(CodeToText[this.selectedOptions['0']],
           CodeToText[this.selectedOptions['1']],
@@ -281,6 +293,7 @@ export default {
             }
       },
       async addShopCard(pid, num){
+
           try {
             console.log(this.userData.uid,"XXXXXXXXXXX")
               await this.$store.dispatch("addGoddToShopCart", {
@@ -301,6 +314,26 @@ export default {
               await this.$store.dispatch("getGoodData", {
                     'pid':this.$route.params.pid
               });
+            } catch (error) {
+                ElNotification({
+                    title: '获取商品数据失败！',
+                    message: error,
+                    type: 'error'
+                })
+            }
+      },
+      async getRecGoodData(){
+        try {
+              await this.$store.dispatch("getRecGoodData", {
+                    productid:this.$route.params.pid
+              });
+              await this.$store.dispatch("getItemcfData",{
+                    id:this.$route.params.pid
+              });
+              await this.$store.dispatch("getTFIDFData",{
+                    id:this.$route.params.pid  
+              });
+              this.over = true;
             } catch (error) {
                 ElNotification({
                     title: '获取商品数据失败！',
@@ -343,7 +376,12 @@ export default {
     },
 
   mounted(){
-    this.getGoodData();
+    if (this.$route.query.tifarec){
+      this.getRecGoodData();
+    }else{
+      this.getGoodData();
+    }
+
     this.getCommentData();
   },
 
@@ -502,7 +540,7 @@ export default {
     .simRec{
         width: 1400px;
         margin: 0 auto;
-        margin-top: 50px;
+        margin-top: 100px;
     }
     .evaluationContainer{
         margin: 0 auto;

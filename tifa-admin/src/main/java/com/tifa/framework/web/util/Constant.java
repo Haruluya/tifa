@@ -1,4 +1,4 @@
-package com.atguigu.business.utils;
+package com.tifa.framework.web.util;
 
 public class Constant {
 

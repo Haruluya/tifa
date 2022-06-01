@@ -1,4 +1,4 @@
-package com.atguigu.business.model.request;
+package com.tifa.framework.web.service.rec;
 
 public class ProductRecommendationRequest {
     private int productId;

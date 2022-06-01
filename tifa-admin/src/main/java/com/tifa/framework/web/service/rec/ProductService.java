@@ -1,14 +1,14 @@
-package com.atguigu.business.service;
+package com.tifa.framework.web.service.rec;
 
-import com.atguigu.business.model.domain.Product;
-import com.atguigu.business.model.recom.Recommendation;
-import com.atguigu.business.utils.Constant;
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
-import com.mongodb.util.JSON;
+import com.tifa.framework.web.pojo.res.Product;
+import com.tifa.framework.web.pojo.res.Recommendation;
+import com.tifa.framework.web.util.Constant;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,14 +30,18 @@ public class ProductService {
     private MongoCollection<Document> averageProductsScoreCollection;
 
     private MongoCollection<Document> getProductCollection(){
-        if(null == productCollection)
+        if(null == productCollection){
             productCollection = mongoClient.getDatabase(Constant.MONGODB_DATABASE).getCollection(Constant.MONGODB_PRODUCT_COLLECTION);
+        }
+
         return productCollection;
     }
 
     private MongoCollection<Document> getAverageProductsScoreCollection(){
-        if(null == averageProductsScoreCollection)
+        if(null == averageProductsScoreCollection){
             averageProductsScoreCollection = mongoClient.getDatabase(Constant.MONGODB_DATABASE).getCollection(Constant.MONGODB_AVERAGE_PRODUCTS_SCORE_COLLECTION);
+        }
+
         return averageProductsScoreCollection;
     }
 
@@ -49,7 +53,7 @@ public class ProductService {
         return getProducts(ids);
     }
 
-    private List<Product> getProducts(List<Integer> productIds){
+    public List<Product> getProducts(List<Integer> productIds){
         FindIterable<Document> documents = getProductCollection().find(Filters.in("productId", productIds));
         List<Product> products = new ArrayList<>();
         for (Document document: documents) {
@@ -61,12 +65,14 @@ public class ProductService {
     private Product documentToProduct(Document document){
         Product product = null;
         try{
-            product = objectMapper.readValue(JSON.serialize(document), Product.class);
+            product = objectMapper.readValue(JSON.toJSONString(document), Product.class);
             Document score = getAverageProductsScoreCollection().find(Filters.eq("productId", product.getProductId())).first();
-            if(null == score || score.isEmpty())
+            if(null == score || score.isEmpty()){
                 product.setScore(0D);
-            else
+            } else{
                 product.setScore((Double) score.get("avg",0D));
+            }
+
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,8 +81,10 @@ public class ProductService {
 
     public Product findByProductId(int productId) {
         Document document = getProductCollection().find(new Document("productId", productId)).first();
-        if(document == null || document.isEmpty())
+        if(document == null || document.isEmpty()){
             return null;
+        }
+
         return documentToProduct(document);
     }
 

@@ -65,7 +65,6 @@ const actions = {
     // 获取用户信息。
     async getNowUserData({commit},token){
         let result = await getUserData(token);
-        console.log(result);
         if(result.statusCode==200){
             commit("GETUSERDATA",result.data);
         }else{

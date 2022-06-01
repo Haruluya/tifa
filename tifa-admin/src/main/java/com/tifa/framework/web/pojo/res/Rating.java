@@ -1,4 +1,4 @@
-package com.atguigu.business.model.domain;
+package com.tifa.framework.web.pojo.res;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

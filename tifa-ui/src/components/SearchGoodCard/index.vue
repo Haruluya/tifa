@@ -30,6 +30,8 @@
     </div>
 </template>
 <script>
+
+
 import goodDefaultImg from '_assets/images/tifa_default_card_img.webp'
 
 export default {

@@ -2,16 +2,16 @@
     <div class="mainContainer" @click="toGoodDetail()">
         <div class="content">
             <dvi class="image">
-                <img src="https://img14.360buyimg.com/ceco/s300x300_jfs/t1/147923/30/18586/454087/5fdc028eE9518ec6b/1e4e64b14043aa71.png.webp" alt="" srcset="">
+                <img :src="pdata.imageUrl" alt="" srcset="">
             </dvi>
             <div class="title">
                 <span class="des">
-                    雷士（NVC）智能轻触风暖浴霸 超宽风口 
+                    {{pdata.name}}
                 </span>
             </div>
             <div class="price">
                 <a>
-                    <span>$88</span>
+                    <span>Score:{{pdata.score.toString().substring(0,4)}}</span>
                 </a>
             </div>
         </div>
@@ -24,10 +24,17 @@ export default{
     data(){
 
     },
+    props:{
+        pdata:{
+            default:{}
+        }
+    },
     methods: {
         toGoodDetail(){
             this.$router.push('/gooddetail');
         }
+    },
+    mounted() {
     },
 }
 
@@ -47,7 +54,7 @@ export default{
         padding: 5px;
         .image{
             img{
-                width: 93%;
+                width: 80%;
             }
         }
 

@@ -260,3 +260,46 @@ export const postaddCommentData= (data)=>
         url:`/review/addReview`,
         data
     })
+
+export const getHotProducts= ()=>
+    requests({
+        method:'get',
+        url:`/rec/hotrec`,
+    })
+export const getMostRatedProducts= ()=>
+    requests({
+        method:'get',
+        url:`/rec/mostrate`,
+    })
+
+export const getSimProductsByContent= (data)=>
+    requests({
+        method:'get',
+        url:`/rec/contentrec/${data.id}`,
+    })
+
+export const getALSRecProducts= (data)=>
+    requests({
+        method:'get',
+        url:`/rec/alsrec`,
+        params:data
+    })
+
+export const getOnlineRecProducts= (data)=>
+    requests({
+        method:'get',
+        url:`/rec/onlinerec`,
+        params:data
+    })
+
+export const getItemCFProducts= (data)=>
+    requests({
+        method:'get',
+        url:`/rec/itemcf/${data.id}`,
+    })
+
+export const getProductInfo= (data)=>
+    requests({
+        method:'get',
+        url:`/rec/info/${data.productid}`,
+    })

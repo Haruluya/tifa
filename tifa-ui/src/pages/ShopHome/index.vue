@@ -77,13 +77,13 @@
             <DiscountCard class="rightCard"/>
         </div>
         <div class="hotGoods">
-            <RecPanel :title="recTitle[0]"/>
+            <RecPanel :title="recTitle[0]"  :recData="recentlyRateData" v-if="over" />
         </div>
         <div class="mostRates">
-            <RecPanel :title="recTitle[1]"/>
+            <RecPanel :title="recTitle[1]" :recData="highestRateData" v-if="over"/>
         </div>
         <div class="onlineRec">
-            <RecPanel :title="recTitle[2]"/>
+            <RecPanel :title="recTitle[2]" :recData="onlineData" v-if="over"/>
         </div>
         <div class="ALSRec">
             <div class="title">
@@ -91,13 +91,14 @@
                 基于ALS的用户商品推荐
                 <el-icon><arrow-right-bold /></el-icon>
             </div>
-            <div class="channel" v-for="index in 4" :key="index">
-                <el-row v-for="indexx in 4" :key="index" align="middle" justify="center">
-                  <el-col :span="4" v-for="indexy in 5" key="index">
-                      <div class="card">
-                         <GoodCard/>
-                      </div>
-                  </el-col> 
+            <div class="channel"  v-if="over">
+                <el-row v-for="indexRow in (alsData.products.length / 4 < 1 ? 1 :alsData.products.length / 4)" :key="indexRow">
+                <template v-for="indexCol in (alsData.products.length / 4 < 1 ?alsData.products.length : 4)" :key="indexCol">
+                    <el-col :span="6" >
+                        <GoodCard
+                        :pdata='alsData.products[(indexRow-1) * 4 + indexCol - 1]'/>
+                    </el-col>
+                </template>
                 </el-row>
             </div>
         </div>
@@ -133,6 +134,7 @@ export default {
     },
     data() {
         return {
+            over:false,
             imgList:[
                 ['https://img30.360buyimg.com/babel/s380x300_jfs/t1/103723/16/29112/51630/628b7875Efc4c213c/d7424fb6e69a4bf1.jpg.webp',
             'https://img14.360buyimg.com/pop/s380x300_jfs/t1/131225/12/22254/35823/627b8fedE0d4083ce/d8b18935f5e5bef4.jpg.webp',],
@@ -178,18 +180,25 @@ export default {
         },
         toMyMerchant(){
             this.$router.push('/mymerchant');
+        },
+        async getRecData(){
+            await this.$store.dispatch('getRecData');
+            await this.$store.dispatch('getAlsData',{userid:this.userData.uid?this.userData.uid:1});
+            await this.$store.dispatch('getOnlineData',{userid:this.userData.uid?this.userData.uid:1});
+            this.over = true;
         }
     },
     computed:{
       ...mapState({
 
         }),
-      ...mapGetters(['userName','userData','token'])
+      ...mapGetters(['userName','userData','token','recentlyRateData','highestRateData','alsData','onlineData'])
     },
-    mounted() {
+     mounted() {
         if (getToken()){
             this.$store.dispatch('getNowUserData',getToken());
         }
+        this.getRecData();
 
     },
 }
@@ -341,8 +350,10 @@ export default {
 // als推荐面板。
 
 .ALSRec{
-    margin: 10px;
+    width: 1400px;
+    margin: 0 auto;
     .title{
+
         text-align: center;
         font-family: "Microsoft YaHei", "Heiti SC", tahoma, arial, "Hiragino Sans GB";
         font-size: 25px;

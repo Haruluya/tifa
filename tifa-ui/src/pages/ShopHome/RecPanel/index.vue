@@ -15,9 +15,9 @@
                 </div>
             </el-col>
             <div class="centerPanel">
-                <div v-for="index in 10" :key="index" >
+                <div v-for="(item,index) in recData.data.products" v-if="recData.data" :key="index" >
                     <div class="card">
-                        <RecCard />
+                        <RecCard :pdata="item" />
                     </div>
                 </div>
             </div>
@@ -38,11 +38,18 @@ export default {
     name:'recPanel',
     props:{
         title:String,
+        recData:{
+            type:Object,
+            default:{}
+        }
     },
     components:{
         RecCard,
         CarsouelSmall
-    }
+    },
+    mounted() {
+    },
+
 }
 </script>
 <style lang="less" scoped>
