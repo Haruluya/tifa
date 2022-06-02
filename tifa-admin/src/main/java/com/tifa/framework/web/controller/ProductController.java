@@ -92,7 +92,10 @@ public class ProductController {
         Integer pid = Integer.parseInt((String) (jsonData.get("pid")));
         JSONData rJsonData = new JSONData();
         Map<String, Object> productInfo = JSONData.convertBeanToMap(productService.getById(pid));
-        Map<String, Object> productImageInfo = JSONData.convertBeanToMap(productimageService.getById(pid - 3));
+        Map<String, Object> productImageInfo = JSONData.convertBeanToMap(productimageService.getOne(
+                new QueryWrapper<Productimage>()
+                        .eq("pid",pid)
+        ));
         Map<String, Object> productCategoryInfo = JSONData.convertBeanToMap(categoryService.getById(pid));
         rJsonData.put("productInfo",productInfo );
         rJsonData.put("productImageInfo",productImageInfo);
@@ -129,7 +132,10 @@ public class ProductController {
         ArrayList<String> imgList = new ArrayList<>();
         shopCartItemInfo.forEach((item)->{
             Product product = productService.getById(item.getPid());
-            String img = productimageService.getById(item.getPid()).getType();
+            String img = productimageService.getOne(
+                    new QueryWrapper<Productimage>()
+                            .eq("pid",item.getPid())
+            ).getType();
             Integer num = item.getNum();
             arrayList.add(product);
             numList.add(num);
@@ -170,6 +176,18 @@ public class ProductController {
         product.setPid(pid);
         product.setBid(0);
         productService.updateById(product);
+        productimageService.remove(
+                new QueryWrapper<Productimage>()
+                        .eq("pid",pid)
+        );
+        categoryService.remove(
+                new QueryWrapper<Category>()
+                        .eq("pid",pid)
+        );
+        productService.remove(
+                new QueryWrapper<Product>()
+                        .eq("pid",pid)
+        );
         return AjaxReturnValue.success();
     }
 
@@ -184,8 +202,9 @@ public class ProductController {
         List<Productimage> productImgs = new ArrayList<>();
         products.forEach((item)->{
             productImgs.add(
-                    productimageService.getById(
-                            item.getPid()-3
+                    productimageService.getOne(
+                            new QueryWrapper<Productimage>()
+                                    .eq("pid",item.getPid())
                     )
             );
 
@@ -209,8 +228,12 @@ public class ProductController {
 
         productService.save(product);
         Productimage productimage = new Productimage();
-        productimage.setPid(new Long(productService.count()).intValue()+1);
+        productimage.setPid(productService.getOne(
+                new QueryWrapper<Product>()
+                        .eq("pname",product.getPname())
+        ).getPid());
         productimage.setType((String)jsonData.get("img"));
+
         productimageService.save(productimage);
 
         return AjaxReturnValue.success();

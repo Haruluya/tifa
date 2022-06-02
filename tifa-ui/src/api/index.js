@@ -303,3 +303,10 @@ export const getProductInfo= (data)=>
         method:'get',
         url:`/rec/info/${data.productid}`,
     })
+
+export const addRate= (data)=>
+    requests({
+        method:'get',
+        url:`/rec/rate/${data.productid}`,
+        params:{score:data.score,userid:data.userid}
+    })

@@ -150,7 +150,7 @@
                 <el-result
                     icon="success"
                     title="注册成功！"
-                    sub-title="你的账号：Haruluya注册成功！"
+                    :sub-title="'你的账号'+secondStepFormModel.userName + '注册成功'"
                 >
                     <template #extra>
                     <el-button type="primary" @click="toLoginPage()">去登录</el-button>

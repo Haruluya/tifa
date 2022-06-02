@@ -64,13 +64,7 @@ export default {
                 type: 'Info',
                 }
             )
-            .catch(() => {
-                ElMessage({
-                    type: 'info',
-                    message: '取消提交',
-                })
-            })
-            .then(async () => {
+             .then(async () => {
                 let pid = this.merchantProductsData.products[this.index].pid;
                 await this.$store.dispatch('deleteProduct',{pid});
                 await this.$store.dispatch('getMerchantProductData',{uid:this.userData.uid});
@@ -79,6 +73,13 @@ export default {
                     message: '更新成功',
                 })
             })
+            .catch(() => {
+                ElMessage({
+                    type: 'info',
+                    message: '取消提交',
+                })
+            })
+           
         }
     },
     mounted() {

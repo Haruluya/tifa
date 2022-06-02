@@ -64,12 +64,6 @@ export default {
                 type: 'Info',
                 }
             )
-            .catch(() => {
-                ElMessage({
-                    type: 'info',
-                    message: '取消提交',
-                })
-            })
             .then(async () => {
                 let oid = this.merchantOrderData.ordersData[this.index].oid;
                 await this.$store.dispatch('confirmDeto',{oid});
@@ -77,7 +71,15 @@ export default {
                     type: 'success',
                     message: '更新成功',
                 })
+                await this.$store.dispatch('getMerchantOrderData',{uid:this.userData.uid});
             })
+            .catch(() => {
+                ElMessage({
+                    type: 'info',
+                    message: '取消提交',
+                })
+            })
+
         }
     },
 }

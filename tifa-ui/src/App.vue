@@ -89,4 +89,8 @@ body{
   font-weight: bold !important;
   font-family: tahoma, arial, 宋体 !important;
 }
+
+.el-col{
+  min-height: 1px;
+}
 </style>

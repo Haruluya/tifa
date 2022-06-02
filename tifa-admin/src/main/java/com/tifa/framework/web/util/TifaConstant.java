@@ -19,7 +19,7 @@ public class TifaConstant {
 
     public static String HIGH_RATE_RECENTLY_CLOUD_PRODUCTS = "RateMoreRecentlyProducts";
 
-    public static String ONLINE_RECS_COLLECTION = "onlineRecs";
+    public static String ONLINE_RECS_COLLECTION = "StreamRecs";
 
     public static String USER_RECS_COLLECTION = "UserRecs";
 

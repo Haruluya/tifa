@@ -45,7 +45,11 @@ public class PayController {
     public Object pay (@RequestBody JSONData jsonData) throws Exception {
         PaymentBO paymentBO = new PaymentBO();
         paymentBO.setSubject((String) (jsonData.get("subject")));
-        paymentBO.setTotal((Double)(jsonData.get("price")));
+        try{
+            paymentBO.setTotal((Double)(jsonData.get("price")));
+        }catch (ClassCastException ex){
+            paymentBO.setTotal(Double.parseDouble(((Integer) jsonData.get("price")).toString()));
+        }
 
 
 

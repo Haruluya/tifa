@@ -25,6 +25,7 @@ const actions = {
   async getSearchData({ commit }, params) {
     let result = await postSearchDataRequest(params);
     console.log(result);
+    
     if (result.statusCode == 200) {
       commit("GETSEARCHDATA", result.data);
     }
@@ -38,11 +39,6 @@ const actions = {
 
 
 const getters = {
-
-    //产品列表。
-    goodsList(state){
-      return state.searchData.goodsList||[];
-    },
 
     pageIndex(state){
       return state.pageIndex;

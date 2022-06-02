@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RedisService {
     @Autowired
-    public RedisTemplate<String, Object> redisTemplate;
+    public RedisTemplate<String, String> redisTemplate;
 
     /**
      * 存储评分记录到redis。

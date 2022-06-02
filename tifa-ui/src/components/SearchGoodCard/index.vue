@@ -1,6 +1,6 @@
 <template>
     <div class="mainContainer" @click="toGoodDetail()">
-        <div class="goodImg">
+        <div class="goodImg" v-if="goodImg">
             <el-image :src="goodImg.type">
             </el-image>
         </div>
@@ -15,10 +15,10 @@
             <div class="title">
                {{goodInfo.pname}}
             </div>
-            <div class="commentCount">
+            <div class="commentCount" >
                 {{goodInfo.stock}}评论
             </div>
-            <div class="merchant">
+            <div class="merchant" v-if="category">
                 {{category.categoryname}}<el-icon><Present /></el-icon>
             </div>
 
@@ -60,9 +60,8 @@ export default {
         }
     },
     mounted(){
-        if (this.goodImg.type == "images/model/guan/url_none.png"){
-            this.goodImg.type = goodDefaultImg
-        }
+
+ 
     },
 
     updated() {

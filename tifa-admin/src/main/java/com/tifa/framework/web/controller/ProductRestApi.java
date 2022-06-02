@@ -13,6 +13,7 @@ import com.tifa.framework.web.util.AjaxReturnValue;
 import com.tifa.framework.web.util.JSONData;
 import com.tifa.framework.web.util.TifaConstant;
 import org.apache.log4j.Logger;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -92,6 +93,10 @@ public class ProductRestApi {
     public AjaxReturnValue getSimProductsByContent(@PathVariable("id")int id) {
         List<Recommendation> recommendations = recService.getSimRecommendationsByContent(id);
         JSONData jsonData = new JSONData();
+        if (recommendations == null){
+            jsonData.put("products",new ArrayList<>());
+            return AjaxReturnValue.success(new ArrayList<>());
+        }
         jsonData.put("products",productService.getRecommendProducts(recommendations));
         return AjaxReturnValue.success("ok",jsonData);
     }
@@ -127,7 +132,7 @@ public class ProductRestApi {
         if (recommendations == null){
             jsonData.put("products",new ArrayList<>());
         }else {
-            jsonData.put("products", recService.getProductsByRecommendations(recommendations));
+            jsonData.put("products", productService.getRecommendProducts(recommendations));
         }
         return AjaxReturnValue.success("ok",jsonData);
     }

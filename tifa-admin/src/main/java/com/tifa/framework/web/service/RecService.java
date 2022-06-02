@@ -91,6 +91,9 @@ public class RecService {
         MongoCollection<Document> contentBasedProductsCollection = mongoClient.getDatabase(TifaConstant.MONGODB_DATABASE).getCollection(TifaConstant.CONTENTBASED_COLLECTION);
         Document document = contentBasedProductsCollection.find(new Document("productId", id)).first();
         List<Recommendation> recommendations = new ArrayList<>();
+        if (document == null){
+            return null;
+        }
         ArrayList<Document> recs = document.get("recs", ArrayList.class);
         for (Document recDoc : recs) {
             recommendations.add(new Recommendation(recDoc.getInteger("productId"), recDoc.getDouble("score")));
@@ -178,7 +181,7 @@ public class RecService {
     public boolean storeRatingData(int userid, int productid,Double score) {
         Rating rating = new Rating(userid, productid, score);
         redisService.storeRatingToRedis(rating);
-        if (ratingExist(rating.getUserId(), rating.getUserId())) {
+        if (ratingExist(rating.getUserId(), rating.getProductId())) {
             return updateRating(rating);
         } else {
             return newRating(rating);

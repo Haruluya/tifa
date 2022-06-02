@@ -10,7 +10,8 @@ import {
     getProductInfo,
     getItemCFProducts,
     getSimProductsByContent,
-    getOnlineRecProducts
+    getOnlineRecProducts,
+    addRate
 } from "@/api";
 import defaultImg from '_assets/images/tifa_default_card_img.webp'
 const state = {
@@ -79,6 +80,7 @@ const actions = {
 
   async getCommentData({commit}, data){
     let result = await postgetCommentData(data);
+    console.log(result)
     if (result.statusCode == 200) {
       commit("SETCOMMENT", result.data);
       return "ok";
@@ -118,6 +120,15 @@ const actions = {
     console.log(result);
     if (result.statusCode == 200) {
       commit("SETITEMCFDATA",result);
+      return "ok";
+    } else {
+      return Promise.reject(new Error("faile"));
+    }
+  },
+  async addRateD({commit},data){
+    let result = await addRate(data);
+    console.log(result);
+    if (result.statusCode == 200) {
       return "ok";
     } else {
       return Promise.reject(new Error("faile"));

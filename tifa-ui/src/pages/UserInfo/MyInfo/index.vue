@@ -34,7 +34,7 @@
                 <el-input v-model="headpicture" :placeholder="userData.headpicture" clearable size="large" />
             </div>
             <div class="headImg">
-                <el-image v-if="userData.headpicture" :src="userData.headpicture"></el-image>
+                <el-image  :src="headpicture"></el-image>
             </div>
             <div class="email">
                 邮箱:
@@ -145,7 +145,7 @@ export default {
                 this.getLocationData();
                 ElNotification({
                     title: '添加收货地址成功！',
-                    message: countries+'/'+provinces+'/'+city+'/'+detailAddress,
+                    message: countries+'/'+provinces+'/'+city,
                     type: 'success'
                 })
                 } catch (error) {
@@ -159,7 +159,7 @@ export default {
         async getLocationData(){
           try {
               await this.$store.dispatch("getLocationData", {
-                phone:this.$store.getters.userData.phone,
+                pname:this.userData.uname,
               });
             } catch (error) {
                 ElNotification({
@@ -225,6 +225,7 @@ export default {
                     });
                     await this.$store.dispatch('getNowUserData',this.token);
                     await this.getLocationData()
+                    this.nickname = this.userData.nickname
                     ElNotification({
                         type: 'success',
                         message: '更新用户信息成功！',

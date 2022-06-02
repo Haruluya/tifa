@@ -26,7 +26,7 @@
                     title="Tips"
                     :width="200"
                     trigger="hover"
-                    content="服务主要支付方式为微信。"
+                    content="扫码服务见微信开发平台。"
                 >
                     <template #reference>
                         <div class="popoverItem">
@@ -40,7 +40,7 @@
                     title="Github"
                     :width="200"
                     trigger="hover"
-                    content="开发者Github地址：xxxx。"
+                    content="Github地址：https://github.com/Haruluya/tifa。"
                 >
                     <template #reference>
                         <div class="popoverItem">
@@ -54,7 +54,7 @@
                     title="QQ"
                     :width="200"
                     trigger="hover"
-                    content="开发者QQ地址：xxxx。"
+                    content="开发者QQ：2198645565。"
                 >
                     <template #reference>
                         <div class="popoverItem">
@@ -65,10 +65,10 @@
                 </el-popover>
                     <el-popover
                     placement="top-start"
-                    title="QQ"
+                    title="Document"
                     :width="200"
                     trigger="hover"
-                    content="开发者QQ地址：xxxx。"
+                    content="相关文档见github。"
                 >
                     <template #reference>
                         <div class="popoverItem">

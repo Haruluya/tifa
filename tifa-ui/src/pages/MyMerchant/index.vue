@@ -24,6 +24,8 @@
     </div>
 </template>
 <script>
+import { ElNotification} from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'  
 import HomeHeader from '../ShopHome/HomeHeader'
 export default {
     name:"mymerchant",

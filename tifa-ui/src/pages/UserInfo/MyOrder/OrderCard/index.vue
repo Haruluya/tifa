@@ -10,6 +10,9 @@
             <div class="back" v-if="orderData.ordersData[index].status == 'comment' ">
                 <el-button type="text" @click="dialogFormVisible=true">请求退货</el-button>
             </div>
+            <div class="back" v-if="orderData.ordersData[index].status == 'create' ">
+                <el-button type="text" @click="toPay()">去付款</el-button>
+            </div>
         </div>
         <div class="content">
             <div class="goodImg">
@@ -190,6 +193,16 @@ export default {
         },
         toComment(){
             this.$router.push("/gooddetail/"+this.orderData.productData[this.index].pid+"?tifa=1");
+        },
+        toPay(){
+            this.$store.dispatch("setSumPrice",this.orderData.productData[this.index].promoteprice);
+            this.$store.dispatch("setPids",this.orderData.productData[this.index].pid)
+            this.$router.push('/purchase');
+            ElNotification({
+                title: '请付款',
+                message: '创建订单成功！',
+                type: 'sucess'
+            })
         },
         async confirmReturn(){
             this.dialogFormVisible = false;

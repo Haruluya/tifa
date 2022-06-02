@@ -38,18 +38,21 @@
                         </div>
 
                     </div>
-                    <div class="goodCards" >
-                        <el-row v-for="indexRow in (searchGoodsList.length / 4 < 1 ? 1 :searchGoodsList.length / 4)" :key="indexRow">
-                        <template v-for="indexCol in (searchGoodsList.length / 4 < 1 ?searchGoodsList.length : 4)" :key="indexCol">
-                          <el-col :span="6" >
+                    <div class="goodCards" v-if="over">
+                        <el-row>
+                        <div v-for="indexCol in (searchGoodsList.length)" :key="indexCol">
+                          <el-col span="6">
                               <SearchGoodCard 
-                              :goodImg='searchGoodsImg[(indexRow-1) * 4 + indexCol - 1]' 
-                              :goodInfo= 'searchGoodsList[(indexRow-1) * 4 + indexCol - 1]'
-                              :category='categorys[(indexRow-1) * 4 + indexCol - 1]'/>
+                              :goodImg='searchGoodsImg[indexCol-1]' 
+                              :goodInfo= 'searchGoodsList[indexCol-1]'
+                              :category='categorys[indexCol-1]'/>
                           </el-col>
-                        </template>
 
+                        </div>
+                        
                         </el-row>
+
+                       
                     </div>
                 </el-main>
                 <el-aside width="300px" class="aside">
@@ -93,6 +96,7 @@ export default {
     data() {
         return {
           currentPage:1,
+          over:false
         }
     },
     computed:{
@@ -106,6 +110,7 @@ export default {
                     'searchKey':this.$route.params.searchKey,
                     'pageIndex':this.pageIndex
                 });
+                this.over = true;
             } catch (error) {
                 ElNotification({
                     title: '获取搜索数据失败',

@@ -44,10 +44,14 @@ public class OrderController {
     public AjaxReturnValue orderData(@RequestBody JSONData jsonData){
         Integer uid = (Integer)(jsonData.get("uid"));
         String statu = (String) (jsonData.get("statu"));
-        List<Order> data;
-
+        List<Order> data = new ArrayList<>();
+        List<Order> temp = new ArrayList<>();
         if ("all".equals(statu)){
             data = orderService.list(
+                    new QueryWrapper<Order>()
+                            .eq("uid",uid)
+            );
+            temp = orderService.list(
                     new QueryWrapper<Order>()
                             .eq("uid",uid)
             );
@@ -57,15 +61,26 @@ public class OrderController {
                             .eq("uid",uid)
                             .eq("status",statu)
             );
+            temp = orderService.list(
+                    new QueryWrapper<Order>()
+                            .eq("uid",uid)
+                            .eq("status",statu)
+            );
         }
-
         ArrayList<Product> productData = new ArrayList<>();
         ArrayList<Productimage> productimages = new ArrayList<>();
-        data.forEach((element)->{
+        List<Order> finalData = data;
+        temp.forEach((element)->{
             String[] products = element.getUsermessage().split("#");
             for (int i = 0; i < products.length; i++){
+                if (i != 0){
+                    finalData.add(element);
+                }
                 productData.add(productService.getById(products[i]));
-                productimages.add(productimageService.getById(products[i]));
+                productimages.add(productimageService.getOne(
+                        new QueryWrapper<Productimage>()
+                                .eq("pid",products[i])
+                ));
             }
         });
         JSONData jsonData1 = new JSONData();
@@ -110,7 +125,10 @@ public class OrderController {
             String[] products = element.getUsermessage().split("#");
             for (int i = 0; i < products.length; i++){
                 productData.add(productService.getById(products[i]));
-                productimages.add(productimageService.getById(products[i]));
+                productimages.add(productimageService.getOne(
+                        new QueryWrapper<Productimage>()
+                                .eq("pid",products[i]))
+                );
             }
         });
         JSONData jsonData1 = new JSONData();

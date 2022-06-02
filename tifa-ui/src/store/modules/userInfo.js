@@ -32,6 +32,7 @@ const actions = {
     },
     async getLocationData({ commit }, data) {
         let result = await postLocationDataRequest(data);
+        console.log(result)
         if (result.statusCode == 200) {
             commit("GETLOCATIONDATA", result.data);
         } else {

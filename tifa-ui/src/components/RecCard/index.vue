@@ -31,7 +31,7 @@ export default{
     },
     methods: {
         toGoodDetail(){
-            this.$router.push('/gooddetail');
+this.$router.push('/gooddetail/'+this.pdata.productId+'?tifarec=1');
         }
     },
     mounted() {
