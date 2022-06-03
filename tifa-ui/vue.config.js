@@ -16,7 +16,7 @@ module.exports = {
         port:8080,
 	    proxy:{
         '/tifai':{
-            target: 'http://localhost:8081',
+            target: 'http://5198y370g3.zicp.vip',
 	      }
         },
         allowedHosts: [

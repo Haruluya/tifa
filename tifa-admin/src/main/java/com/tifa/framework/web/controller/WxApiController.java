@@ -149,14 +149,14 @@ public class WxApiController {
                 isCodeLogin = true;
                 nowUser = member;
                 userService.save(member);
-                return "redirect:http://5198y370g3.zicp.vip:40592/loginsuccess";
+                return "redirect:http://haruluya.natapp1.cc/loginsuccess";
             }else{
                 isCodeLogin = true;
                 nowUser = userService.getOne(
                         new QueryWrapper<User>()
                                 .eq("openid",openid)
                 );
-                return "redirect:http://5198y370g3.zicp.vip:40592/loginsuccess";
+                return "redirect:http://haruluya.natapp1.cc/loginsuccess";
             }
 
         } catch (Exception e) {

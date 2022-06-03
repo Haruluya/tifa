@@ -8,7 +8,7 @@ import { ElNotification} from 'element-plus'
 
 // axios全局配置。
 axios.defaults.method = 'GET';//设置默认的请求类型为 GET
-axios.defaults.baseURL = 'http://localhost:8081/tifai';//设置基础 URL
+axios.defaults.baseURL = 'http://5198y370g3.zicp.vip/tifai';//设置基础 URL
 axios.defaults.timeout = 5000;
 
 
